@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zosflix</title>
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Google Fonts: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            overflow-x: hidden;
+        }
+
+        #hr {
+            background: #2c2c2c;
+
+        }
+
+        #m1 img {
+            transform-style: preserve-3d;
+            transition: 0.3s ease;
+            border-radius: 10px;
+        }
+
+        #color_ms {
+            background: #151515;
+        }
+
+
+
+        #m1 img:hover {
+            transform: translateZ(1px) scale(1.01);
+            filter: brightness(80%);
+        }
+
+        /* Fix for navbar text visibility */
+        header {
+            position: relative;
+            z-index: 100;
+        }
+
+        nav a,
+        .header-icons i {
+            color: white !important;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                0 0 5px rgba(0, 0, 0, 0.8);
+            font-weight: 500;
+        }
+
+        /* Fix for background slider */
+        #bg-slider {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -10;
+        }
+
+        /* Fix for content slider */
+        #content-slider {
+            position: relative;
+            z-index: 1;
+            margin-top: 100px;
+        }
+
+        /* Ensure text is visible */
+        #slideTitle {
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        #slideInfo,
+        #slideDesc {
+            color: #e0e0e0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+
+    <!-- Hero Section -->
+    <section id="section1" class="relative min-h-screen flex flex-col">
+
+        <!-- Background Image Slider -->
+        <div id="bg-slider" class="absolute inset-0 z-0 bg-cover bg-center transition-all duration-1000"></div>
+
+        <!-- Overlay for better text visibility -->
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+        <!-- Navbar -->
+        <header
+            class="flex items-center justify-between px-8 md:px-12 py-2 mt-2 mx-4 rounded-2xl backdrop-blur-sm border border-white/10 ">
+            <img src="make a logo of text .png" alt="Logo" class="h-8">
+
+            <nav class="hidden md:flex gap-8 font-medium text-lg">
+                <a href="#" class="hover:text-green-400 transition-colors duration-300">Home</a>
+                <a href="#" class="hover:text-green-400 transition-colors duration-300">Discover</a>
+                <a href="#" class="hover:text-green-400 transition-colors duration-300">Movie Release</a>
+                <a href="#" class="hover:text-green-400 transition-colors duration-300">Forum</a>
+                <a href="#" class="hover:text-green-400 transition-colors duration-300">About</a>
+            </nav>
+
+            <!-- Icons -->
+            <div class="flex gap-5 header-icons">
+                <i class="ri-search-2-line cursor-pointer hover:text-green-400 transition text-xl"></i>
+                <i class="ri-notification-line cursor-pointer text-xl hover:text-green-400 transition"></i>
+                <i class="ri-account-circle-line cursor-pointer text-xl hover:text-green-400 transition"></i>
+            </div>
+        </header>
+
+        <!-- Hero Content -->
+        <main class="flex-1 flex flex-col items-start justify-center px-4 md:px-12 mt-8 md:mt-20">
+            <!-- Content Slider -->
+            <div id="content-slider" class="">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <!-- Left Content -->
+                    <div class="flex-1">
+                        <button id="slideBtn"
+                            class="bg-black/70 rounded-full px-6 py-2 text-white font-medium border border-white/20 mb-6">
+                            Movie
+                        </button>
+                        <h1 id="slideTitle" class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 duration-500"></h1>
+                        <h3 id="slideInfo" class="text-xl md:text-xl text-gray-300 mb-6"></h3>
+                        <p id="slideDesc" class="text-lg text-gray-200 leading-relaxed mb-8 max-w-2xl"></p>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                            <button id="Play"
+                                class="bg-green-600 hover:bg-green-700 transition py-3 px-8 rounded-xl text-white text-lg flex items-center justify-center">
+                                <i class="ri-play-circle-fill mr-3 text-2xl"></i> Play Now
+                            </button>
+                            <button id="Watch"
+                                class="bg-gray-800 hover:bg-gray-700 transition py-3 px-6 rounded-xl text-white text-lg flex items-center justify-center border border-gray-600">
+                                <i class="ri-play-circle-line mr-3 text-2xl"></i> Watch Trailer
+                            </button>
+                            <button id=""
+                                class="bg-black hover:bg-gray-900 transition py-3 px-6 rounded-xl text-white text-lg flex items-center justify-center border border-gray-700">
+                                <i class="ri-bookmark-line mr-3 text-2xl"></i> Add Watchlist
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </main>
+    </section>
+
+   <!-- Brands Section -->
+<section class="py-8 bg-black">
+    <div class="w-full overflow-hidden">
+        <h2 class="text-2xl font-bold px-8 mb-6">Streaming On</h2>
+        <div class="relative overflow-hidden">
+            <!-- Marquee Container -->
+            <div class="flex animate-marquee whitespace-nowrap">
+                <!-- First set of logos -->
+                <div class="flex gap-8 items-center h-28">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.r1kCkxVpfznChwIcJl5xhgHaHa?cb=ucfimg2&ucfimg=1&w=1080&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://i.pinimg.com/736x/e6/ad/a9/e6ada96e8b17e0fd6bd89032cccbef83.jpg" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://static.vecteezy.com/system/resources/previews/020/336/129/non_2x/marvel-logo-marvel-icon-free-free-vector.jpg" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://th.bing.com/th/id/R.08ea14f384624dc0fb35495e7a0c614f?rik=Z3ilwWRP%2fqhonw&riu=http%3a%2f%2fgeekcitytoys.com%2fcdn%2fshop%2fcollections%2fblack-series.webp%3fv%3d1682817929&ehk=zbSjx6KA15qLOTPjE%2b4tiWuV37LmT%2fYKue%2bf6Ry37rc%3d&risl=&pid=ImgRaw&r=0" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://i0.wp.com/www.heyuguys.com/images/2021/06/APple-TV-plus-logo.png?fit=1200%2C630&ssl=1" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://static.vecteezy.com/system/resources/previews/019/040/346/non_2x/amazon-prime-video-logo-editorial-free-vector.jpg" 
+                         class="h-16 w-auto object-contain">
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="flex gap-8 items-center h-28 ml-8">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.r1kCkxVpfznChwIcJl5xhgHaHa?cb=ucfimg2&ucfimg=1&w=1080&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://i.pinimg.com/736x/e6/ad/a9/e6ada96e8b17e0fd6bd89032cccbef83.jpg" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://static.vecteezy.com/system/resources/previews/020/336/129/non_2x/marvel-logo-marvel-icon-free-free-vector.jpg" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://th.bing.com/th/id/R.08ea14f384624dc0fb35495e7a0c614f?rik=Z3ilwWRP%2fqhonw&riu=http%3a%2f%2fgeekcitytoys.com%2fcdn%2fshop%2fcollections%2fblack-series.webp%3fv%3d1682817929&ehk=zbSjx6KA15qLOTPjE%2b4tiWuV37LmT%2fYKue%2bf6Ry37rc%3d&risl=&pid=ImgRaw&r=0" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://i0.wp.com/www.heyuguys.com/images/2021/06/APple-TV-plus-logo.png?fit=1200%2C630&ssl=1" 
+                         class="h-16 w-auto object-contain">
+                    <img src="https://static.vecteezy.com/system/resources/previews/019/040/346/non_2x/amazon-prime-video-logo-editorial-free-vector.jpg" 
+                         class="h-16 w-auto object-contain">
+                </div>
+            </div>
+            
+            <!-- Gradient overlays for smooth edges -->
+            <div class="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+            <div class="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+        </div>
+    </div>
+</section>
+
+<style>
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    50% {
+
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 10s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .animate-marquee {
+        animation: marquee 8s linear infinite;
+    }
+}
+</style>
+
+    <!-- Top Movies Section -->
+    <section class="py-8" id="color_ms">
+        <div class="px-8 overflow-hidden">
+            <h2 class="text-3xl font-bold mb-5" style="font-weight: 500;">Top 10 Movies <i
+                    class="ri-arrow-right-wide-line"></i></h2>
+
+            <!-- Horizontal scrolling container -->
+            <div id="m1" class="flex flex-nowrap overflow-x-auto gap-4 w-full  scrollbar-hide  ml-5">
+
+                <!-- Movie cards -->
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hdstream4u.com/file/l2kspczpcxs6">
+                        <img src="https://image.tmdb.org/t/p/w342/po7U3As6Jp2zG9RopavoZMkdnr1.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hubstream.art/#d88csq">
+                        <img src="https://image.tmdb.org/t/p/w500/1AfKrRPRPT0TtCTiK9uyBCgFjZS.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hdstream4u.com/file/ytlqdnbuvoxn">
+                        <img src="https://image.tmdb.org/t/p/w500/vqBmyAj0Xm9LnS1xe1MSlMAJyHq.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hdstream4u.com/file/urltt9bnmwpn">
+                        <img src="https://image.tmdb.org/t/p/w500/7FsHlW9z7gDhDE4EXAE2WcXUVQj.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hubstream.art/#6s5hvl">
+                        <img src="https://image.tmdb.org/t/p/w500/1H9hdeRoniz30RKhyr1uLdBTfpG.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hdstream4u.com/file/ywtcshgfgohl">
+                        <img src="https://image.tmdb.org/t/p/w500/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hubstream.art/#3w9yx3">
+                        <img src="https://image.tmdb.org/t/p/w500/7dzaPdEhP6hagPKi9Y22I0rKRCz.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+                <div class="relative group flex-shrink-0 w-40 sm:w-40 md:w-40 lg:w-48">
+                    <a href="https://hubstream.art/#jtbi6r">
+                        <img src="https://image.tmdb.org/t/p/w500/fdxf02vUous6fty6O4nollyuo4m.jpg"
+                            class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700 hover:scale-105">
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="flex justify-center mt-12">
+                <hr class="w-[96%]" style="border-color: #343434;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Optional: Add this CSS to hide scrollbar for better appearance -->
+    <style>
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari and Opera */
+        }
+    </style>
+
+    <!-- Movie cards 2-->
+    <div class="px-8 ">
+        <h2 class="text-3xl font-bold mb-5 mt-8" style="font-weight: 500;">Top 10 Anime <i
+                class="ri-arrow-right-wide-line"></i></h2>
+        <div id="m1" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+
+            <div class="relative group">
+                <a href=""><img src="https://image.tmdb.org/t/p/w342/tCZFfYTIwrR7n94J6G14Y4hAFU6.jpg"
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+            </div>
+            <div class="relative group">
+                <a href=""><img src=""
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+            </div>
+            <div class="relative group">
+                <a href=""><img src=""
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+            </div>
+            <div class="relative group">
+                <a href=""><img src=""
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+            </div>
+            <div class="relative group">
+                <a href=""><img src=""
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="flex justify-center mt-12">
+        <hr class="w-[96%]" style="border-color: #343434;">
+    </div>
+    <!-- Movie cards 3-->
+
+    <div class="px-8">
+        <h2 class="text-3xl font-bold mb-5 mt-8" style="font-weight: 500;">Top 10 Movies <i
+                class="ri-arrow-right-wide-line"></i></h2>
+        <div id="m1" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+
+            <div class="relative group">
+                <a href="https://tv.apple.com/"><img
+                        src="https://th.bing.com/th/id/OIP.J9_2JYrtbHyf1IW_1g-NjwHaJ2?w=208&h=277&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1 "
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+                <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <i class="ri-list-unordered bg-gray-800 p-2 rounded-lg hover:bg-blue-600 cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Movie cards 4-->
+
+    <div class="flex justify-center mt-12">
+        <hr class="w-[96%]" style="border-color: #343434;">
+    </div>
+
+    <div class="px-8">
+        <h2 class="text-3xl mb-5 mt-8" style="font-weight: 500;">Top 10 Movies <i class="ri-arrow-right-wide-line"></i>
+        </h2>
+        <div id="m1" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+            <div class="relative group">
+                <a href=""><img src=""
+                        class="w-full h-auto rounded-lg shadow-lg transition duration-300 border border-gray-700"></a>
+                <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <i class="ri-list-unordered bg-gray-800 p-2 rounded-lg hover:bg-blue-600 cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-12">
+        <hr class="w-[96%]" style="border-color: #343434;">
+    </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Fixed slides array with correct image URLs
+        const slides = [
+            {
+                bg: "https://4kwallpapers.com/images/walls/thumbs_2t/11990.jpeg",
+                title: "The Spider-Man, Advanced suit",
+                info: "2h50m • 2020 • Action",
+                desc: "An epic journey through mystical lands where heroes battle dark forces to save humanity from ultimate destruction."
+            },
+            {
+                bg: "https://4kwallpapers.com/images/walls/thumbs_3t/21920.jpg",
+                title: "The F1 Car",
+                info: "2h10m • 2023 • Sci-Fi • Adventure",
+                desc: "A breathtaking journey under the ocean with mythical creatures and ancient civilizations awakening."
+            },
+            {
+                bg: "https://4kwallpapers.com/images/walls/thumbs_3t/17916.jpeg",
+                title: "Avatar: Fire and Ash",
+                info: "1h55m • 2021 • Thriller • Mystery",
+                desc: "Dark secrets unfold as hunters chase shadows across the city in this heart-pounding thriller."
+            },
+            {
+                bg: "https://4kwallpapers.com/images/walls/thumbs_3t/24385.jpg",
+                title: " IT: Welcome To Derry",
+                info: "2h35m • 2024 • Thriller • Mystery",
+                desc: "Dark secrets unfold as hunters chase shadows across the city in this heart-pounding thriller."
+            },
+            {
+                bg: "https://4kwallpapers.com/images/walls/thumbs_3t/24439.jpg",
+                title: "David Corenswet (Superman)",
+                info: "1h55m • 2021 • Thriller • Mystery",
+                desc: "Dark secrets unfold as hunters chase shadows across the city in this heart-pounding thriller."
+            }
+        ];
+
+        let index = 0;
+        const bgSlider = document.getElementById("bg-slider");
+        const slideTitle = document.getElementById("slideTitle");
+        const slideInfo = document.getElementById("slideInfo");
+        const slideDesc = document.getElementById("slideDesc");
+        // const play = document.getElementById("Play");
+        // const watch = document.getElementById("Watch");
+
+        function showSlide(i) {
+            // Set background image
+            bgSlider.style.backgroundImage = `url('${slides[i].bg}')`;
+            bgSlider.style.backgroundSize = 'cover';
+            bgSlider.style.backgroundPosition = 'center';
+            bgSlider.style.backgroundRepeat = 'no-repeat';
+
+            // Set content
+            slideTitle.textContent = slides[i].title;
+            slideInfo.textContent = slides[i].info;
+            slideDesc.textContent = slides[i].desc;
+            // slideDesc.textContent = slides[i].paly;
+            // slideDesc.textContent = slides[i].watch;
+
+            // Smooth transition
+            bgSlider.style.opacity = '0';
+            setTimeout(() => {
+                bgSlider.style.opacity = '1';
+            }, 50);
+        }
+
+        // Auto change every 5 seconds
+        setInterval(() => {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        }, 5000);
+
+        // First slide load
+        showSlide(index);
+
+        // Initial transition
+        setTimeout(() => {
+            bgSlider.style.transition = 'opacity 1s ease';
+        }, 100);
+    </script>
+
+</body>
+
+</html>
