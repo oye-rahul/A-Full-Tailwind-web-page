@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body>
-    <h1 class="colo"></h1>
+    <title>tailwind-web</title>
+    <!-- Correct Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Lilex:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+        body {
+            font-family: 'Rubik', sans-serif;
+        }
+    </style>
 
+</head>
+
+<body>
+    <script src="script.js" defer></script>
+    <!-- navbar -->
+    <nav class="p-3 flex bg-blue-50 justify-between items-center">
+        <a href="#" id="brand" class="flex gap-3 items-center">
+            <img src="finder.png" class="max-h-12 min-h-6">
+            <span class="font-medium text-2xl">Todesktop</span>
+        </a>
+        <div id="nav-menu " class="hidden md:flex gap-8">
+            <a href="#" class="font-medium hover:text-blue-600 text-xl">Pricing</a>
+            <a href="#" class="font-medium hover:text-blue-600 text-xl">Docs</a>
+            <a href="#" class="font-medium hover:text-blue-600 text-xl">Changelog</a>
+            <a href="#" class="font-medium hover:text-blue-600 text-xl">Blogs</a>
+            <a href="#" class="font-medium hover:text-blue-600 text-xl">Login</a>
+        </div>
+        <button
+            class="hidden md:block text-xl border-2 border-blue-800 rounded-xl py-1 px-4 font-medium hover:bg-blue-800 hover:text-white transition duration-300">
+            <span class="flex space-x-1">
+                <i class="ri-aliens-line text-2xl"></i>
+                <span>Alionz Developer's</span>
+                <i class="ri-arrow-right-line text-2xl"></i>
+            </span>
+        </button>
+
+        <button class="md:hidden" onclick="HandleMenu()">
+            <i class="ri-menu-line text-2xl p-2 "></i>
+        </button>
+        <!-- Mobile menu -->
+        <div id="hidemenu" class="hidden fixed bg-white inset-0">
+            <div id="bar" class="flex justify-between  bg-blue-50">
+                <a href="#" id="brand" class="flex gap-3 p-3 items-center">
+                    <img src="finder.png" class="max-h-12">
+                    <span class="font-medium text-2xl" >Todesktop</span>
+                </a>
+                <button class="md:hidden" onclick="HandleMenu()">
+                    <i class="ri-close-line text-4xl p-4 "></i>
+
+                </button>
+            </div>
+            <div class="mt-5 flex flex-col items-start ">
+                <hr class="bg-gray-500 w-full">
+                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Pricing</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Docs</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Changelog</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Blogs</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Login</a>
+                <hr class="bg-gray-500 w-full">
+
+            </div>
+            <div class="flex mt-6">
+                <button
+                    class="text-xl border-2 border-t-blue-800 border-b-blue-800 py-3 px-4 font-medium hover:bg-blue-800 hover:text-white transition duration-300 block w-full">
+                    <span class="flex space-x-1">
+                        <i class="ri-aliens-line text-2xl"></i>
+                        <span>Alionz Developer's</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+    <main>
+        <!-- hero section -->
+        <div id="hero">
+        </div>
+    </main>
 </body>
+
 </html>
