@@ -28,10 +28,11 @@
         }
 
         /* force white tiles for line-1 and line-2 */
-        #lines-grop #line-1 > div,
-        #lines-grop #line-2 > div {
-            background-color: #fff; /* override */
-            border: 1px solid rgba(0,0,0,0.12);
+        #lines-grop #line-1>div,
+        #lines-grop #line-2>div {
+            background-color: #fff;
+            /* override */
+            border: 1px solid rgba(0, 0, 0, 0.12);
         }
     </style>
 
@@ -155,109 +156,295 @@
                     <img src="./assests/Arrow pointing left .png" class="h-10 rotate-90 transform scale-x-[-1]">
                 </div>
                 <div id="lines-grop" class="flex flex-col">
-                    <div id="line-1" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-20">
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/helm-for-app-store-connect-2025-12-04.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Helm</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/daily-tracker-ripples-2025-10-31.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Daily Tracker</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-support-2025-10-27.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16  rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Apple co.</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/instagram-2025-10-30.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Instagram</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/glow-space-feng-shui-detector-2025-10-06.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Glow Space</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/google-2025-10-06.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                    <div id="line-1" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-48">
+                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32
+                            ">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/google-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
                             <span class="text-[12px] md:text-[16px] font-semibold">Google</span>
                         </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/stocks-2025-08-05.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/stocks-2025-08-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Stocks</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/helm-for-app-store-connect-2025-12-04.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Helm</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/daily-tracker-ripples-2025-10-31.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Tracker</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-support-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16  rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Apple co.</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/instagram-2025-10-30.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Instagram</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/glow-space-feng-shui-detector-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Glow Space</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/stocks-2025-08-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
                             <span class="text-[12px] md:text-[16px] font-semibold">Stocks</span>
                         </div>
                     </div>
-                    <div id="line-2" class="flex gap-4 flex-nowrap px-4 py-2 translate-x-1" >
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/duet-2025-04-13.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Duet</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/puff-2025-04-13.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Puff Ai</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/yup-open-social-all-in-one-2025-04-13.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Yup</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/duolingo-language-lessons-2024-09-01.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Duolingo</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/procreate-dreams-2024-06-17.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Procreate</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/hako-credit-card-points-2024-04-09.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Hako</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/countdown-app-widget-2023-10-03.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Countdown</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-podcasts-2025-10-20.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Podcasts</span>
-                        </div>
-                    </div>
-                    <div id="line-3" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-20" >
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024" class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
-                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
-                        </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                    <div id="line-2" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-32">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
                             <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
                         </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
                             <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
                         </div>
-                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
-                            <img src="https://cdn.jim-nielsen.com/ios/256/bigo-live-live-stream-go-live-2025-04-10.png?rf=1024" class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/duet-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Duet</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/puff-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Puff Ai</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/yup-open-social-all-in-one-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Yup</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/duolingo-language-lessons-2024-09-01.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Duolingo</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/procreate-dreams-2024-06-17.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Procreate</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/hako-credit-card-points-2024-04-09.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Hako</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/countdown-app-widget-2023-10-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Countdown</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-podcasts-2025-10-20.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Podcasts</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                    </div>
+                    <div id="line-3" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-48">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/bigo-live-live-stream-go-live-2025-04-10.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
                             <span class="text-[12px] md:text-[16px] font-semibold">Bigo</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/swiftly-business-workspace-2025-04-26.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Pastel</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/perplexity-ask-anything-2024-11-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Sniper</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/news-import-2024-07-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Motion</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/pastel-2026-01-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Scrivener</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/magic-drawing-and-ai-2025-07-14.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bluebird</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/bluebird-focus-timer-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Magic</span>
+                        </div>
+                         <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- stp bt spt -->
+             
         </div>
     </main>
-    <div class="h[1000px]"></div>
+    <div class="h-[1000px]"></div>
 </body>
 
 </html>
