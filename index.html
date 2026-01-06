@@ -10,8 +10,21 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Lilex:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
         body {
             font-family: 'Rubik', sans-serif;
+        }
+
+        .barname:hover {
+            transform: scale(1.05);
+        }
+
+        .bar:hover {
+            transform: translateX(10px);
+        }
+
+        #vision-text-bt:hover {
+            transform: translateY(-5px);
         }
     </style>
 
@@ -26,11 +39,11 @@
             <span class="font-medium text-2xl">Todesktop</span>
         </a>
         <div id="nav-menu " class="hidden md:flex gap-8">
-            <a href="#" class="font-medium hover:text-blue-600 text-xl">Pricing</a>
-            <a href="#" class="font-medium hover:text-blue-600 text-xl">Docs</a>
-            <a href="#" class="font-medium hover:text-blue-600 text-xl">Changelog</a>
-            <a href="#" class="font-medium hover:text-blue-600 text-xl">Blogs</a>
-            <a href="#" class="font-medium hover:text-blue-600 text-xl">Login</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Pricing</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Docs</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Changelog</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Blogs</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Login</a>
         </div>
         <button
             class="hidden md:block text-xl border-2 border-blue-800 rounded-xl py-1 px-4 font-medium hover:bg-blue-800 hover:text-white transition duration-300">
@@ -49,7 +62,7 @@
             <div id="bar" class="flex justify-between  bg-blue-50">
                 <a href="#" id="brand" class="flex gap-3 p-3 items-center">
                     <img src="finder.png" class="max-h-12">
-                    <span class="font-medium text-2xl" >Todesktop</span>
+                    <span class="font-medium text-2xl">Todesktop</span>
                 </a>
                 <button class="md:hidden" onclick="HandleMenu()">
                     <i class="ri-close-line text-4xl p-4 "></i>
@@ -58,15 +71,20 @@
             </div>
             <div class="mt-5 flex flex-col items-start ">
                 <hr class="bg-gray-500 w-full">
-                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Pricing</a>
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Pricing</a>
                 <hr class="bg-gray-500 w-full">
-                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Docs</a>
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Docs</a>
                 <hr class="bg-gray-500 w-full">
-                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Changelog</a>
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Changelog</a>
                 <hr class="bg-gray-500 w-full">
-                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Blogs</a>
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Blogs</a>
                 <hr class="bg-gray-500 w-full">
-                <a href="#" class=" px-5 py-4 text-2xl hover:bg-gray-100 block w-full">Login</a>
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Login</a>
                 <hr class="bg-gray-500 w-full">
 
             </div>
@@ -85,7 +103,44 @@
     <!-- main -->
     <main>
         <!-- hero section -->
-        <div id="hero">
+        <div id="hero" class="min-h-screen bg-gradient-to-br from-purple-100 via-orange-50 to-transparent">
+            <div id="hero-container"
+                class="max-w-4xl mx-auto px-6 pb-32 flex flex-col  sm:justify-center sm:items-center h-full">
+                <div id="vision-text-bt"
+                    class="bg-amber-50 my-8 p-1 rounded-xl shadow-md hover:shadow-xl w-fit border-amber-400 border-2 transition duration-300 group flex sm:mt-20">
+                    <p class="flex items-center mx-2 text-amber-900 font-medium"><i
+                            class="ri-circle-fill text-amber-500"></i><span
+                            class=" text-amber-500 ml-2 mr-1 font-normal"> v0.21.1:</span>Find-in-page bug fixer<i
+                            class="ri-arrow-right-line text-xl ml-1 text-amber-500 group-hover:translate-x-[5px] transition duration-300"></i>
+                    </p>
+                </div>
+                <div id="3-icon" class="mt-5 hidden md:flex justify-center items-center md:gap-8">
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-file-code-line mr-1"></i>Code optional
+                    </h3>
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-hand mr-1"></i>Drag & Drop builder
+                    </h3>
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-macbook-line mr-1"></i>Windows, Mac & Linux
+                    </h3>
+                </div>
+                <div class="mt-8 sm:w-[80%]">
+                    <h1 class="top-text text-5xl font-medium sm:text-7xl sm:text-center ">Web app to desktop app in
+                        minutes</h1>
+                    <p class="text-gray-700 text-xl mt-8 sm:text-center sm:text-2xl">Take your web application and
+                        convert it into a desktop application with minimal effort and time.</p>
+                </div>
+                <div
+                    class="mt-10 sm:flex sm:justify-center sm:items-center sm:w-full sm:flex-row sm:px-6 sm:gap-4 w-full max-w-md">
+                    <button
+                        class="w-full bg-blue-700 py-2 rounded-md text-white font-medium hover:bg-blue-600 transition duration-200">Download
+                        now</button>
+                    <button
+                        class="sm:-mt-0 mt-3 w-full bg-white py-2 border-[1px] border-black rounded-md text-black font-medium">Read
+                        Docs</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>
