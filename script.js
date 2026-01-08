@@ -44,3 +44,16 @@ setupIntersectionObserver(line1, false, 0.15);
 setupIntersectionObserver(line2, true, 0.15);
 setupIntersectionObserver(line3, false, 0.15);
 setupIntersectionObserver(line4, true, 0.15);
+
+const dtElements = document.querySelectorAll('.faq-item');
+
+dtElements.forEach(element => {
+  element.addEventListener('click', () => {
+    const ddId = element.getAttribute('aria-controls');
+    const ddElement = document.getElementById(ddId);
+    const ddArrowIcon = element.querySelector('i');
+
+    ddElement.classList.toggle('hidden');
+    ddArrowIcon.classList.toggle('rotate-180');
+  });
+});

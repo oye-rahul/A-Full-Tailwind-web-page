@@ -34,6 +34,15 @@
             /* override */
             border: 1px solid rgba(0, 0, 0, 0.12);
         }
+
+        .pricecard:hover {
+            transform: scale(1.04);
+        }
+
+        .btn:hover{
+            box-shadow:0px 0px 25px rgba(98, 98, 252, 0.615);
+
+        }
     </style>
 
 </head>
@@ -41,7 +50,7 @@
 <body>
     <script src="script.js" defer></script>
     <!-- navbar -->
-    <nav class="p-3 flex bg-blue-50 justify-between items-center">
+    <nav class="p-3 flex bg-blue-50 justify-between items-center fixed top-0 left-0 w-full shadow-md z-50 ">
         <a href="#" id="brand" class="flex gap-3 items-center">
             <img src="./assests/finder.png" class="max-h-12 min-h-6">
             <span class="font-medium text-2xl">Todesktop</span>
@@ -831,8 +840,8 @@
                             app in front of customers in days instead of months.</h3>
                         <div class="flex justify-center ">
                         </div>
-                        <button class="py-3 bg-blue-700 w-full flex justify-center text-white gap-3 rounded-md"><i
-                                class="ri-download-2-line"></i>Download ToDestop Builder
+                        <button class="btn py-3 bg-blue-700 w-full flex justify-center text-white gap-3 rounded-md transition dru"><i
+                                class="ri-download-2-line "></i>Download ToDestop Builder
 
                         </button>
                         <p class="text-xs italic font-light text-gray-500 ">*You can create a desktop app and run it on
@@ -850,9 +859,10 @@
             <!-- pricing 3 cards -->
             <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36 ">
                 <h2 class="text-6xl">Choose a plan that fits your needs </h2>
-                <div class="flex flex-col lg:flex-row justify-between  gap-4 mt-5 ">
+                <div class="flex flex-col lg:flex-row justify-between  gap-4 mt-5">
 
-                    <div class="flex flex-col rounded-xl border-2 p-8 gap-6 sm:w-[35%]">
+                    <div
+                        class="flex bg-gray-50 flex-col rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
                         <h2 class="text-4xl font-medium">Free</h2>
                         <p class="font-light text-xl">For personal use or testing your app before deploying to
                             customers.</p>
@@ -876,7 +886,8 @@
                     </div>
 
 
-                    <div class="flex flex-col rounded-xl border-2 p-8 gap-6 sm:w-[35%]">
+                    <div
+                        class="flex flex-col bg-gray-50 rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
                         <h2 class="text-4xl font-medium">Essential</h2>
                         <p class="font-light text-xl">For simple desktop apps.</p>
                         <h2 class="font-bold text-2xl">$99<span class="text-lg font-light">/month</span></h2>
@@ -899,7 +910,8 @@
                             Docs</button>
                     </div>
 
-                    <div class="flex flex-col rounded-xl border-2 p-8 gap-6 sm:w-[35%]">
+                    <div
+                        class="flex flex-col bg-gray-50 rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
                         <h2 class="text-4xl font-medium">Professional</h2>
                         <p class="font-light text-xl">For sophisticated desktop apps.</p>
                         <h2 class="font-bold text-2xl">$149<span class="text-lg font-light">/month</span></h2>
@@ -926,10 +938,112 @@
 
 
             <!-- FQS -->
-             <div></div>
+            <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36">
+                <h3 class="text-6xl mb-6">FQS</h3>
+                <div class="sm:grid-cols-2 grid items-start">
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq1">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq1">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq2">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq2">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq3">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq3">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq4">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq4">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq5">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq5">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq6">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq6">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36">
+                <div class="flex flex-col sm:flex-row rounded-lg p-5 bg-gray-50 py-16 sm:justify-between sm:px-10">
+                    <div class="justify-center flex ">
+                        <a href="#" id="brand" class="flex gap-3 items-center">
+                            <img src="./assests/finder.png" class="max-h-12 min-h-6">
+                            <span class="font-medium text-2xl">Todesktop</span>
+                        </a>
+                    </div>
+                    <div class="items-center flex sm:mt-3 gap-5 mt-10 flex-col sm:flex-row">
+                        <div class="flex gap-6 text-2xl">
+                            
+                            <a href="https://github.com/oye-rahul"><i class="ri-github-fill"></i></a>
+                            <a href="https://www.instagram.com/oye.rahul_malvi/"><i class="ri-instagram-line"></i></a>
+                            <a href="https://www.threads.com/"><i class="ri-threads-line"></i></a>
+                            
+                            
+                        </div>
+                        <a href="#"><h2 class="font-light mt-5 sm:mt-0">Documentation</h2></a>
+                    </div>
+                </div>
+                <div class="flex items-center flex-col mt-20 mb-20">
+                    <div class="flex items-center gap-5">
+                        <img class="w-10 rounded-lg" src="https://imgs.search.brave.com/1BALw-g_WZEdYKVhO809ut9go6OhtejhMnAlT-2jGKU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbWFya2V0aW5n/Ljk5c3RhdGljLmNv/bS9pbWFnZXMvcHJv/ZHVjdC1sYW5kaW5n/L3doeTk5ZC9XaHk5/OWRfbG9nby1kZXNp/Z24ucG5nP2F1dG89/Zm9ybWF0JmZpdD1t/YXgmdz0zODQwJnE9/NzU" alt="">
+                        <h2>The  Hype  Lab  Company  PVT. LTD.</h2>
+                    </div>
+                    <h2 class="text-gray-500 mt-10 flex">© 2024 ToDesktop, Inc. All rights reserved.</h2>
+                </div>
+            </div>
         </div>
     </main>
-    <div class="h-[1000px]"></div>
 </body>
 
 </html>
