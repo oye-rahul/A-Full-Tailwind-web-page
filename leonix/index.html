@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonix</title>
+
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Google Fonts: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP & Lenis (Smooth Scroll & Animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+    <style>
+        /* Smooth navbar scroll transition styling */
+        #main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-container {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-inner {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-logo-img {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-logo-text {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #btn-consult {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #btn-login {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #nav-avatar-circle {
+            display: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Scrolled Pill Menu Style (matching the image) */
+        /* Scrolled Pill Menu Style (White Mode Floating Pill) */
+        #main-nav.scrolled {
+            top: 1.25rem;
+            background-color: transparent !important;
+            border-bottom: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            z-index: 50;
+        }
+        #main-nav.scrolled #nav-container {
+            max-width: 1040px;
+            width: 92%;
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            border-radius: 9999px !important;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08) !important;
+            padding-left: 1.75rem !important;
+            padding-right: 1.75rem !important;
+        }
+        #main-nav.scrolled #nav-inner {
+            height: 3.75rem !important; /* h-15 */
+        }
+        #main-nav.scrolled #nav-logo-img {
+            width: 2.75rem !important;
+        }
+        #main-nav.scrolled #nav-logo-text {
+            color: #2563eb !important; /* Keep Blue Logo */
+        }
+        #main-nav.scrolled #nav-links a {
+            color: #4b5563 !important; /* Keep Gray Links */
+        }
+        #main-nav.scrolled #nav-links a:hover {
+            color: #000000 !important;
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+        #main-nav.scrolled #nav-links a.active-link {
+            background-color: #2563eb !important; /* Blue active pill */
+            color: #ffffff !important;
+            border-radius: 0.75rem !important;
+            padding: 0.5rem 1rem !important;
+        }
+        #main-nav.scrolled #btn-login {
+            color: #374151 !important;
+        }
+        #main-nav.scrolled #btn-login:hover {
+            color: #000000 !important;
+        }
+        #main-nav.scrolled #btn-consult {
+            background-color: #000000 !important; /* Keep Black Button */
+            color: #ffffff !important;
+            padding: 0.5rem 1.25rem !important;
+            font-size: 0.75rem !important;
+            border-radius: 9999px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+        #main-nav.scrolled #btn-consult:hover {
+            background-color: #1f2937 !important;
+        }
+        #main-nav.scrolled #nav-avatar-circle {
+            display: flex;
+        }
+        #main-nav.scrolled #mega-menu {
+            top: 3.75rem !important;
+            background-color: #ffffff !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1) !important;
+        }
+        #main-nav.scrolled #mega-menu * {
+            color: #1f2937 !important;
+        }
+        #main-nav.scrolled #mega-menu .hover\:bg-gray-50:hover * {
+            background-color: rgba(0, 0, 0, 0.03) !important;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div id="custom-cursor">
+        <i class="ri-telegram-2-line"></i>
+        <span class="font-normal bg-amber-200 text-black py-0 px-3 rounded-3xl text-sm">Guest</span>
+    </div>
+
+    <div id="service-cursor"></div>
+
+    <div id="ecosystem-cursor">
+        <i class="ri-hand-point-up-fill"></i>
+    </div>
+
+    <div id="main-content" class="relative z-10 bg-white border-b-[40px] border-white shadow-2xl">
+        <!-- nav bar  -->
+        <nav id="main-nav" class="sticky top-0 z-40 bg-transparent backdrop-blur-md transition-all duration-300">
+            <div id="nav-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300">
+                <div id="nav-inner" class="flex justify-between h-20 items-center transition-all duration-300">
+
+                    <!-- Logo -->
+                    <div id="nav-logo"
+                        class="sticky flex-shrink-0 flex items-center gap-2 cursor-pointer transition-all duration-300">
+                        <img src="logo.png" id="nav-logo-img" class="w-16 transition-all duration-300">
+                        <span id="nav-logo-text"
+                            class="text-2xl font-black text-blue-600 tracking-tighter transition-all duration-300">Leonix</span>
+                    </div>
+
+                    <!-- Links -->
+                    <div id="nav-links" class="hidden lg:flex items-center space-x-1 h-full">
+                        <!-- Products with Mega Menu -->
+                        <div class="group h-full flex items-center">
+                            <a href="services.html"
+                                class="text-gray-600 hover:text-black hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 group-hover:bg-blue-50 group-hover:text-black">
+                                Services <i
+                                    class="ri-arrow-down-s-line text-lg transition-transform group-hover:rotate-180"></i>
+                            </a>
+
+                            <!-- Mega Menu -->
+                            <div id="mega-menu"
+                                class="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-3xl shadow-2xl border border-gray-100 p-2 opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-[100] flex">
+                                <!-- Left: Product List -->
+                                <div class="flex-1 p-6 grid grid-cols-2 gap-x-8 gap-y-4">
+                                    <!-- Service 1: Design -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-2 px-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-pink-500"></div>
+                                            <h5 class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                Design & Identity</h5>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-1">
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-contacts-book-line text-pink-500"></i> Visiting Cards
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-layout-top-line text-pink-500"></i> Banners
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-slideshow-view text-pink-500"></i> PPTs & Templates
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Service 2: Media -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-2 px-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+                                            <h5 class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                Media
+                                                & Editing</h5>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-1">
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-video-line text-indigo-500"></i> Video Editing
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-magic-line text-indigo-500"></i> Reel Making
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-quill-pen-line text-indigo-500"></i> Script Writing
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Service 3: Marketing -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-2 px-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                                            <h5 class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                Marketing & Ads</h5>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-1">
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-google-line text-emerald-500"></i> Google & YT Ads
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-instagram-line text-emerald-500"></i> FB & Insta Ads
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-search-eye-line text-emerald-500"></i> SEO & SMM
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Service 4: Dev -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-2 px-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
+                                            <h5 class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                Technical Dev</h5>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-1">
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-code-s-line text-blue-600"></i> Web Engineering
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-window-line text-blue-600"></i> UI/UX Design
+                                            </div>
+                                            <div
+                                                class="flex items-center gap-3 p-2 text-sm font-bold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                                                <i class="ri-database-2-line text-blue-600"></i> Fullstack Solutions
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right: What's New -->
+                                <div class="w-[350px] bg-gray-50 rounded-[2rem] p-8 flex flex-col">
+                                    <div class="flex justify-between items-center mb-8">
+                                        <h3 class="font-black text-gray-900">What's New</h3>
+                                        <a href="#" class="text-sm font-bold text-gray-400 hover:text-black">View
+                                            all</a>
+                                    </div>
+                                    <div class="space-y-8">
+                                        <a href="#" class="block group/news">
+                                            <div
+                                                class="rounded-2xl overflow-hidden mb-4 shadow-md group-hover/news:scale-[1.02] transition-transform">
+                                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80"
+                                                    alt="News 1" class="w-full h-32 object-cover">
+                                            </div>
+                                            <p
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
+                                                November 6, 2025</p>
+                                            <h4 class="font-black text-sm text-gray-900 leading-tight">Image Editing,
+                                                Component Shuffling, New Components &...</h4>
+                                        </a>
+                                        <a href="#" class="block group/news">
+                                            <div
+                                                class="rounded-2xl overflow-hidden mb-4 shadow-md group-hover/news:scale-[1.02] transition-transform">
+                                                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&q=80"
+                                                    alt="News 2" class="w-full h-32 object-cover">
+                                            </div>
+                                            <p
+                                                class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
+                                                October 8, 2025</p>
+                                            <h4 class="font-black text-sm text-gray-900 leading-tight">Advanced Search
+                                                Comes
+                                                to Site Builder, Plus New Components</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="community.html"
+                            class="text-gray-600 hover:text-black hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1">Community
+                            <i class="ri-arrow-down-s-line text-lg"></i></a>
+                        <a href="pricing.html"
+                            class="text-gray-600 hover:text-black hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition-colors">Pricing</a>
+                        <a href="chat.html"
+                            class="text-gray-600 hover:text-black hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition-colors">Contact
+                            Expert</a>
+                    </div>
+
+                    <!-- Right Side -->
+                    <div class="hidden md:flex items-center gap-6" id="auth-nav">
+                        <button onclick="window.location.href='login.html'" id="btn-login"
+                            class="text-gray-700 font-bold hover:text-black transition-colors">Log in</button>
+                        <button onclick="window.location.href='chat.html'" id="btn-consult"
+                            class="bg-black hover:bg-gray-800 py-3 px-6 text-white font-bold rounded-lg transition-all transform hover:scale-105 active:scale-95">Start
+                            Consulting</button>
+                        <!-- Profile Z Avatar Circle (visible on scroll) -->
+                        <div id="nav-avatar-circle"
+                            class="w-8 h-8 rounded-full bg-cyan-600 text-white items-center justify-center font-bold shadow-md shadow-cyan-500/30 cursor-pointer select-none">
+                            Z
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="lg:hidden flex items-center">
+                        <button id="mobile-menu-toggle" class="text-gray-700 hover:text-black focus:outline-none p-2">
+                            <i class="ri-menu-3-line text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer Menu -->
+            <div id="mobile-drawer" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] hidden flex justify-end">
+                <div
+                    class="w-4/5 max-w-sm bg-white h-full p-8 flex flex-col justify-between shadow-2xl overflow-y-auto">
+                    <div>
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex items-center gap-2">
+                                <img src="logo.png" class="w-12" alt="Leonix Logo">
+                                <span class="text-xl font-black text-blue-600 tracking-tighter">Leonix</span>
+                            </div>
+                            <button id="mobile-menu-close" class="text-gray-400 hover:text-black p-2">
+                                <i class="ri-close-line text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex flex-col space-y-4">
+                            <a href="services.html"
+                                class="text-gray-800 font-bold text-lg hover:text-blue-600 py-2 border-b border-gray-100 flex items-center justify-between">
+                                Services <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                            <a href="community.html"
+                                class="text-gray-800 font-bold text-lg hover:text-blue-600 py-2 border-b border-gray-100 flex items-center justify-between">
+                                Community <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                            <a href="pricing.html"
+                                class="text-gray-800 font-bold text-lg hover:text-blue-600 py-2 border-b border-gray-100 flex items-center justify-between">
+                                Pricing <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                            <a href="chat.html"
+                                class="text-gray-800 font-bold text-lg hover:text-blue-600 py-2 border-b border-gray-100 flex items-center justify-between">
+                                Contact Expert <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-gray-100 space-y-3">
+                        <button onclick="window.location.href='login.html'"
+                            class="w-full py-3.5 rounded-xl font-bold border border-gray-200 text-gray-800 hover:bg-gray-50">
+                            Log In / Account
+                        </button>
+                        <button onclick="window.location.href='chat.html'"
+                            class="w-full py-3.5 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-md">
+                            Start Consulting
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="relative bg-white min-h-screen flex items-center justify-center -mt-20">
+            <!-- Main Purple Box Group -->
+            <div
+                class="hero-cursor-area relative w-full max-w-[95%] hover:bg-[#f8f7ff] rounded-3xl p-10 md:p-20 overflow-hidden group border hover:border-purple-400 shadow-2xl shadow-purple-100/20 mt-24">
+
+                <!-- Background Decorative Elements (Floating Images) -->
+                <div class="absolute inset-0 z-0">
+                    <!-- Left Side Images -->
+                    <div class="absolute left-10 top-20 hidden xl:flex flex-col gap-5">
+                        <div class="relative" data-aos="fade-right" data-aos-delay="200">
+                            <img src="https://elements-resized.envatousercontent.com/elements-cover-images/25df89f4-55d8-47bf-93e2-1f1879e1166c?w=710&cf_fit=scale-down&q=85&format=auto&s=a216f3f1564419f7a7076a5059912e543f16cad1cb77b11678d424bd5322e253"
+                                class="w-72 rounded-2xl shadow-2xl border-4 border-white 
+                transform -rotate-6 transition-all duration-700 
+                -ml-20 group-hover:-ml-7 group-hover:rotate-0 group-hover:scale-100" />
+                        </div>
+                        <div class="relative" data-aos="fade-right" data-aos-delay="400">
+                            <img src="https://elements-resized.envatousercontent.com/elements-cover-images/f02a11ea-e5ba-4c9c-b438-ad4f3586930e?w=710&cf_fit=scale-down&q=85&format=auto&s=4f8e7427195b160de8612c92f701a220b71b7894f37664b44cf974ffd4e2b45d"
+                                class="w-72 rounded-2xl shadow-2xl border-4 border-white 
+                transform rotate-3 transition-all duration-700
+                -ml-10 group-hover:-ml-2 group-hover:rotate-0 group-hover:scale-100">
+                            <!-- Cursor Label: Jessica -->
+                            <!-- <div
+                            class="absolute -left-4 -bottom-4 bg-[#FFD700] px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-md">
+                            <i class="ri-cursor-fill text-black"></i> Jessica
+                        </div> -->
+                        </div>
+                        <div class="relative -mt-8" data-aos="fade-right" data-aos-delay="600">
+                            <img src="eb0a7e997049a039.png"
+                                class="w-56 -rotate-12 translate-x-4 transform transition-all group-hover:rotate-[-4deg] group-hover:scale-100 duration-700">
+                        </div>
+                    </div>
+
+                    <!-- Right Side Images -->
+                    <div class="absolute -right-10 top-2 hidden xl:flex flex-col gap-8">
+                        <div class="relative -mr-10" data-aos="fade-left" data-aos-delay="700">
+                            <img src="ChatGPT_Image_Feb_1__2026__02_42_20_PM-removebg-preview.png"
+                                class="w-48 translate-x-28 transform transition-all duration-700 group-hover:translate-x-7 mt-7   rotate-6 group-hover:rotate-0 group-hover:scale-100">
+                            <!-- Cursor Label: Guest -->
+                            <!-- <div
+                            class="absolute -right-4 -bottom-4 text-black px-3 rounded-full text-md font-semibold flex justify-end gap-1 ">
+                            <img src="https://img.icons8.com/?size=100&id=jLkEh2zFhThT&format=png&color=000000"
+                                class="w-6 h-6 " />
+                            Rahul
+                        </div> -->
+                        </div>
+                        <div class="relative -mt-5" data-aos="fade-left" data-aos-delay="300">
+                            <img src="https://elements-resized.envatousercontent.com/elements-cover-images/c004c39b-93ae-4ad6-8b96-04b19ef52481?w=710&cf_fit=scale-down&q=85&format=auto&s=1c356d12a9e4b2d2b7202adc0169cdae53bbb7b835ac0129a383064cfc3800df"
+                                class="w-64 rounded-2xl shadow-2xl border-4 border-white rotate-6 -translate-x-10 transform transition-all group-hover:rotate-0 duration-700 group-hover:-translate-x-20 group-hover:scale-110">
+                            <!-- Cursor Label: Mario -->
+                            <!-- <div
+                            class="absolute -left-8 -top-4 bg-[#3B82F6] text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-md">
+                            <i class="ri-cursor-fill"></i> Mario
+                        </div> -->
+                        </div>
+                        <div class="relative" data-aos="fade-left" data-aos-delay="500">
+                            <img src="https://cdn.dribbble.com/userupload/13144482/file/original-cc14aeb38a203f33173f9314bf0e0a7f.jpg?resize=752x"
+                                class="w-64 -mr-32 rounded-2xl shadow-xl border-4 border-white translate-x-1 -rotate-6 transform transition-all group-hover:-translate-x-16 group-hover:rotate-0 duration-700 group-hover:scale-110">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Center Content -->
+                <div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+                    <!-- Trust Badge -->
+                    <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-gray-200 px-4 py-2 rounded-full mb-8"
+                        data-aos="zoom-in">
+                        <span class="text-blue-600 font-bold">Comprehensive Services</span>
+                        <span class="text-gray-600 font-medium">Your One-Stop Digital Solution Partner</span>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-6xl md:text-8xl font-black text-[#1a1a1a] leading-tight tracking-tight mt-5"
+                        data-aos="fade-up" data-aos-duration="1000">
+                        One place for all your <br>
+                        <span id="changing-text"
+                            class="bg-gradient-to-r mt-5 from-blue-600 to-indigo-600 bg-clip-text text-transparent italic min-h-[1.2em] inline-block">Digital
+                            Growth</span>
+                    </h1>
+
+                    <!-- Sub Heading -->
+                    <p class="text-xl md:text-2xl text-gray-500 max-w-2xl mx-auto leading-relaxed mt-14"
+                        data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        From premium graphic design and video editing to high-impact digital marketing and world-class
+                        web
+                        development. Leonox builds, grows, and scales your brand.
+                    </p>
+
+                    <DIV class="h-4"></DIV>
+
+
+
+                    <!-- Generate Bar -->
+                    <!-- <div class="w-full max-w-3xl p-[2px] rounded-2xl bg-linear-to-r from-orange-400 via-pink-500 to-indigo-600 shadow-2xl shadow-indigo-200/30 group-hover:shadow-indigo-300/50 transition-all duration-500"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-white rounded-2xl flex items-center p-2">
+                        <input type="text" placeholder="Describe a company in a sentence or two..."
+                            class="flex-1 px-6 py-4 text-xl outline-none text-gray-700 bg-transparent placeholder-gray-400">
+                        <button
+                            class="bg-[#5a45ff] hover:bg-[#4a35ff] text-white px-10 py-4 rounded-xl text-xl font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg flex items-center gap-2">
+                            Generate
+                        </button>
+                    </div>
+                </div> -->
+                </div>
+            </div>
+        </section>
+        <section class="pb-20 bg-gray-50/50 service-cursor-area">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-3xl mx-auto mb-12 mt-16" data-aos="fade-up">
+                    <span
+                        class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-black tracking-widest uppercase mb-4">
+                        Modular Capabilities
+                    </span>
+                    <h2 class="text-5xl md:text-6xl font-black text-slate-900 tracking-tight mb-4">
+                        Our Expert Service Hub
+                    </h2>
+                    <p class="text-gray-500 text-lg md:text-xl font-medium">
+                        A unified digital ecosystem engineering web platforms, intelligent branding, high-retention
+                        motion media, and cloud logic systems.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-gray-100 rounded-[3rem] p-6 md:p-10 shadow-2xl shadow-gray-200/40"
+                    data-aos="zoom-in" data-aos-duration="1000">
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+                        <!-- Left Column -->
+                        <div class="lg:col-span-1 flex flex-col gap-8">
+                            <!-- Multi-cloud Card -->
+                            <div
+                                class="bg-gray-50/50 border border-gray-100 rounded-3xl p-8 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+                                <div class="relative w-32 h-32 mb-8">
+                                    <div
+                                        class="absolute inset-0 border-2 border-dashed border-gray-200 rounded-full animate-[spin_20s_linear_infinite]">
+                                    </div>
+                                    <div
+                                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 p-2.5 rounded-xl text-white shadow-xl">
+                                        <i class="ri-cloud-line text-lg"></i>
+                                    </div>
+                                    <div
+                                        class="absolute bottom-[10%] right-[5%] bg-black p-2.5 rounded-xl text-white shadow-xl">
+                                        <i class="ri-nextjs-line text-lg"></i>
+                                    </div>
+                                    <div
+                                        class="absolute bottom-[10%] left-[5%] bg-orange-500 p-2.5 rounded-xl text-white shadow-xl">
+                                        <i class="ri-fire-fill text-lg"></i>
+                                    </div>
+                                    <div
+                                        class="absolute inset-4 bg-gray-200/50 rounded-full flex items-center justify-center">
+                                        <i class="ri-flashlight-fill text-blue-600 text-3xl"></i>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-3 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold uppercase rounded-full tracking-widest mb-3">AI
+                                    Engine</span>
+                                <h3 class="text-xl font-bold text-gray-800 leading-tight">
+                                    AI-Powered Neural Branding
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-3 leading-relaxed">
+                                    Generative identity systems, automated design tokens, predictive style guides, and
+                                    dynamic multi-platform visual templates built for rapid scaling.
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-1.5 justify-center">
+                                    <span
+                                        class="text-[10px] bg-white px-2.5 py-1 rounded-md border border-gray-200 text-gray-600 font-semibold">Generative
+                                        AI</span>
+                                    <span
+                                        class="text-[10px] bg-white px-2.5 py-1 rounded-md border border-gray-200 text-gray-600 font-semibold">Style
+                                        Guides</span>
+                                </div>
+                            </div>
+
+                            <!-- Alerts Card -->
+                            <div
+                                class="bg-gray-50/50 border border-gray-100 rounded-3xl p-8 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+                                <div class="w-full space-y-2 mb-6">
+                                    <div
+                                        class="flex justify-between items-center p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                                        <span class="font-bold text-indigo-600 text-xs flex items-center gap-1.5"><i
+                                                class="ri-video-line"></i> Premiere Pro</span>
+                                        <span
+                                            class="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded">Video
+                                            Cut</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                                        <span class="font-bold text-pink-500 text-xs flex items-center gap-1.5"><i
+                                                class="ri-image-line"></i> Photoshop</span>
+                                        <span
+                                            class="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded">VFX
+                                            & Edit</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 bg-white rounded-xl border border-gray-100 shadow-xs">
+                                        <span class="font-bold text-purple-600 text-xs flex items-center gap-1.5"><i
+                                                class="ri-layout-line"></i> Figma</span>
+                                        <span
+                                            class="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded">UI
+                                            Systems</span>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 leading-tight">
+                                    Next-Gen Motion & Visual Design
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-3 leading-relaxed">
+                                    Broadcast-grade video editing, viral short-form reels, and pixel-perfect interface
+                                    designs engineered to maximize audience retention.
+                                </p>
+                                <a href="services.html#media"
+                                    class="mt-4 text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Explore
+                                    Creative Suite <i class="ri-arrow-right-line"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Middle Column (FEATURED WEB APPS & PLATFORM ENGINEERING) -->
+                        <div class="lg:col-span-2">
+                            <div
+                                class="h-full bg-gradient-to-b from-gray-50/80 to-white border border-gray-100 rounded-[2.5rem] p-8 md:p-10 flex flex-col group hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+
+                                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                                    <span
+                                        class="px-4 py-1.5 bg-blue-600 text-white text-xs font-extrabold uppercase rounded-full tracking-wider shadow-md shadow-blue-200">
+                                        ✨ Featured • Web App Architecture
+                                    </span>
+                                    <span class="text-xs font-bold text-gray-400 flex items-center gap-1">
+                                        <i class="ri-checkbox-circle-fill text-green-500"></i> Production Ready
+                                    </span>
+                                </div>
+
+                                <div
+                                    class="mb-8 rounded-2xl overflow-hidden border border-gray-200 shadow-xl transform group-hover:scale-[1.01] transition-transform duration-500 relative">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
+                                        alt="Enterprise Web Application Dashboard"
+                                        class="w-full h-64 md:h-72 object-cover">
+                                    <div
+                                        class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white/50 flex flex-wrap justify-between items-center gap-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-3 h-3 rounded-full bg-green-500 animate-ping"></div>
+                                            <span class="text-xs font-black text-gray-900">Live Web Infrastructure
+                                                Console</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <span
+                                                class="text-[10px] font-bold bg-gray-900 text-white px-2.5 py-1 rounded-lg">Next.js
+                                                14</span>
+                                            <span
+                                                class="text-[10px] font-bold bg-blue-600 text-white px-2.5 py-1 rounded-lg">React</span>
+                                            <span
+                                                class="text-[10px] font-bold bg-emerald-600 text-white px-2.5 py-1 rounded-lg">Tailwind</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto space-y-4">
+                                    <h3 class="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                                        Enterprise Web Architecture & Digital Web Apps
+                                    </h3>
+                                    <p class="text-gray-600 text-base md:text-lg leading-relaxed">
+                                        We engineer custom, highly scalable web applications and SaaS platforms powered
+                                        by modern frontend frameworks, real-time database sync, and serverless edge
+                                        delivery. Designed for lightning-fast responsiveness, zero downtime, and maximum
+                                        conversion rates.
+                                    </p>
+
+                                    <!-- Performance Metrics Grid -->
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 border-t border-gray-100">
+                                        <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+                                            <div class="text-xl font-black text-blue-600">&lt; 50ms</div>
+                                            <div class="text-[10px] font-bold text-gray-400 uppercase">Edge Response
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+                                            <div class="text-xl font-black text-emerald-600">99.99%</div>
+                                            <div class="text-[10px] font-bold text-gray-400 uppercase">System Uptime
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+                                            <div class="text-xl font-black text-indigo-600">100/100</div>
+                                            <div class="text-[10px] font-bold text-gray-400 uppercase">Lighthouse SEO
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+                                            <div class="text-xl font-black text-purple-600">4.8x</div>
+                                            <div class="text-[10px] font-bold text-gray-400 uppercase">ROAS Lift</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-4 flex flex-wrap items-center gap-4">
+                                        <button onclick="window.location.href='chat.html?service=web'"
+                                            class="bg-gray-900 hover:bg-black text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg hover:shadow-xl">
+                                            Consult Web Engineers <i class="ri-arrow-right-line"></i>
+                                        </button>
+                                        <a href="services.html#dev"
+                                            class="text-sm font-bold text-gray-600 hover:text-black transition-colors flex items-center gap-1">
+                                            View Full Engineering Stack <i class="ri-external-link-line"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="lg:col-span-1 flex flex-col gap-8">
+                            <!-- Auth Card -->
+                            <div
+                                class="bg-gray-50/50 border border-gray-100 rounded-3xl p-8 flex flex-col items-center text-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+                                <div class="flex gap-4 mb-6">
+                                    <div
+                                        class="w-12 h-12 bg-white border border-gray-100 rounded-xl flex items-center justify-center shadow-sm text-blue-600">
+                                        <i class="ri-refresh-line text-xl"></i>
+                                    </div>
+                                    <div
+                                        class="w-12 h-12 bg-white border border-gray-100 rounded-xl flex items-center justify-center shadow-sm text-purple-600">
+                                        <i class="ri-fingerprint-line text-xl"></i>
+                                    </div>
+                                    <div
+                                        class="w-12 h-12 bg-white border border-gray-100 rounded-xl flex items-center justify-center shadow-sm text-green-600">
+                                        <i class="ri-shield-keyhole-line text-xl"></i>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-3 py-1 bg-green-50 text-green-700 text-[10px] font-bold uppercase rounded-full tracking-widest mb-3">Enterprise
+                                    Security</span>
+                                <h3 class="text-xl font-bold text-gray-800 leading-tight">
+                                    Zero-Trust Quantum Security
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-3 leading-relaxed">
+                                    Biometric authentication, OAuth 2.0 multi-tenant isolation, automated DDoS
+                                    shielding, and AES-256 encrypted session infrastructure.
+                                </p>
+                            </div>
+
+                            <!-- Automation Card -->
+                            <div
+                                class="bg-gray-50/50 border border-gray-100 rounded-3xl p-8 flex flex-col items-center group hover:bg-white hover:shadow-xl transition-all duration-500">
+                                <div class="grid grid-cols-2 gap-2.5 mb-4 w-full">
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-reactjs-fill text-blue-500 text-sm"></i> React
+                                    </div>
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-google-fill text-red-500 text-sm"></i> Google Cloud
+                                    </div>
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-code-fill text-amber-500 text-sm"></i> Python
+                                    </div>
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-figma-line text-purple-500 text-sm"></i> Figma
+                                    </div>
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-nodejs-fill text-green-500 text-sm"></i> Node.js
+                                    </div>
+                                    <div
+                                        class="bg-white px-3 py-2 rounded-xl border border-gray-100 flex items-center gap-2 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <i class="ri-database-2-line text-indigo-500 text-sm"></i> Next.js
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 mb-4 pt-3 border-t border-gray-100 w-full justify-center">
+                                    <i class="ri-flashlight-fill text-green-500 text-xl"></i>
+                                    <span class="text-lg font-black text-gray-900">Saliver Engine</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 leading-tight text-center">
+                                    Cloud-Native Logic & Edge Microservices
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-3 text-center leading-relaxed">
+                                    Serverless microservices, distributed edge computing, GraphQL/REST APIs, and
+                                    high-concurrency database architectures.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white overflow-hidden ecosystem-cursor-area">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                    <!-- Left: Media Column -->
+                    <div class="relative" data-aos="fade-right">
+                        <!-- Video Container showing Digital Marketing Animation Mockup -->
+                        <div
+                            class="relative rounded-[2.5rem] overflow-hidden shadow-2xl z-10 aspect-square bg-slate-950 flex items-center justify-center border border-gray-100">
+                            <!-- Loop video showcasing analytics dashboard / ads campaign data -->
+                            <video autoplay loop muted playsinline
+                                class="w-full h-full object-cover opacity-90 transition-opacity duration-500 hover:opacity-100">
+                                <source
+                                    src="https://assets.mixkit.co/videos/preview/mixkit-data-screens-of-a-business-dashboard-34351-large.mp4"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none">
+                            </div>
+
+                            <!-- Floating Interactive Platforms Overlay Badge -->
+                            <div
+                                class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/60 flex items-center justify-between shadow-lg">
+                                <span class="text-xs font-black text-gray-800 tracking-wider uppercase">Target
+                                    Channels</span>
+                                <div class="flex gap-2">
+                                    <span
+                                        class="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center shadow-xs"
+                                        title="Google & YouTube Ads">
+                                        <i class="ri-google-fill text-red-500 text-sm"></i>
+                                    </span>
+                                    <span
+                                        class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shadow-xs"
+                                        title="Facebook & Instagram Ads">
+                                        <i class="ri-facebook-fill text-blue-600 text-sm"></i>
+                                    </span>
+                                    <span
+                                        class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center shadow-xs"
+                                        title="Instagram">
+                                        <i class="ri-instagram-line text-pink-500 text-sm"></i>
+                                    </span>
+                                    <span
+                                        class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center shadow-xs"
+                                        title="SEO & SMM">
+                                        <i class="ri-search-line text-amber-500 text-sm"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge: ROI Growth -->
+                        <div
+                            class="absolute -top-6 left-10 z-20 bg-white border border-gray-100 rounded-full px-4 py-2.5 shadow-xl flex items-center gap-3">
+                            <div
+                                class="bg-[#3b82f6] text-white text-xs font-black px-3 py-1 rounded-full flex items-center gap-1">
+                                <i class="ri-arrow-right-up-line"></i> +480%
+                            </div>
+                            <span class="text-gray-600 font-bold text-xs uppercase tracking-wider">ROAS
+                                Scalability</span>
+                        </div>
+
+                        <!-- Floating Card: Active Ads Accounts & Campaign Stats -->
+                        <div
+                            class="absolute -bottom-10 -right-6 z-20 bg-white border border-gray-100 rounded-3xl p-6 shadow-2xl w-64 transform transition-transform hover:scale-105 duration-300">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-2 bg-blue-50 rounded-xl">
+                                    <i class="ri-line-chart-line text-blue-600 text-xl"></i>
+                                </div>
+                                <span class="flex h-2 w-2 relative">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between text-xs border-b border-gray-50 pb-1.5">
+                                    <span class="text-gray-500 font-bold flex items-center gap-1.5"><i
+                                            class="ri-google-fill text-red-500"></i> Google & YT</span>
+                                    <span class="text-green-600 font-black">Active</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs border-b border-gray-50 pb-1.5">
+                                    <span class="text-gray-500 font-bold flex items-center gap-1.5"><i
+                                            class="ri-facebook-circle-fill text-blue-600"></i> FB & Insta</span>
+                                    <span class="text-green-600 font-black">Active</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-gray-500 font-bold flex items-center gap-1.5"><i
+                                            class="ri-search-line text-amber-500"></i> SEO & SMM</span>
+                                    <span class="text-gray-900 font-black">98/100</span>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-4 pt-3 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-[10px] font-bold uppercase tracking-wider">
+                                <i class="ri-refresh-line animate-spin"></i> Live Tracker Connected
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Content Column -->
+                    <div data-aos="fade-left">
+                        <span
+                            class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-black tracking-widest uppercase mb-8 border border-blue-100">
+                            Omni-Channel Scale
+                        </span>
+
+                        <h2 class="text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-8">
+                            High-Performance <span class="inline-flex items-center"><i
+                                    class="ri-megaphone-line text-blue-500 mx-2 animate-bounce"></i>Ad Campaigns</span>
+                        </h2>
+
+                        <p class="text-gray-500 text-xl leading-relaxed mb-12">
+                            We build data-driven digital marketing engines that convert cold clicks into recurring
+                            revenue. Maximize ROAS with expert media buying and automated tracking.
+                        </p>
+
+                        <!-- Feature Items -->
+                        <div class="space-y-10 mb-12">
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-14 h-14 bg-white border border-gray-100 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:border-blue-200 transition-all duration-300 shrink-0">
+                                    <i class="ri-google-fill text-2xl text-red-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-black text-gray-900 mb-1">Google & YouTube Ads</h4>
+                                    <p class="text-gray-400 text-lg">Target high-intent search queries and capture
+                                        buyers with high-retention video advertising workflows.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-14 h-14 bg-white border border-gray-100 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:border-blue-200 transition-all duration-300 shrink-0">
+                                    <i class="ri-facebook-circle-fill text-2xl text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-black text-gray-900 mb-1">Facebook & Instagram Ads</h4>
+                                    <p class="text-gray-400 text-lg">Harness laser-focused audience segmentation and
+                                        hyper-converting visual creative strategies.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-14 h-14 bg-white border border-gray-100 rounded-2xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:border-blue-200 transition-all duration-300 shrink-0">
+                                    <i class="ri-search-line text-2xl text-amber-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-black text-gray-900 mb-1">SEO & Social Media Marketing (SMM)
+                                    </h4>
+                                    <p class="text-gray-400 text-lg">Build long-term organic authority and continuous
+                                        organic traffic via search rankings and viral content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <button onclick="window.location.href='chat.html'"
+                            class="bg-black justify-between px-5 py-4 rounded-full font-bold text-white text-lg flex items-center gap-4 group transition-all transform hover:scale-[1.02] active:scale-95 cursor-pointer hover:bg-blue-600 hover:text-white w-[320px] max-w-[100%]">
+                            <div>
+                                Consult Marketing Experts
+                            </div>
+                            <div
+                                class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center group-hover:bg-white transition-colors ml-5">
+                                <i
+                                    class="ri-arrow-right-line text-white group-hover:text-black group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: FLOW STEPS (Sitemaps, Wireframes, Style Guide) -->
+        <section class="py-24 bg-[#fcfcfc] relative">
+            <div class="max-w-[1400px] mx-auto px-14 ">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <span
+                        class="inline-block px-4 py-1.5 bg-purple-50 text-purple-600 rounded-full text-xs font-black tracking-widest uppercase mb-4">
+                        Brand Deliverables
+                    </span>
+                    <h2 class="text-5xl md:text-6xl font-black text-gray-900 tracking-tight mb-4">
+                        Custom Graphic Assets
+                    </h2>
+                    <p class="text-gray-500 text-lg font-medium">
+                        Elevate your brand presence across physical and digital touchpoints with our high-end marketing
+                        collateral design.
+                    </p>
+                </div>
+
+                <!-- Connecting Line Container -->
+                <div class="absolute top-72 left-0 w-full hidden lg:block">
+                    <div
+                        class="max-w-6xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-purple-200 to-transparent relative">
+                        <div class="absolute top-0 left-1/3 w-2 h-2 -mt-[3px] bg-purple-300 rounded-full"></div>
+                        <div class="absolute top-0 right-1/3 w-2 h-2 -mt-[3px] bg-purple-300 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+
+                    <!-- Card 1: Visiting Cards -->
+                    <div class="bg-white rounded-[2rem] border-t-2 border-blue-500 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group h-full"
+                        data-aos="fade-up">
+                        <span class="text-blue-500 font-bold uppercase tracking-widest text-xs mb-4">Identity
+                            Design</span>
+                        <h3 class="text-4xl font-black text-gray-900 mb-4">Visiting Cards</h3>
+                        <p class="text-gray-500 font-medium mb-8 max-w-[250px]">
+                            Tactile, double-sided business card concepts engineered to leave an unforgettable
+                            impression.
+                        </p>
+                        <button onclick="openFlowModal('visitingcard')"
+                            class="px-6 py-2 border border-blue-200 rounded-lg font-bold text-blue-600 hover:bg-blue-50 transition-colors mb-12 active:scale-95">
+                            Inspect Layouts
+                        </button>
+                        <!-- Visiting Card Illustration -->
+                        <div
+                            class="w-full h-56 bg-slate-50 border border-slate-100 rounded-2xl p-6 mt-auto flex items-center justify-center relative overflow-hidden transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <!-- Card Preview Stack -->
+                            <div class="relative w-full h-36 max-w-[220px]">
+                                <!-- Card Back -->
+                                <div
+                                    class="absolute inset-x-0 top-0 h-28 bg-slate-900 rounded-xl shadow-md border border-white/10 p-3 flex flex-col justify-between text-left transform -rotate-6 translate-y-1">
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+                                        <span class="text-[9px] font-black text-white tracking-tighter">LEONIX</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[7px] text-gray-500 block">www.leonix.agency</span>
+                                    </div>
+                                </div>
+                                <!-- Card Front -->
+                                <div
+                                    class="absolute inset-x-0 top-0 h-28 bg-white rounded-xl shadow-xl border border-gray-100 p-4 flex flex-col justify-between text-left transform translate-y-4 translate-x-2 group-hover:translate-y-1 group-hover:translate-x-0 transition-all duration-500">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="text-xs font-black text-gray-900">Alex Carter</h4>
+                                            <p class="text-[8px] text-blue-500 font-medium">Head of Branding</p>
+                                        </div>
+                                        <i class="ri-qr-code-line text-lg text-gray-400"></i>
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[7px] text-gray-400 flex items-center gap-1"><i
+                                                class="ri-phone-line"></i> +1 (555) 019-2834</p>
+                                        <p class="text-[7px] text-gray-400 flex items-center gap-1"><i
+                                                class="ri-mail-line"></i> alex@leonix.agency</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Banners -->
+                    <div class="bg-white rounded-[2rem] border-t-2 border-indigo-600 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group h-full"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <span class="text-indigo-600 font-bold uppercase tracking-widest text-xs mb-4">Ad
+                            Campaigns</span>
+                        <h3 class="text-4xl font-black text-gray-900 mb-4">Banners</h3>
+                        <p class="text-gray-500 font-medium mb-8 max-w-[250px]">
+                            High-conversion digital web banners styled for search, social feeds, and display campaigns.
+                        </p>
+                        <button onclick="openFlowModal('banner')"
+                            class="px-6 py-2 border border-indigo-200 rounded-lg font-bold text-indigo-600 hover:bg-indigo-50 transition-colors mb-12 active:scale-95">
+                            See Banner Specs
+                        </button>
+
+                        <!-- Banner Illustration -->
+                        <div
+                            class="w-full h-56 bg-slate-50 border border-slate-100 rounded-2xl p-6 mt-auto flex items-center justify-center relative overflow-hidden transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <div
+                                class="w-full max-w-[240px] h-32 bg-gradient-to-br from-indigo-900 to-indigo-950 rounded-lg border border-indigo-100 p-3.5 text-left flex flex-col justify-between relative overflow-hidden shadow-md">
+                                <!-- Banner UI elements -->
+                                <div class="flex justify-between items-center">
+                                    <span
+                                        class="text-[7px] bg-[#a3e635] text-black font-black px-2 py-0.5 rounded-full">ACTIVE
+                                        SALE</span>
+                                    <div class="flex gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-xs font-black text-white leading-tight">Scale Your Campaigns</h4>
+                                    <p class="text-[8px] text-gray-300 mt-0.5">50% Growth in First Month</p>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <button
+                                        class="bg-[#a3e635] text-black font-black text-[8px] px-3 py-1 rounded">Launch
+                                        Now</button>
+                                    <span class="text-[7px] text-indigo-300">Google Ad (300x250)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: PPTs & Templates -->
+                    <div class="bg-white rounded-[2rem] border-t-2 border-purple-600 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group h-full"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <span class="text-purple-600 font-bold uppercase tracking-widest text-xs mb-4">Pitch
+                            Decks</span>
+                        <h3 class="text-4xl font-black text-gray-900 mb-4">PPTs & Templates</h3>
+                        <p class="text-gray-500 font-medium mb-8 max-w-[250px]">
+                            High-end corporate PowerPoint slide decks tailored for keynotes, pitches, and webinars.
+                        </p>
+                        <button onclick="openFlowModal('ppt')"
+                            class="px-6 py-2 border border-purple-200 rounded-lg font-bold text-purple-600 hover:bg-purple-50 transition-colors mb-12 active:scale-95">
+                            View Pitch Assets
+                        </button>
+
+                        <!-- Style Guide / PPT Illustration -->
+                        <div
+                            class="w-full h-56 bg-slate-50 border border-slate-100 rounded-2xl p-6 mt-auto flex items-center justify-center relative overflow-hidden transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <!-- PPT Slide Preview -->
+                            <div
+                                class="w-full max-w-[240px] bg-white rounded-lg p-3 text-left border border-slate-200 shadow-md">
+                                <div
+                                    class="flex items-center gap-1 mb-2 border-b border-gray-100 pb-1.5 justify-between">
+                                    <span class="text-[8px] font-black text-gray-900">Slide 04: Market Potential</span>
+                                    <div class="flex gap-1 text-[8px] text-gray-400">
+                                        <i class="ri-arrow-left-s-line"></i>
+                                        <span>4 / 12</span>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="col-span-2 space-y-1">
+                                        <div class="w-full h-1.5 bg-gray-200 rounded-full"></div>
+                                        <div class="w-5/6 h-1.5 bg-gray-200 rounded-full"></div>
+                                        <div class="w-4/6 h-1.5 bg-gray-200 rounded-full"></div>
+                                        <div
+                                            class="w-14 h-3 bg-purple-600/10 rounded flex items-center justify-center text-[6px] font-black text-purple-700 mt-2 p-1">
+                                            Target Market</div>
+                                        <div class="w-full h-1.5 bg-gray-200 rounded-full"></div>
+                                        <div class="w-4/6 h-1.5 bg-gray-200 rounded-full"></div>
+                                        <div
+                                            class=" h-5 bg-purple-600/10 rounded flex items-center justify-center text-[6px] font-black text-purple-700 mt-2 p-1.5">
+                                            Every year, inefficient software costs companies $1.2M</div>
+                                    </div>
+                                    <!-- Mini Chart -->
+                                    <div
+                                        class="flex items-end justify-between h-10 px-1 border-b border-l border-gray-100 pt-1">
+                                        <div class="w-1.5 h-4 bg-purple-400 rounded-t"></div>
+                                        <div class="w-1.5 h-7 bg-purple-600 rounded-t"></div>
+                                        <div class="w-1.5 h-9 bg-purple-800 rounded-t"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: LIBRARIES GRID (Figma, Webflow, React) -->
+
+        <!-- ACETERNITY-STYLE CONTAINER SCROLL SECTION -->
+        <section id="scroll-animation-section" class="relative py-20 overflow-hidden bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <!-- Scroll Container -->
+                <div id="scroll-container" class="relative flex flex-col items-center">
+
+                    <!-- Title Component -->
+                    <div id="scroll-title" class="text-center mb-20 z-20">
+                        <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-none">
+                            Unleash the power of <br />
+                            <span
+                                class="text-6xl md:text-[8rem] font-black bg-gradient-to-b from-slate-900 to-slate-500 bg-clip-text text-transparent">
+                                Scroll Animations
+                            </span>
+                        </h1>
+                    </div>
+
+                    <!-- 3D Card Wrapper -->
+                    <div id="scroll-card-wrapper" class="w-full max-w-6xl perspective-[1000px] -mt-10 md:-mt-20">
+                        <div id="scroll-card"
+                            class="relative w-full aspect-[16/10] md:aspect-video bg-[#222222] rounded-[30px] border-[6px] border-[#6c6c6c] p-2 md:p-4 shadow-2xl transition-shadow duration-500 overflow-hidden"
+                            style="transform: rotateX(20deg) scale(0.9); transform-origin: top center;">
+
+                            <!-- Content inside the card -->
+                            <div class="w-full h-full bg-gray-100 rounded-2xl overflow-hidden relative">
+                                <img src="https://ui.aceternity.com/_next/image?url=%2Flinear.webp&w=3840&q=75"
+                                    alt="Global Platform Mockup"
+                                    class="w-full h-full object-cover object-left-top shadow-inner">
+
+                                <!-- Subtle Overlay for depth -->
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent pointer-events-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCRIPT FOR CONTAINER SCROLL ANIMATION -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const card = document.querySelector('#scroll-card');
+                const title = document.querySelector('#scroll-title');
+                const section = document.querySelector('#scroll-animation-section');
+
+                // Initial state
+                gsap.set(card, {
+                    rotateX: 20,
+                    scale: 0.9,
+                    y: 0
+                });
+
+                // Scroll Animation
+                gsap.to(card, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom", // Start when section enters view
+                        end: "center center", // Finish when section center hits screen center
+                        scrub: 1, // Smooth scrolling
+                    },
+                    rotateX: 0,
+                    scale: 1,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                    duration: 1
+                });
+
+                // Title Translation effect (parallax)
+                gsap.to(title, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true,
+                    },
+                    y: -100, // Moves up as we scroll
+                    opacity: 1,
+                });
+            });
+        </script>
+
+        <!-- NEW SECTION: Testimonials & Community -->
+        <section class="py-24 bg-[#f8f9fa]">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Community Header -->
+                <div class="text-center mb-20" data-aos="fade-up">
+                    <div class="flex justify-center -space-x-2 mb-6">
+                        <img src="https://i.pravatar.cc/150?u=1" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/150?u=2" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/150?u=3" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/150?u=4" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/150?u=5" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/150?u=6" class="w-10 h-10 rounded-full border-2 border-white">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-500">
+                            +1M</div>
+                    </div>
+                    <p class="text-gray-500 font-bold text-sm uppercase tracking-widest mb-4">Empowering 5,000+ Happy
+                        Clients</p>
+                    <h2 class="text-5xl md:text-7xl font-black text-gray-900 leading-tight mb-8">
+                        Scaling Brands with<br>Next-Gen Digital Solutions
+                    </h2>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button
+                            class="px-8 py-4 bg-white border border-gray-200 rounded-xl font-bold text-gray-900 hover:bg-gray-50 transition-all flex items-center gap-2 shadow-sm">
+                            <i class="ri-slack-line text-xl"></i> Join our community
+                        </button>
+                        <button
+                            class="px-8 py-4 bg-transparent border border-gray-200 rounded-xl font-bold text-gray-500 hover:text-gray-900 transition-all">
+                            Read more reviews
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scrolling Testimonials (Unified System) -->
+                <div class="flex justify-center gap-6 mt-10 mask-fade max-h-[740px] overflow-hidden">
+
+                    <!-- Column 1 -->
+                    <div class="flex flex-col gap-6 pb-6 animate-vertical-scroll" style="animation-duration: 15s;">
+                        <!-- Repeat 2 times for seamless loop -->
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">This ERP revolutionized our
+                                    operations, streamlining finance and inventory. The cloud-based platform keeps us
+                                    productive, even remotely.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/1.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Briana Patton">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Briana Patton</div>
+                                        <div class="text-xs text-gray-500">Operations Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Implementing this ERP was smooth
+                                    and quick. The customizable, user-friendly interface made team training effortless.
+                                </p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/2.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Bilal Ahmed">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Bilal Ahmed</div>
+                                        <div class="text-xs text-gray-500">IT Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">The support team is exceptional,
+                                    guiding us through setup and providing ongoing assistance, ensuring our
+                                    satisfaction.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/3.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Saman Malik">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Saman Malik</div>
+                                        <div class="text-xs text-gray-500">Customer Support Lead</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for Loop -->
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">This ERP revolutionized our
+                                    operations, streamlining finance and inventory. The cloud-based platform keeps us
+                                    productive, even remotely.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/1.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Briana Patton">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Briana Patton</div>
+                                        <div class="text-xs text-gray-500">Operations Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Implementing this ERP was smooth
+                                    and quick. The customizable, user-friendly interface made team training effortless.
+                                </p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/2.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Bilal Ahmed">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Bilal Ahmed</div>
+                                        <div class="text-xs text-gray-500">IT Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">The support team is exceptional,
+                                    guiding us through setup and providing ongoing assistance, ensuring our
+                                    satisfaction.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/3.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Saman Malik">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Saman Malik</div>
+                                        <div class="text-xs text-gray-500">Customer Support Lead</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 (Hidden on Mobile) -->
+                    <div class="hidden md:flex flex-col gap-6 pb-6 animate-vertical-scroll"
+                        style="animation-duration: 19s;">
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">This ERP's seamless integration
+                                    enhanced our business operations and efficiency. Highly recommend for its intuitive
+                                    interface.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/4.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Omar Raza">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Omar Raza</div>
+                                        <div class="text-xs text-gray-500">CEO</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Its robust features and quick
+                                    support have transformed our workflow, making us significantly more efficient.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Zainab Hussain">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Zainab Hussain</div>
+                                        <div class="text-xs text-gray-500">Project Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">The smooth implementation exceeded
+                                    expectations. It streamlined processes, improving overall business performance.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/6.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Aliza Khan">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Aliza Khan</div>
+                                        <div class="text-xs text-gray-500">Business Analyst</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for Loop -->
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">This ERP's seamless integration
+                                    enhanced our business operations and efficiency. Highly recommend for its intuitive
+                                    interface.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/4.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Omar Raza">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Omar Raza</div>
+                                        <div class="text-xs text-gray-500">CEO</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Its robust features and quick
+                                    support have transformed our workflow, making us significantly more efficient.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/5.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Zainab Hussain">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Zainab Hussain</div>
+                                        <div class="text-xs text-gray-500">Project Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">The smooth implementation exceeded
+                                    expectations. It streamlined processes, improving overall business performance.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/6.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Aliza Khan">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Aliza Khan</div>
+                                        <div class="text-xs text-gray-500">Business Analyst</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 (Hidden on Tablet) -->
+                    <div class="hidden lg:flex flex-col gap-6 pb-6 animate-vertical-scroll"
+                        style="animation-duration: 17s;">
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Our business functions improved
+                                    with a user-friendly design and positive customer feedback.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/7.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Farhan Siddiqui">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Farhan Siddiqui</div>
+                                        <div class="text-xs text-gray-500">Marketing Director</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">They delivered a solution that
+                                    exceeded expectations, understanding our needs and enhancing our operations.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/8.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Sana Sheikh">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Sana Sheikh</div>
+                                        <div class="text-xs text-gray-500">Sales Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Using this ERP, our online presence
+                                    and conversions significantly improved, boosting business performance.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/9.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Hassan Ali">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Hassan Ali</div>
+                                        <div class="text-xs text-gray-500">E-commerce Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for Loop -->
+                        <div class="flex flex-col gap-6">
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Our business functions improved
+                                    with a user-friendly design and positive customer feedback.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/7.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Farhan Siddiqui">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Farhan Siddiqui</div>
+                                        <div class="text-xs text-gray-500">Marketing Director</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">They delivered a solution that
+                                    exceeded expectations, understanding our needs and enhancing our operations.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/women/8.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Sana Sheikh">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Sana Sheikh</div>
+                                        <div class="text-xs text-gray-500">Sales Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-10 rounded-3xl border bg-white shadow-lg shadow-blue-500/5 max-w-xs w-full">
+                                <p class="text-gray-700 font-medium leading-relaxed">Using this ERP, our online presence
+                                    and conversions significantly improved, boosting business performance.</p>
+                                <div class="flex items-center gap-3 mt-6">
+                                    <img src="https://randomuser.me/api/portraits/men/9.jpg"
+                                        class="h-10 w-10 rounded-full" alt="Hassan Ali">
+                                    <div>
+                                        <div class="font-bold text-gray-900 leading-tight">Hassan Ali</div>
+                                        <div class="text-xs text-gray-500">E-commerce Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CINEMATIC REVEAL FOOTER -->
+    <div id="wrapper-reveal" class="relative h-screen w-full"
+        style="clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);">
+        <footer
+            class="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-white text-gray-900 cinematic-footer-wrapper">
+
+            <!-- Ambient Light & Grid Background -->
+            <div
+                class="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0">
+            </div>
+            <div class="footer-bg-grid absolute inset-0 z-0 pointer-events-none"></div>
+
+            <!-- Giant background text -->
+            <div id="giant-text"
+                class="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none">
+                LEONIX
+            </div>
+
+            <!-- 1. Diagonal Sleek Marquee -->
+            <div
+                class="absolute top-12 left-0 w-full overflow-hidden border-y border-gray-100 bg-white/60 backdrop-blur-md py-4 z-10 -rotate-2 scale-110 shadow-2xl">
+                <div
+                    class="flex w-max animate-footer-scroll-marquee text-xs md:text-sm font-bold tracking-[0.3em] text-gray-400 uppercase">
+                    <div class="flex items-center space-x-12 px-6">
+                        <span>Accountability Redefined</span> <span class="text-blue-600/60">✦</span>
+                        <span>Transparent Tracking</span> <span class="text-indigo-600/60">✦</span>
+                        <span>12-Step Progress</span> <span class="text-blue-600/60">✦</span>
+                        <span>Sponsor Connection</span> <span class="text-indigo-600/60">✦</span>
+                        <span>Absolute Privacy</span> <span class="text-blue-600/60">✦</span>
+                    </div>
+                    <div class="flex items-center space-x-12 px-6">
+                        <span>Accountability Redefined</span> <span class="text-blue-600/60">✦</span>
+                        <span>Transparent Tracking</span> <span class="text-indigo-600/60">✦</span>
+                        <span>12-Step Progress</span> <span class="text-blue-600/60">✦</span>
+                        <span>Sponsor Connection</span> <span class="text-indigo-600/60">✦</span>
+                        <span>Absolute Privacy</span> <span class="text-blue-600/60">✦</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Main Center Content -->
+            <div
+                class="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
+                <h2 id="footer-heading"
+                    class="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center">
+                    Ready to begin?
+                </h2>
+
+                <!-- Interactive Magnetic Pills Layout -->
+                <div id="footer-links" class="flex flex-col items-center gap-6 w-full">
+                    <div class="flex flex-wrap justify-center gap-4 w-full">
+                        <a href="https://wa.me/"
+                            class="magnetic-btn footer-glass-pill px-10 py-5 rounded-full text-gray-900 font-bold text-sm md:text-base flex items-center gap-3 group border-gray-600 hover:bg-green-100">
+                            <i class="ri-whatsapp-line text-xl"></i>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:hello@leonix.com"
+                            class="magnetic-btn footer-glass-pill px-10 py-5 rounded-full text-gray-900 font-bold text-sm md:text-base flex items-center gap-3 group border-gray-600 hover:bg-blue-100">
+                            <i class="ri-mail-line text-xl"></i>
+                            Email
+                        </a>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-2">
+                        <a href="#"
+                            class="magnetic-btn footer-glass-pill px-6 py-3 rounded-full text-gray-500 font-medium text-xs md:text-sm hover:text-gray-900 border-gray-600">Privacy
+                            Policy</a>
+                        <a href="#"
+                            class="magnetic-btn footer-glass-pill px-6 py-3 rounded-full text-gray-500 font-medium text-xs md:text-sm hover:text-gray-900 border-gray-600">Terms
+                            of Service</a>
+                        <a href="#"
+                            class="magnetic-btn footer-glass-pill px-6 py-3 rounded-full text-gray-500 font-medium text-xs md:text-sm hover:text-gray-900 border-gray-600">Support</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Bottom Bar / Credits -->
+            <div
+                class="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between  gap-6">
+                <div
+                    class="text-gray-400 text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
+                    © 2026 Leonix. All rights reserved.
+                </div>
+
+                <div
+                    class="footer-glass-pill px-6 py-3 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default border-gray-100 ">
+                    <span class="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">Crafted
+                        with</span>
+                    <span class="animate-footer-heartbeat text-sm md:text-base text-red-500">❤</span>
+                    <span class="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">by</span>
+                    <span class="text-gray-900 font-black text-xs md:text-sm tracking-normal ml-1">Leonix</span>
+                </div>
+
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
+                    class="magnetic-btn w-12 h-12 rounded-full footer-glass-pill flex items-center justify-center text-gray-400 hover:text-gray-900 group order-3">
+                    <i
+                        class="ri-arrow-up-line text-xl transform group-hover:-translate-y-1.5 transition-transform duration-300"></i>
+                </button>
+            </div>
+        </footer>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // AOS Initialization
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // --- DYNAMIC AUTH UI & AVATAR LOGIC ---
+        const authUser = JSON.parse(localStorage.getItem('leonix_current_user'));
+        const btnLogin = document.getElementById('btn-login');
+        const avatarCircle = document.getElementById('nav-avatar-circle');
+
+        if (authUser) {
+            // Hide Login button
+            if (btnLogin) btnLogin.style.display = 'none';
+            
+            // Show avatar circle always (both scrolled and scrolled-top)
+            if (avatarCircle) {
+                avatarCircle.style.display = 'flex';
+                // Set initials from name
+                const initial = authUser.name ? authUser.name.charAt(0).toUpperCase() : 'U';
+                avatarCircle.innerText = initial;
+                avatarCircle.onclick = () => {
+                    window.location.href = 'profile.html';
+                };
+            }
+        } else {
+            // Show Login, Hide avatar circle
+            if (btnLogin) btnLogin.style.display = 'block';
+            if (avatarCircle) avatarCircle.style.display = 'none';
+        }
+
+        // Lenis Smooth Scroll Initialization
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            wheelMultiplier: 1,
+            autoRaf: true
+        });
+
+        // REGISTER PLUGIN
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Footer Animations
+        const wrapperReveal = document.getElementById('wrapper-reveal');
+        const giantText = document.getElementById('giant-text');
+        const footerHeading = document.getElementById('footer-heading');
+        const footerLinks = document.getElementById('footer-links');
+
+        // Giant Text Parallax
+        if (giantText && wrapperReveal) {
+            gsap.fromTo(giantText,
+                { y: "10vh", scale: 0.8, opacity: 0 },
+                {
+                    y: "0vh",
+                    scale: 1,
+                    opacity: 1,
+                    ease: "power1.out",
+                    scrollTrigger: {
+                        trigger: wrapperReveal,
+                        start: "top 80%",
+                        end: "bottom bottom",
+                        scrub: 1,
+                    }
+                }
+            );
+        }
+
+        // Staggered Content
+        if (footerHeading && footerLinks) {
+            gsap.fromTo([footerHeading, footerLinks],
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: wrapperReveal,
+                        start: "top 40%",
+                        end: "bottom bottom",
+                        scrub: 1,
+                    }
+                }
+            );
+        }
+
+        // Magnetic Buttons Logic
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const h = rect.width / 2;
+                const w = rect.height / 2;
+                const x = e.clientX - rect.left - h;
+                const y = e.clientY - rect.top - w;
+
+                gsap.to(btn, {
+                    x: x * 0.4,
+                    y: y * 0.4,
+                    rotationX: -y * 0.15,
+                    rotationY: x * 0.15,
+                    scale: 1.05,
+                    ease: "power2.out",
+                    duration: 0.4,
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    rotationX: 0,
+                    rotationY: 0,
+                    scale: 1,
+                    ease: "elastic.out(1, 0.3)",
+                    duration: 1.2,
+                });
+            });
+        });
+
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        const heroArea = document.querySelector('.hero-cursor-area');
+
+        const serviceCursor = document.getElementById('service-cursor');
+        const serviceArea = document.querySelector('.service-cursor-area');
+
+        const ecosystemCursor = document.getElementById('ecosystem-cursor');
+        const ecosystemArea = document.querySelector('.ecosystem-cursor-area');
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let serviceX = 0, serviceY = 0;
+        let ecosystemX = 0, ecosystemY = 0;
+
+        // Global Mouse Tracking
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Hero Area
+        if (heroArea) {
+            heroArea.addEventListener('mouseenter', () => cursor.style.display = 'flex');
+            heroArea.addEventListener('mouseleave', () => cursor.style.display = 'none');
+        }
+
+        // Service Area
+        if (serviceArea) {
+            serviceArea.addEventListener('mouseenter', () => serviceCursor.style.display = 'block');
+            serviceArea.addEventListener('mouseleave', () => serviceCursor.style.display = 'none');
+
+            const serviceCards = serviceArea.querySelectorAll('.group, button, a, img');
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', () => serviceCursor.classList.add('grow'));
+                card.addEventListener('mouseleave', () => serviceCursor.classList.remove('grow'));
+            });
+        }
+
+        // Ecosystem Area
+        if (ecosystemArea) {
+            ecosystemArea.addEventListener('mouseenter', () => ecosystemCursor.style.display = 'block');
+            ecosystemArea.addEventListener('mouseleave', () => ecosystemCursor.style.display = 'none');
+        }
+
+        function animate() {
+            let dist = 0.15;
+
+            // Hero
+            cursorX += (mouseX - cursorX) * dist;
+            cursorY += (mouseY - cursorY) * dist;
+            if (cursor) {
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            }
+
+            // Service
+            serviceX += (mouseX - serviceX) * dist;
+            serviceY += (mouseY - serviceY) * dist;
+            if (serviceCursor) {
+                serviceCursor.style.left = serviceX + 'px';
+                serviceCursor.style.top = serviceY + 'px';
+            }
+
+            // Ecosystem
+            ecosystemX += (mouseX - ecosystemX) * dist;
+            ecosystemY += (mouseY - ecosystemY) * dist;
+            if (ecosystemCursor) {
+                ecosystemCursor.style.left = ecosystemX + 'px';
+                ecosystemCursor.style.top = ecosystemY + 'px';
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Dynamic Word Changing Logic
+        const words = ["Web Dev.", "Video Editing.", "SEO & SMM.", "Digital Growth.", "Graphic Design."];
+        let currentIndex = 0;
+        const changingText = document.getElementById('changing-text');
+
+        function changeWord() {
+            currentIndex = (currentIndex + 1) % words.length;
+
+            gsap.to(changingText, {
+                y: -20,
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    changingText.textContent = words[currentIndex];
+                    gsap.fromTo(changingText,
+                        { y: 20, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.5 }
+                    );
+                }
+            });
+        }
+
+        setInterval(changeWord, 3000);
+
+        // --- MOBILE DRAWER JS ---
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+
+        if (mobileMenuToggle && mobileDrawer) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileDrawer.classList.remove('hidden');
+            });
+        }
+        if (mobileMenuClose && mobileDrawer) {
+            mobileMenuClose.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+            });
+        }
+
+        // --- FLOW STEP MODAL LOGIC ---
+        function openFlowModal(type) {
+            const modal = document.getElementById('flow-modal');
+            const title = document.getElementById('flow-modal-title');
+            const subtitle = document.getElementById('flow-modal-subtitle');
+            const content = document.getElementById('flow-modal-body');
+
+            if (!modal) return;
+
+            if (type === 'visitingcard') {
+                title.innerText = 'Premium Visiting Card Layouts';
+                subtitle.innerText = 'Brand identity layouts optimized for high-end print finishes.';
+                content.innerHTML = `
+                    <div class="space-y-4 text-left">
+                        <div class="p-4 bg-blue-50/50 border border-blue-100 rounded-2xl">
+                            <h4 class="font-bold text-blue-600 text-sm mb-1">Standard Production Specs</h4>
+                            <p class="text-xs text-gray-500">Dimensions: 3.5" x 2.0" (Standard US Business Card size) + 0.125" bleed margins.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                                <div class="text-xs font-bold text-gray-800">1. Cotton Stock Finish</div>
+                                <div class="text-[10px] text-gray-400 mt-1">400GSM thick cotton paper, letterpress matte texture.</div>
+                            </div>
+                            <div class="p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                                <div class="text-xs font-bold text-gray-800">2. Luxury Foil Stamping</div>
+                                <div class="text-[10px] text-gray-400 mt-1">Metallic gold / silver leaf stamp options for emblems.</div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                            <div class="text-xs font-bold text-gray-800">3. Embedded QR Code Routing</div>
+                            <div class="text-[10px] text-gray-400 mt-1">High-contrast matrix bar code routing instantly to digital vCard / link tree channels.</div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'banner') {
+                title.innerText = 'Marketing Banner Specifications';
+                subtitle.innerText = 'Omni-channel advertising banner grids structured for performance.';
+                content.innerHTML = `
+                    <div class="space-y-4 text-left">
+                        <div class="border border-indigo-100 rounded-2xl p-4 bg-indigo-50/30">
+                            <h4 class="font-bold text-indigo-600 text-sm mb-2">Display Ad Dimensions</h4>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="p-2 bg-white rounded border border-gray-100 text-center">
+                                    <div class="text-[9px] font-black">300 x 250</div>
+                                    <div class="text-[8px] text-gray-400 mt-0.5">Medium Rec</div>
+                                </div>
+                                <div class="p-2 bg-white rounded border border-gray-100 text-center">
+                                    <div class="text-[9px] font-black">728 x 90</div>
+                                    <div class="text-[8px] text-gray-400 mt-0.5">Leaderboard</div>
+                                </div>
+                                <div class="p-2 bg-white rounded border border-gray-100 text-center">
+                                    <div class="text-[9px] font-black">1080 x 1350</div>
+                                    <div class="text-[8px] text-gray-400 mt-0.5">Instagram Portrait</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                            <div class="text-xs font-bold text-gray-800">Visual Safety Zones</div>
+                            <div class="text-[10px] text-gray-400 mt-1">Text-safe spacing borders of 15% padding around layouts to avoid truncation across social media channels.</div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'ppt') {
+                title.innerText = 'Corporate Pitch & Presentation Kits';
+                subtitle.innerText = 'Dynamic presentation slides built for clear corporate communication.';
+                content.innerHTML = `
+                    <div class="space-y-4 text-left">
+                        <div class="p-3 bg-purple-50/30 border border-purple-100 rounded-xl">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest block mb-2">Key Highlights</span>
+                            <div class="space-y-2">
+                                <div class="flex gap-2 text-xs items-start">
+                                    <i class="ri-checkbox-circle-line text-purple-600 mt-0.5"></i>
+                                    <span>Ratio: 16:9 cinematic slide layout templates.</span>
+                                </div>
+                                <div class="flex gap-2 text-xs items-start">
+                                    <i class="ri-checkbox-circle-line text-purple-600 mt-0.5"></i>
+                                    <span>Assets: Vector icons, infographics, custom data charts, mockups.</span>
+                                </div>
+                                <div class="flex gap-2 text-xs items-start">
+                                    <i class="ri-checkbox-circle-line text-purple-600 mt-0.5"></i>
+                                    <span>Ease of Use: Completely editable vector layouts, fully responsive in PowerPoint & Google Slides.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeFlowModal() {
+            const modal = document.getElementById('flow-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // --- NAVBAR SCROLL TRIGGER LOGIC ---
+        window.addEventListener('scroll', () => {
+            const mainNav = document.getElementById('main-nav');
+            if (mainNav) {
+                if (window.scrollY > 80) {
+                    mainNav.classList.add('scrolled');
+                } else {
+                    mainNav.classList.remove('scrolled');
+                }
+            }
+        });
+    </script>
+
+    <!-- FLOW MODAL DIALOG -->
+    <div id="flow-modal"
+        class="fixed inset-0 z-[300] bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl relative animate-in fade-in zoom-in duration-300">
+            <button onclick="closeFlowModal()"
+                class="absolute top-6 right-6 w-9 h-9 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-black transition-colors">
+                <i class="ri-close-line text-xl"></i>
+            </button>
+            <div class="mb-6">
+                <h3 id="flow-modal-title" class="text-2xl font-black text-gray-900 leading-tight"></h3>
+                <p id="flow-modal-subtitle" class="text-xs text-gray-500 font-medium mt-1"></p>
+            </div>
+            <div id="flow-modal-body" class="mb-8"></div>
+            <button onclick="closeFlowModal()"
+                class="w-full py-3.5 bg-gray-900 text-white font-bold rounded-xl hover:bg-black transition-colors">
+                Close Inspector
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

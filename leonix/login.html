@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonix | Secure Gateway</title>
+    
+    <!-- External Credits & CSS -->
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #6C3FF5;
+            --primary-foreground: #ffffff;
+            --background: #ffffff;
+            --foreground: #000000;
+        }
+
+        .bg-grid-white {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+
+        .eye-ball {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: height 0.15s ease-out;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .eye-ball.blinking {
+            height: 2px !important;
+        }
+
+        .pupil {
+            border-radius: 50%;
+            background-color: #2D2D2D;
+            transition: transform 0.1s ease-out;
+        }
+
+        .character {
+            position: absolute;
+            bottom: 0;
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: bottom center;
+        }
+
+        /* Subtle Glows */
+        .glow-1 {
+            filter: blur(60px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white overflow-hidden">
+    
+    <div class="grid lg:grid-cols-2 min-h-screen">
+        
+        <!-- Left Content Section -->
+        <div class="relative hidden lg:flex flex-col justify-between bg-[#e0e0ff]   p-12 text-white overflow-hidden">
+            
+            <!-- Header -->
+            <div class="relative z-20">
+                <a href="index.html" class="flex items-center gap-2 text-lg font-semibold">
+                    <div class="w-16 h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                        <img src="logo.png" class="w-16">
+                    </div>
+                    <span class="text-3xl font-black tracking-tighter text-black">Leonix</span>
+                </a>
+            </div>
+
+            <!-- Character Scene Container -->
+            <div class="relative z-20 flex items-end justify-center h-[500px]">
+                <div class="relative" style="width: 550px; height: 400px;">
+                    
+                    <!-- Purple Character (Back) -->
+                    <div id="char-purple" class="character" style="left:70px; width:180px; height:400px; background-color:#6C3FF5; border-radius:10px 10px 0 0; z-index:1;">
+                        <div class="eyes absolute flex gap-8" style="left:45px; top:40px;">
+                            <div class="eye-ball w-[18px] h-[18px]">
+                                <div class="pupil w-[7px] h-[7px]"></div>
+                            </div>
+                            <div class="eye-ball w-[18px] h-[18px]">
+                                <div class="pupil w-[7px] h-[7px]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Black Character (Middle) -->
+                    <div id="char-black" class="character" style="left:240px; width:120px; height:310px; background-color:#2D2D2D; border-radius:8px 8px 0 0; z-index:2;">
+                        <div class="eyes absolute flex gap-6" style="left:26px; top:32px;">
+                            <div class="eye-ball w-[16px] h-[16px]">
+                                <div class="pupil w-[6px] h-[6px]"></div>
+                            </div>
+                            <div class="eye-ball w-[16px] h-[16px]">
+                                <div class="pupil w-[6px] h-[6px]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orange Character (Front Left) -->
+                    <div id="char-orange" class="character" style="left:0px; width:240px; height:200px; background-color:#FF9B6B; border-radius:120px 120px 0 0; z-index:3;">
+                        <div class="eyes absolute flex gap-8" style="left:82px; top:90px;">
+                            <div class="pupil w-[12px] h-[12px]"></div>
+                            <div class="pupil w-[12px] h-[12px]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Yellow Character (Front Right) -->
+                    <div id="char-yellow" class="character" style="left:310px; width:140px; height:230px; background-color:#E8D754; border-radius:70px 70px 0 0; z-index:4;">
+                        <div class="eyes absolute flex gap-6" style="left:52px; top:40px;">
+                            <div class="pupil w-[12px] h-[12px]"></div>
+                            <div class="pupil w-[12px] h-[12px]"></div>
+                        </div>
+                        <div id="yellow-mouth" class="absolute w-20 h-1 bg-[#2D2D2D] rounded-full" style="left:40px; top:88px;"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-grid-black opacity-10 z-0"></div>
+            <div class="absolute top-1/4 right-1/4 w-64 h-64 glow-light z-0"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-96 h-96 glow-light opacity-50 z-0"></div>
+        </div>
+
+        <!-- Right Login Section (LIGHT MODE) -->
+        <div class="flex items-center justify-center p-8 bg-white text-slate-900 border-l border-gray-100">
+            <div class="w-full max-w-[420px]">
+                
+                <!-- Mobile Logo -->
+                <div class="lg:hidden flex items-center justify-center gap-2 text-lg font-semibold mb-12">
+                     <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
+                        <i class="ri-sparkling-2-line text-blue-600"></i>
+                    </div>
+                    <span class="text-2xl font-black tracking-tighter text-slate-900">Leonix</span>
+                </div>
+
+                <!-- Header -->
+                <div class="text-center mb-10">
+                    <h1 id="auth-main-title" class="text-3xl font-bold tracking-tight mb-2 text-slate-900">Welcome back!</h1>
+                    <p id="auth-main-subtitle" class="text-slate-500 text-sm">Please enter your details to continue</p>
+                </div>
+
+                <!-- Toggle -->
+                <div class="flex p-1 bg-gray-100 rounded-2xl mb-8 border border-gray-200">
+                    <button onclick="toggleView('login')" id="tab-login" class="flex-1 py-3 text-sm font-bold rounded-xl transition-all bg-white text-slate-950 shadow-sm">Login</button>
+                    <button onclick="toggleView('signup')" id="tab-signup" class="flex-1 py-3 text-sm font-bold rounded-xl transition-all text-slate-500 hover:text-slate-900">Sign Up</button>
+                </div>
+
+                <!-- Form -->
+                <form id="auth-main-form" onsubmit="handleAuth(event)" class="space-y-4">
+                    
+                    <!-- NEW FIELDS (ONLY FOR SIGNUP) -->
+                    <div id="signup-fields" class="hidden space-y-4">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium">Full Name</label>
+                            <div class="relative">
+                                <i class="ri-user-smile-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                <input id="input-name" type="text" placeholder="John Doe" class="input-dark w-full h-12 pl-12 pr-4 rounded-xl outline-none transition-all">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium">Age</label>
+                            <div class="relative">
+                                <i class="ri-calendar-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                <input id="input-age" type="number" placeholder="25" class="input-dark w-full h-12 pl-12 pr-4 rounded-xl outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="method-selector" class="flex justify-center gap-6 mb-2">
+                        <button type="button" onclick="setMethod('email')" id="m-email" class="text-[10px] font-black uppercase tracking-widest text-blue-400 border-b-2 border-blue-400 pb-1">Email</button>
+                        <button type="button" onclick="setMethod('tel')" id="m-tel" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Mobile</button>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label id="label-identity" class="text-sm font-medium">Email</label>
+                        <div class="relative">
+                            <i id="icon-identity" class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg"></i>
+                            <input id="input-identity" type="email" placeholder="anna@gmail.com" required 
+                                class="input-dark w-full h-12 pl-12 pr-4 rounded-xl outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Password</label>
+                        <div class="relative">
+                            <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg"></i>
+                            <input id="input-password" type="password" placeholder="••••••••" required 
+                                class="input-dark w-full h-12 pl-12 pr-12 rounded-xl outline-none transition-all">
+                            <button type="button" onclick="togglePassword()" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
+                                <i id="icon-eye" class="ri-eye-line text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" id="remember" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <label for="remember" class="text-sm text-slate-500 cursor-pointer select-none">Remember for 30 days</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-600 hover:underline font-medium">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" id="btn-submit" class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-900 transition-all transform active:scale-95 flex items-center justify-center gap-2 mt-4">
+                        Login
+                    </button>
+                </form>
+
+                <!-- Social -->
+                <div class="mt-6">
+                    <button class="w-full h-12 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl text-sm font-bold flex items-center justify-center gap-3 transition-colors text-slate-900">
+                        <i class="ri-google-fill text-xl text-red-500"></i>
+                        Continue with Google
+                    </button>
+                </div>
+                
+                <!-- Footer Link -->
+                <div id="footer-toggle-text" class="text-center text-sm text-slate-500 mt-8">
+                    Don't have an account? <a href="javascript:toggleView('signup')" class="text-blue-600 font-bold hover:underline">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Feedback -->
+    <div id="portal-success" class="hidden fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center text-center">
+        <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-6">
+            <i class="ri-checkbox-circle-fill text-5xl"></i>
+        </div>
+        <h2 class="text-3xl font-bold tracking-tight">Identity Verified</h2>
+        <p class="text-gray-500 mt-2">Entering the Leonix Network...</p>
+    </div>
+
+    <script>
+        // --- CHARACTER ANIMATION LOGIC ---
+        let mouseX = 0, mouseY = 0;
+        let isTyping = false, isBlinking = false, showPassword = false;
+        let isPurplePeeking = false, isLookingAtEachOther = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            updateCharacterPositions();
+        });
+
+        // Blinking loops
+        function blinkChar(charId) {
+            const eyes = document.querySelectorAll(`#${charId} .eye-ball`);
+            eyes.forEach(e => e.classList.add('blinking'));
+            setTimeout(() => {
+                eyes.forEach(e => e.classList.remove('blinking'));
+                setTimeout(() => blinkChar(charId), Math.random() * 4000 + 3000);
+            }, 150);
+        }
+        blinkChar('char-purple');
+        blinkChar('char-black');
+
+        // Typing watchers
+        const identityInput = document.getElementById('input-identity');
+        const passwordInput = document.getElementById('input-password');
+
+        identityInput.addEventListener('focus', () => { isTyping = true; triggerLookAtEachOther(); });
+        identityInput.addEventListener('blur', () => { isTyping = false; });
+        passwordInput.addEventListener('input', (e) => { 
+            if(e.target.value.length > 0 && showPassword) {
+                triggerPeek();
+            }
+        });
+
+        function triggerLookAtEachOther() {
+            isLookingAtEachOther = true;
+            setTimeout(() => isLookingAtEachOther = false, 800);
+        }
+
+        function triggerPeek() {
+            if(isPurplePeeking) return;
+            isPurplePeeking = true;
+            setTimeout(() => isPurplePeeking = false, 800);
+        }
+
+        function updateCharacterPositions() {
+            const chars = ['char-purple', 'char-black', 'char-orange', 'char-yellow'];
+            
+            chars.forEach(id => {
+                const el = document.getElementById(id);
+                if(!el) return;
+
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 3;
+
+                const deltaX = mouseX - centerX;
+                const deltaY = mouseY - centerY;
+
+                // Body Skew
+                let skew = Math.max(-6, Math.min(6, -deltaX / 120));
+                let transX = 0;
+                let height = '';
+
+                // Behavioral logic override
+                if (id === 'char-purple') {
+                    if (isTyping || (passwordInput.value.length > 0 && !showPassword)) {
+                        skew -= 12;
+                        transX = 40;
+                        height = '440px';
+                    }
+                    if (passwordInput.value.length > 0 && showPassword) {
+                        skew = 0;
+                    }
+                }
+
+                if (id === 'char-black') {
+                    if (isLookingAtEachOther) {
+                        skew = skew * 1.5 + 10;
+                        transX = 20;
+                    } else if (isTyping || (passwordInput.value.length > 0 && !showPassword)) {
+                        skew *= 1.5;
+                    }
+                    if (passwordInput.value.length > 0 && showPassword) {
+                        skew = 0;
+                    }
+                }
+
+                if (passwordInput.value.length > 0 && showPassword) {
+                    skew = 0;
+                }
+
+                el.style.transform = `skewX(${skew}deg) translateX(${transX}px)`;
+                if(height) el.style.height = height;
+
+                // Move Eyes/Pupils
+                const eyeGroup = el.querySelector('.eyes');
+                const pupils = el.querySelectorAll('.pupil');
+                
+                if(eyeGroup) {
+                    const faceX = Math.max(-15, Math.min(15, deltaX / 20));
+                    const faceY = Math.max(-10, Math.min(10, deltaY / 30));
+                    
+                    let targetLX = 45 + faceX; // Default for purple
+                    let targetLY = 40 + faceY;
+
+                    // Manual overrides for positions
+                    if(id === 'char-purple') {
+                         if (passwordInput.value.length > 0 && showPassword) { targetLX = 20; targetLY = 35; } 
+                         else if (isLookingAtEachOther) { targetLX = 55; targetLY = 65; }
+                    }
+                    if(id === 'char-black') {
+                         targetLX = 26 + faceX; targetLY = 32 + faceY;
+                         if (passwordInput.value.length > 0 && showPassword) { targetLX = 10; targetLY = 28; } 
+                         else if (isLookingAtEachOther) { targetLX = 32; targetLY = 12; }
+                    }
+                     if(id === 'char-orange') { targetLX = 82 + faceX; targetLY = 90 + faceY; if(passwordInput.value.length > 0 && showPassword) { targetLX = 50; targetLY = 85; } }
+                     if(id === 'char-yellow') { targetLX = 52 + faceX; targetLY = 40 + faceY; if(passwordInput.value.length > 0 && showPassword) { targetLX = 20; targetLY = 35; } }
+
+                    eyeGroup.style.left = targetLX + 'px';
+                    eyeGroup.style.top = targetLY + 'px';
+
+                    // Pupil Inside Movement
+                    pupils.forEach(p => {
+                        const dist = Math.min(Math.sqrt(deltaX**2 + deltaY**2), 5);
+                        const angle = Math.atan2(deltaY, deltaX);
+                        let px = Math.cos(angle) * dist;
+                        let py = Math.sin(angle) * dist;
+
+                        // Behavior Overrides
+                        if (passwordInput.value.length > 0 && showPassword) {
+                            if(id === 'char-purple') { px = isPurplePeeking ? 4 : -4; py = isPurplePeeking ? 5 : -4; }
+                            else { px = -5; py = -4; }
+                        } else if (isLookingAtEachOther) {
+                            if(id === 'char-purple') { px = 3; py = 4; }
+                            if(id === 'char-black') { px = 0; py = -4; }
+                        }
+
+                        p.style.transform = `translate(${px}px, ${py}px)`;
+                    });
+
+                    // Mouth
+                    const mouth = el.querySelector('#yellow-mouth');
+                    if(mouth) {
+                         let mx = 40 + faceX; let my = 88 + faceY;
+                         if(passwordInput.value.length > 0 && showPassword) { mx = 10; my = 88; }
+                         mouth.style.left = mx + 'px';
+                         mouth.style.top = my + 'px';
+                    }
+                }
+            });
+        }
+
+        // --- AUTH LOGIC ---
+        let authMode = 'login';
+        let authMethod = 'email';
+
+        function toggleView(m) {
+            authMode = m;
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+            const signupFields = document.getElementById('signup-fields');
+            const footerText = document.getElementById('footer-toggle-text');
+            const btnSubmit = document.getElementById('btn-submit');
+            const mainTitle = document.getElementById('auth-main-title');
+            
+            if (m === 'login') {
+                tabLogin.className = 'flex-1 py-3 text-sm font-bold rounded-xl transition-all bg-white text-slate-950 shadow-sm';
+                tabSignup.className = 'flex-1 py-3 text-sm font-bold rounded-xl transition-all text-slate-500 hover:text-slate-900';
+                signupFields.classList.add('hidden');
+                mainTitle.innerText = "Welcome back!";
+                btnSubmit.innerText = "Login";
+                footerText.innerHTML = `Don't have an account? <a href="javascript:toggleView('signup')" class="text-blue-600 font-bold hover:underline">Sign Up</a>`;
+            } else {
+                tabSignup.className = 'flex-1 py-3 text-sm font-bold rounded-xl transition-all bg-white text-slate-950 shadow-sm';
+                tabLogin.className = 'flex-1 py-3 text-sm font-bold rounded-xl transition-all text-slate-500 hover:text-slate-900';
+                signupFields.classList.remove('hidden');
+                mainTitle.innerText = "Join Leonix";
+                btnSubmit.innerText = "Create Account";
+                footerText.innerHTML = `Already have an account? <a href="javascript:toggleView('login')" class="text-blue-600 font-bold hover:underline">Log In</a>`;
+            }
+        }
+
+        function setMethod(met) {
+            authMethod = met;
+            document.getElementById('m-email').className = met === 'email' ? 'text-[10px] font-black uppercase tracking-widest text-blue-400 border-b-2 border-blue-400 pb-1' : 'text-[10px] font-black uppercase tracking-widest text-slate-500';
+            document.getElementById('m-tel').className = met === 'tel' ? 'text-[10px] font-black uppercase tracking-widest text-blue-400 border-b-2 border-blue-400 pb-1' : 'text-[10px] font-black uppercase tracking-widest text-slate-500';
+            
+            const input = document.getElementById('input-identity');
+            const label = document.getElementById('label-identity');
+            const icon = document.getElementById('icon-identity');
+
+            if(met === 'email') {
+                input.type = 'email';
+                input.placeholder = 'anna@gmail.com';
+                label.innerText = 'Email';
+                icon.className = 'ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg';
+            } else {
+                input.type = 'tel';
+                input.placeholder = '+1 (555) 000-0000';
+                label.innerText = 'Mobile Number';
+                icon.className = 'ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg';
+            }
+        }
+
+        function togglePassword() {
+            showPassword = !showPassword;
+            const input = document.getElementById('input-password');
+            const icon = document.getElementById('icon-eye');
+            input.type = showPassword ? 'text' : 'password';
+            icon.className = showPassword ? 'ri-eye-off-line text-lg' : 'ri-eye-line text-lg';
+            updateCharacterPositions();
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            const id = document.getElementById('input-identity').value;
+            const pw = document.getElementById('input-password').value;
+            const users = JSON.parse(localStorage.getItem('leonix_users') || '[]');
+
+            if(authMode === 'signup') {
+                const name = document.getElementById('input-name').value;
+                const age = document.getElementById('input-age').value;
+                
+                if(!name) { alert('Please enter your name.'); return; }
+
+                if(users.find(u => u.identity === id)) { alert('Identity already claimed.'); return; }
+                
+                const user = { 
+                    id: 'usr_'+Date.now(), 
+                    identity: id, 
+                    password: pw, 
+                    name: name,
+                    age: age
+                };
+                
+                users.push(user);
+                localStorage.setItem('leonix_users', JSON.stringify(users));
+                localStorage.setItem('leonix_current_user', JSON.stringify(user));
+                showFinalSuccess();
+            } else {
+                const user = users.find(u => u.identity === id && u.password === pw);
+                if(user) {
+                    localStorage.setItem('leonix_current_user', JSON.stringify(user));
+                    showFinalSuccess();
+                } else {
+                    alert('Identity mismatch or invalid credentials.');
+                }
+            }
+        }
+
+        function showFinalSuccess() {
+            const p = document.getElementById('portal-success');
+            p.classList.remove('hidden');
+            gsap.from(p, { opacity:0, scale:0.9, duration:0.5 });
+            setTimeout(() => window.location.href = 'index.html', 1500);
+        }
+    </script>
+</body>
+</html>

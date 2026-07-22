@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonix | Expert Consultation</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        .chat-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .service-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
+        }
+        .chat-bubble-received {
+            background: #f3f4f6;
+            border-radius: 20px 20px 20px 5px;
+        }
+        .chat-bubble-sent {
+            background: #2563eb;
+            color: white;
+            border-radius: 20px 20px 5px 20px;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .bg-glow {
+            animation: pulse-soft 10s infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#f8f9fa] min-h-screen overflow-hidden">
+    
+    <!-- Background Decor -->
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100 rounded-full blur-[120px] bg-glow z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-100 rounded-full blur-[120px] bg-glow z-0"></div>
+
+    <div class="relative z-10 flex h-screen w-full">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-24 bg-white border-r border-gray-100 flex flex-col items-center py-8 gap-10">
+            <a href="index.html" class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 hover:scale-110 transition-transform">
+                <i class="ri-home-fill text-white text-2xl"></i>
+            </a>
+            <div class="flex flex-col gap-6">
+                <button class="w-12 h-12 rounded-xl text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all">
+                    <i class="ri-dashboard-line text-2xl"></i>
+                </button>
+                <button class="w-12 h-12 rounded-xl text-blue-600 bg-blue-50 transition-all">
+                    <i class="ri-chat-3-fill text-2xl"></i>
+                </button>
+                <button class="w-12 h-12 rounded-xl text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all">
+                    <i class="ri-settings-4-line text-2xl"></i>
+                </button>
+            </div>
+            <div class="mt-auto">
+                <img src="https://i.pravatar.cc/150?u=leonix-agent" class="w-10 h-10 rounded-full ring-2 ring-blue-100">
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Workspace Header -->
+            <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-10">
+                <div class="flex items-center gap-4">
+                    <h1 class="text-xl font-black text-gray-900 tracking-tighter">System Console</h1>
+                    <span class="px-3 py-1 bg-green-100 text-green-600 text-[10px] font-bold uppercase rounded-full tracking-widest">Active Connection</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="text-right">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none">Status</p>
+                        <p class="text-sm font-bold text-gray-900">Encrypted (AES-256)</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SELECTION SCREEN (Visible by default) -->
+            <div id="selection-screen" class="flex-1 p-10 flex flex-col items-center justify-center">
+                <div class="max-w-4xl w-full">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">What's on your mind?</h2>
+                        <p class="text-gray-500 font-medium">Choose a specialized agent to begin your digital transformation.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Option 1: Web Page -->
+                        <div onclick="openChat('web')" class="service-card chat-glass p-8 rounded-[40px] cursor-pointer group">
+                            <div class="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-blue-200 group-hover:scale-110 transition-transform">
+                                <i class="ri-code-s-slash-line text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-gray-900 mb-4">Web Architecture</h3>
+                            <p class="text-gray-500 leading-relaxed mb-8">From UI/UX strategy to high-performance development and deployment.</p>
+                            <div class="flex items-center text-blue-600 font-bold gap-2">
+                                Start Consultation <i class="ri-arrow-right-line group-hover:translate-x-2 transition-transform"></i>
+                            </div>
+                        </div>
+
+                        <!-- Option 2: Photo Editing -->
+                        <div onclick="openChat('photo')" class="service-card chat-glass p-8 rounded-[40px] cursor-pointer group">
+                            <div class="w-16 h-16 bg-pink-600 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-pink-200 group-hover:scale-110 transition-transform">
+                                <i class="ri-brush-line text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-gray-900 mb-4">Visual Engineering</h3>
+                            <p class="text-gray-500 leading-relaxed mb-8">Professional retouching, VFX, and brand-aligned visual design.</p>
+                            <div class="flex items-center text-pink-600 font-bold gap-2">
+                                Open Creative Suite <i class="ri-arrow-right-line group-hover:translate-x-2 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAT INTERFACE (Hidden by default) -->
+            <div id="chat-interface" class="hidden flex-1 overflow-hidden flex flex-col">
+                <!-- Chat Header -->
+                <div class="px-10 py-4 bg-white border-b border-gray-100 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <button onclick="backToSelection()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors">
+                            <i class="ri-arrow-left-line text-xl text-gray-400"></i>
+                        </button>
+                        <div id="current-agent-icon" class="w-10 h-10 rounded-full flex items-center justify-center text-white"></div>
+                        <div>
+                            <h4 id="current-agent-name" class="font-bold text-gray-900 text-sm"></h4>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                <span class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Online</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center text-gray-400"><i class="ri-video-chat-line text-xl"></i></button>
+                        <button class="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center text-gray-400"><i class="ri-more-2-fill text-xl"></i></button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-scroller" class="flex-1 overflow-y-auto p-10 space-y-6">
+                    <!-- Messages will be injected here -->
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-6 bg-white border-t border-gray-100">
+                    <div class="max-w-4xl mx-auto relative">
+                        <input id="chat-input" type="text" placeholder="Type your request here..." class="w-full bg-gray-50 border-none rounded-2xl py-5 pl-8 pr-32 font-medium focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                            <button class="p-3 text-gray-400 hover:text-blue-600 transition-colors"><i class="ri-attachment-2"></i></button>
+                            <button onclick="sendMessage()" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const selectionScreen = document.getElementById('selection-screen');
+        const chatInterface = document.getElementById('chat-interface');
+        const scroller = document.getElementById('chat-scroller');
+        const input = document.getElementById('chat-input');
+        
+        // --- AUTH & DATA LOGIC ---
+        const currentUser = JSON.parse(localStorage.getItem('leonix_current_user'));
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+
+        let currentMode = '';
+
+        const agents = {
+            web: {
+                id: "agent_web",
+                name: "Web Architect Agent",
+                icon: "ri-code-s-slash-line",
+                color: "bg-blue-600",
+                intro: "Welcome to the Web Console. I'm ready to help you blueprint and build your next-gen digital experience. What type of website are we building today?"
+            },
+            photo: {
+                id: "agent_photo",
+                name: "Creative Engineering Agent",
+                icon: "ri-brush-line",
+                color: "bg-pink-600",
+                intro: "Visual Suite initialized. I'm here to handle your professional retouching and VFX needs. Upload your assets or describe the project you're working on!"
+            }
+        };
+
+        function getChatKey() {
+            return `leonix_chats_${currentUser.id}_${currentMode}`;
+        }
+
+        function loadChatHistory() {
+            const history = JSON.parse(localStorage.getItem(getChatKey()) || '[]');
+            scroller.innerHTML = '';
+            if (history.length === 0) {
+                addMessage('received', agents[currentMode].intro, false);
+            } else {
+                history.forEach(msg => addMessage(msg.type, msg.text, false));
+            }
+        }
+
+        function saveMessage(type, text) {
+            const key = getChatKey();
+            const history = JSON.parse(localStorage.getItem(key) || '[]');
+            history.push({ type, text, timestamp: new Date().getTime() });
+            localStorage.setItem(key, JSON.stringify(history));
+        }
+
+        function openChat(mode) {
+            currentMode = mode;
+            const agent = agents[mode];
+            
+            // Update UI
+            document.getElementById('current-agent-name').innerText = agent.name;
+            const iconWrap = document.getElementById('current-agent-icon');
+            iconWrap.className = `w-10 h-10 rounded-full flex items-center justify-center text-white ${agent.color}`;
+            iconWrap.innerHTML = `<i class="${agent.icon} text-lg"></i>`;
+
+            // Transition
+            gsap.to(selectionScreen, {
+                opacity: 0,
+                y: -20,
+                duration: 0.4,
+                onComplete: () => {
+                    selectionScreen.style.display = 'none';
+                    chatInterface.style.display = 'flex';
+                    gsap.fromTo(chatInterface, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
+                    
+                    loadChatHistory();
+                }
+            });
+        }
+
+        function backToSelection() {
+            gsap.to(chatInterface, {
+                opacity: 0,
+                y: 20,
+                duration: 0.4,
+                onComplete: () => {
+                    chatInterface.style.display = 'none';
+                    selectionScreen.style.display = 'flex';
+                    gsap.fromTo(selectionScreen, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4 });
+                }
+            });
+        }
+
+        function addMessage(type, text, save = true) {
+            const bubble = document.createElement('div');
+            bubble.className = `flex ${type === 'sent' ? 'justify-end' : 'justify-start'}`;
+            
+            bubble.innerHTML = `
+                <div class="max-w-[70%] p-5 text-sm font-medium ${type === 'sent' ? 'chat-bubble-sent' : 'chat-bubble-received text-gray-700 shadow-sm'}">
+                    ${text}
+                </div>
+            `;
+            
+            scroller.appendChild(bubble);
+            scroller.scrollTop = scroller.scrollHeight;
+            
+            if (save) saveMessage(type, text);
+            gsap.from(bubble, { opacity: 0, y: 10, duration: 0.3 });
+        }
+
+        function sendMessage() {
+            const text = input.value.trim();
+            if(!text) return;
+            
+            addMessage('sent', text);
+            input.value = '';
+
+            // Simulated Agent Response
+            setTimeout(() => {
+                const response = currentMode === 'web' 
+                    ? "Understood. I've initiated the blueprinting sequence for your " + text + ". Should we focus on a Minimalist or High-Tech aesthetic first?"
+                    : "Excellent. I've logged the creative brief for your creative project. Looking forward to refining the visual details!";
+                addMessage('received', response);
+            }, 1000);
+        }
+
+        input.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendMessage();
+        });
+
+        // Auto-launch via URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceParam = urlParams.get('service');
+        const planParam = urlParams.get('plan');
+
+        if (serviceParam && agents[serviceParam]) {
+            openChat(serviceParam);
+        } else if (planParam) {
+            openChat('web');
+            setTimeout(() => {
+                addMessage('received', `I see you are interested in the **${decodeURIComponent(planParam)}**. Let's customize this package for your goals!`, true);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
