@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tailwind-web</title>
+    <!-- Correct Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Lilex:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+        body {
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .barname:hover {
+            transform: scale(1.05);
+        }
+
+        .bar:hover {
+            transform: translateX(10px);
+        }
+
+        #vision-text-bt:hover {
+            transform: translateY(-5px);
+        }
+
+        /* force white tiles for line-1 and line-2 */
+        #lines-grop #line-1>div,
+        #lines-grop #line-2>div {
+            background-color: #fff;
+            /* override */
+            border: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        .pricecard:hover {
+            transform: scale(1.04);
+        }
+
+        .btn:hover{
+            box-shadow:0px 0px 25px rgba(98, 98, 252, 0.615);
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="script.js" defer></script>
+    <!-- navbar -->
+    <nav class="p-3 flex bg-blue-50 justify-between items-center fixed top-0 left-0 w-full shadow-md z-50 ">
+        <a href="#" id="brand" class="flex gap-3 items-center">
+            <img src="./assests/finder.png" class="max-h-12 min-h-6">
+            <span class="font-medium text-2xl">Todesktop</span>
+        </a>
+        <div id="nav-menu" class="hidden md:flex gap-8">
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Pricing</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Docs</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Changelog</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Blogs</a>
+            <a href="#" class=" hover:text-blue-600 text-xl barname transition duration-300">Login</a>
+        </div>
+        <button
+            class="hidden md:block text-xl border-2 border-blue-800 rounded-xl py-1 px-4 font-medium hover:bg-blue-800 hover:text-white transition duration-300">
+            <span class="flex space-x-1">
+                <i class="ri-aliens-line text-2xl"></i>
+                <span>Alionz Developer's</span>
+                <i class="ri-arrow-right-line text-2xl"></i>
+            </span>
+        </button>
+
+        <button class="md:hidden" onclick="HandleMenu()">
+            <i class="ri-menu-line text-2xl p-2 "></i>
+        </button>
+        <!-- Mobile menu -->
+        <div id="hidemenu" class="hidden fixed bg-white inset-0">
+            <div id="bar" class="flex justify-between  bg-blue-50">
+                <a href="#" id="brand" class="flex gap-3 p-3 items-center">
+                    <img src="./assests/finder.png" class="max-h-12">
+                    <span class="font-medium text-2xl">Todesktop</span>
+                </a>
+                <button class="md:hidden" onclick="HandleMenu()">
+                    <i class="ri-close-line text-4xl p-4 "></i>
+
+                </button>
+            </div>
+            <div class="mt-5 flex flex-col items-start ">
+                <hr class="bg-gray-500 w-full">
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Pricing</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Docs</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Changelog</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Blogs</a>
+                <hr class="bg-gray-500 w-full">
+                <a href="#"
+                    class="bar px-5 py-4 text-2xl hover:bg-gray-100 block w-full transition duration-300">Login</a>
+                <hr class="bg-gray-500 w-full">
+
+            </div>
+            <div class="flex mt-10 px-5">
+                <button
+                    class="text-xl border-2 rounded-2xl border-blue-800 py-3 px-4 font-medium hover:bg-blue-800 hover:text-white transition duration-300 block w-full">
+                    <span class="flex">
+                        <i class="ri-aliens-line text-2xl"></i>
+                        <span>Alionz Developer's</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+    <main>
+        <!-- hero section -->
+        <div id="hero" class="min-h-screen bg-gradient-to-b from-purple-100 via-orange-50 to-transparent">
+            <div id="hero-container"
+                class="max-w-4xl mx-auto px-6 pb-32 flex flex-col  sm:justify-center sm:items-center h-full">
+                <div id="vision-text-bt"
+                    class="bg-amber-50 my-8 mt-36 sm:mt-36 p-1 rounded-xl shadow-md hover:shadow-xl w-fit border-amber-400 border-2 transition duration-300 group flex sm:mt-20">
+                    <p class="flex items-center mx-2 text-amber-900 font-medium"><i
+                            class="ri-circle-fill text-amber-500"></i><span
+                            class=" text-amber-500 ml-2 mr-1 font-normal"> v0.21.1:</span>Find-in-page bug fixer<i
+                            class="ri-arrow-right-line text-xl ml-1 text-amber-500 group-hover:translate-x-[5px] transition duration-300"></i>
+                    </p>
+                </div>
+                <div id="3-icon" class="mt-5 hidden md:flex justify-center items-center md:gap-8">
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-file-code-line mr-1"></i>Code optional
+                    </h3>
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-hand mr-1"></i>Drag & Drop builder
+                    </h3>
+                    <h3 class="text-gray-600 font-medium">
+                        <i class="ri-macbook-line mr-1"></i>Windows, Mac & Linux
+                    </h3>
+                </div>
+                <div class="mt-8 sm:w-[80%]">
+                    <h1 class="top-text text-5xl font-medium sm:text-7xl sm:text-center ">Web app to desktop app in
+                        minutes</h1>
+                    <p class="text-gray-700 text-xl mt-8 sm:text-center sm:text-2xl">Take your web application and
+                        convert it into a desktop application with minimal effort and time.</p>
+                </div>
+                <div
+                    class="mt-10 sm:flex sm:justify-center sm:items-center sm:w-full sm:flex-row sm:px-6 sm:gap-4 w-full max-w-md">
+                    <button
+                        class="w-full bg-blue-700 py-2 rounded-md text-white font-medium hover:bg-blue-600 transition duration-200">Download
+                        now</button>
+                    <button
+                        class="sm:-mt-0 mt-3 w-full bg-white py-2 border-[1px] border-black rounded-md text-black font-medium">Read
+                        Docs</button>
+                </div>
+            </div>
+            <div id="logo-slider">
+                <div id="componet-title" class="flex justify-center gap-3">
+                    <img src="./assests/Arrow pointing left .png" class="h-6 -rotate-90 sm:h-10">
+                    <span class="text-sm sm:text-xl">APPS POWERED BY TODESKTOP</span>
+                    <img src="./assests/Arrow pointing left .png" class="h-6 rotate-90 transform scale-x-[-1] sm:h-10">
+                </div>
+                <div id="lines-grop" class="flex flex-col overflow-hidden">
+                    <div id="line-1" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-48">
+                        <div class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32
+                            ">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/google-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Google</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/stocks-2025-08-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Stocks</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/helm-for-app-store-connect-2025-12-04.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Helm</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/daily-tracker-ripples-2025-10-31.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Tracker</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-support-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16  rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Apple co.</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/instagram-2025-10-30.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Instagram</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/glow-space-feng-shui-detector-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Glow Space</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20 md:h-32 md:w-32">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/stocks-2025-08-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Stocks</span>
+                        </div>
+                    </div>
+                    <div id="line-2" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-48">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/bigo-live-live-stream-go-live-2025-04-10.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bigo</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/swiftly-business-workspace-2025-04-26.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Pastel</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/perplexity-ask-anything-2024-11-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Sniper</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/news-import-2024-07-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Motion</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/pastel-2026-01-05.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Scrivener</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/magic-drawing-and-ai-2025-07-14.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bluebird</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/macos/256/bluebird-focus-timer-2025-10-06.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Magic</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-black/5 rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/brightmind-meditation-2024-07-03.png?rf=1024"
+                                class=" h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Bright</span>
+                        </div>
+                    </div>
+                    <div id="line-3" class="flex gap-4 flex-nowrap px-4 py-2 -translate-x-32 sm:hidden">
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/duet-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Duet</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/puff-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Puff Ai</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/yup-open-social-all-in-one-2025-04-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Yup</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/duolingo-language-lessons-2024-09-01.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Duolingo</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/procreate-dreams-2024-06-17.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Procreate</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/hako-credit-card-points-2024-04-09.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Hako</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/countdown-app-widget-2023-10-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Countdown</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg py-2 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-podcasts-2025-10-20.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Podcasts</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1    bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/steddy-stay-consistent-2024-07-03.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Steddy</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/aviary-2020-11-02.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Aviary</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/migraine-tracker-auralog-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Auralog</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/apple-developer-2022-01-13.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">AppleDev</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/image-playground-2025-10-27.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Play</span>
+                        </div>
+                        <div
+                            class="flex flex-col min-w-24 min-h-24 justify-center items-center gap-1 bg-white rounded-lg p-1 border-[1px] border-black/20">
+                            <img src="https://cdn.jim-nielsen.com/ios/256/noteplan-to-do-list-notes-2025-12-08.png?rf=1024"
+                                class="h-12 w-12 md:h-16 md:w-16 rounded-2xl">
+                            <span class="text-[12px] md:text-[16px] font-semibold">Noteplan</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- steps -->
+        <div id="step" class="px-6 max-w-8xl mt-20 mx-auto lg:px-8 lg:mt-36">
+            <h2 class="text-5xl sm:font-semibold mb-10">How It Works</h2>
+            <div id="stp1"
+                class="rounded-xl border px-8 py-12 flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 mt-4">
+                <div class="flex flex-col gap-6 lg:w-1/2">
+                    <span
+                        class="border border-amber-300 bg-yellow-50 text-yellow-800 w-fit px-3 py-1 rounded-lg font-medium">Step
+                        1</span>
+                    <h3 class="text-4xl mt-5">Bootstrap Straight from your web app</h3>
+                    <p class="text-lg font-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
+                        tempore dolores eveniet accusamus? similique corrupti.</p>
+                    <ul class="grid grid-cols-2 gap-0">
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Multiple Windows</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Offline support</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Launch on startup</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Menubar/tray menus</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Customizable UI</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Tabs Settings</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="pt-8">
+                    <img src="./assests/Screenshot 2026-01-07 114853.png" alt="" class="max-h-96">
+                </div>
+            </div>
+            <div id="stp2"
+                class="rounded-xl border px-8 py-12 flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 mt-4">
+                <div class="flex flex-col gap-6 lg:w-1/2">
+                    <span
+                        class="border border-amber-300 bg-yellow-50 text-yellow-800 w-fit px-3 py-1 rounded-lg font-medium">Step
+                        2</span>
+                    <h3 class="text-4xl mt-5">Bootstrap Straight from your web app</h3>
+                    <p class="text-lg font-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
+                        tempore dolores eveniet accusamus? similique corrupti.</p>
+                    <ul class="grid grid-cols-2 gap-0">
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Multiple Windows</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Offline support</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Launch on startup</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Menubar/tray menus</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Customizable UI</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Tabs Settings</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="pt-8">
+                    <img src="./assests/Screenshot 2026-01-07 114853.png" alt="" class="max-h-96">
+                </div>
+            </div>
+            <div id="stp3"
+                class="rounded-xl border px-8 py-12 flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 mt-4">
+                <div class="flex flex-col gap-6 lg:w-1/2">
+                    <span
+                        class="border border-amber-300 bg-yellow-50 text-yellow-800 w-fit px-3 py-1 rounded-lg font-medium">Step
+                        3</span>
+                    <h3 class="text-4xl mt-5">Bootstrap Straight from your web app</h3>
+                    <p class="text-lg font-light">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
+                        tempore dolores eveniet accusamus? similique corrupti.</p>
+                    <ul class="grid grid-cols-2 gap-0">
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Multiple Windows</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Offline support</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Launch on startup</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Menubar/tray menus</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Customizable UI</a>
+                        </li>
+                        <li class="flex sm:gap-4 gap-1 mb-3 items-center">
+                            <i class="ri-check-line text-green-500 text-lg sm:text-2xl "></i>
+                            <a class="text-sm font-light border-b border-black border-opacity-30 hover:border-opacity-90 sm:text-lg"
+                                href="">Tabs Settings</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="pt-8">
+                    <img src="./assests/Screenshot 2026-01-07 114853.png" alt="" class="max-h-96">
+                </div>
+            </div>
+        </div>
+        <!-- banto grid-->
+        <div id="banto-grid" class="px-6 max-w-8xl mt-20 mx-auto lg:px-8 lg:mt-36">
+            <h2 class="text-5xl sm:text-left mb-10">Todesktop handles the details</h2>
+            <div class="flex flex-col gap-6 lg:grid lg:grid-cols-3" style="grid-auto-rows:95px;">
+                <!-- Grid Item 1 -->
+                <div
+                    class="row-start-1 row-end-3  group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Native Notifications</h3>
+                        <img src="./assests/asset 37 (1).png" class="mt-7">
+                    </div>
+                </div>
+                <div
+                    class="row-start-1 row-end-4 group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition-colors duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Auro Updates</h3>
+                        <p class="text-center mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
+                            veritatis voluptatum quas minima nisi quo aspernatur magnam!</p>
+                        <img src="./assests/asset 38 (1).png" class="mt-7">
+                    </div>
+                </div>
+                <div
+                    class="row-start-1 row-end-3  group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition-colors duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Native Notifications</h3>
+                        <img src="./assests/asset 39.png" class="mt-7">
+                    </div>
+                </div>
+                <div
+                    class="row-start-3 row-end-6  group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition-colors duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Auro Updates</h3>
+                        <p class="text-center mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
+                            veritatis voluptatum quas minima nisi quo aspernatur magnam!</p>
+                        <img src="./assests/asset 40.png" class="mt-7">
+                    </div>
+                </div>
+                <div
+                    class="row-start-4 row-end-6 group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition-colors duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Native Notifications</h3>
+                        <img src="./assests/asset 37 (1).png" class="mt-7">
+                    </div>
+                </div>
+                <div
+                    class="row-start-3 row-end-6  group rounded-2xl bg-gray-200 p-[1px] hover:bg-gradient-to-br hover:from-red-200 hover:via-purple-200 hover:to-yellow-200 transition-colors duration-300">
+                    <div
+                        class="bg-white rounded-2xl w-full h-full p-6 flex flex-col items-center hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <h3 class="text-xl font-medium">Auro Updates</h3>
+                        <p class="text-center mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
+                            veritatis voluptatum quas minima nisi quo aspernatur magnam!</p>
+                        <img src="./assests/asset 38 (1).png" class="mt-7">
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+
+        <!-- company line names -->
+        <div id="future-line" class="container px-6 max-w-8xl mt-20 mb-20 mx-auto lg:px-8 lg:mt-10">
+            <div class="border rounded-lg overflow-hidden flex justify-center p-4">
+                <div id="line-4" class="flex gap-4 p-6 items-center">
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Streelbrnd</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Trays</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Deep linking</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Download Anything</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Agantic AI</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Chat-GPT 5.1</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Software</h3>
+                    <span>•</span>
+                    <h3 class="whitespace-nowrap my-0 mx-2 text-2xl font-semibold">Copilot</h3>
+                    <span>•</span>
+                </div>
+            </div>
+        </div>
+        <!-- Customer stories -->
+        <div id="Customer-stories" class="px-6 max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36">
+            <h2 class="text-5xl sm:font-semibold mb-10">Customer stories</h2>
+
+
+            <!--  -->
+            <div class="rounded-xl border-2 flex flex-col lg:flex-row items-start ">
+                <div id="lefr" class="flex flex-col gap-12 p-8">
+                    <div class="h-4 w-full">
+                        <img src="https://anuj-kumar-sharma.github.io/tailwind-landing-page/assets/asset%2044.svg">
+                    </div>
+                    <h3 class="text-xl leading-relaxed">ClickUp used ToDesktop to get their desktop app in front of
+                        customers in days instead of months.</h3>
+                    <div class="flex gap-3 flex-wrap">
+                        <div
+                            class="flex gap-2 items-center justify-center bg-yellow-50 border border-yellow-300 px-3 py-1 rounded-md">
+                            <i class="ri-check-line text-amber-900 text-lg sm:text-2xl "></i>
+                            <h3 class="text-amber-900">Chromeless UI</h3>
+                        </div>
+                        <div
+                            class="flex gap-2 items-center justify-center bg-yellow-50 border border-yellow-300 px-3 py-1 rounded-md">
+                            <i class="ri-check-line text-amber-900 text-lg sm:text-2xl "></i>
+                            <h3 class="text-amber-900">Native spellcheck</h3>
+                        </div>
+                        <div
+                            class="flex gap-2 items-center justify-center bg-yellow-50 border border-yellow-300 px-3 py-1 rounded-md">
+                            <i class="ri-check-line text-amber-900 text-lg sm:text-2xl "></i>
+                            <h3 class="text-amber-900">Task time in menubar</h3>
+                        </div>
+                        <div
+                            class="flex gap-2 items-center justify-center bg-yellow-50 border border-yellow-300 px-3 py-1 rounded-md">
+                            <i class="ri-check-line text-amber-900 text-lg sm:text-2xl "></i>
+                            <h3 class="text-amber-900">
+                                Notification count in the dock</h3>
+                        </div>
+                        <div
+                            class="flex gap-2 items-center justify-center bg-yellow-50 border border-yellow-300 px-3 py-1 rounded-md">
+                            <i class="ri-check-line text-amber-900 text-lg sm:text-2xl "></i>
+                            <h3 class="text-amber-900">Global hotkey to create task</h3>
+                        </div>
+                    </div>
+                    <p class="text-lg font-light text-gray-500 ">“ToDesktop provided us with a <span
+                            class="font-normal text-gray-600 "> polished desktop</span> app in no time. Their expert
+                        team guided us through a smooth migration from our outdated legacy desktop app, enabling us to
+                        deliver<span class="font-normal  text-gray-600"> new and improved features</span> to our
+                        customers within days.”</p>
+                    <div class="flex gap-4">
+                        <div class="w-14">
+                            <img src="./assests/IMG20251117223944 - 17-12-2025 19-00-56 (2).png" class="rounded-full">
+                        </div>
+                        <div class="flex flex-col">
+                            <h3>Malvi Rahul</h3>
+                            <p class="text-gray-500">Founder & CEO. <a href="#" class="border-gray-600">ClickUp</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="rihgt">
+                    <img src="./assests/asset 46.png" class="sm:pl-6 pl-12 md:pl-0 mt-10">
+                </div>
+            </div>
+
+
+            <!-- 3 crds -->
+            <div class="flex flex-col lg:flex-row justify-between gap-4 mt-5 ">
+                <div
+                    class="group rounded-xl p-[1px] hover:bg-gradient-to-br hover:from-red-300 hover:via-purple-300 hover:to-yellow-300 transition-colors duration-300">
+                    <div
+                        class=" flex flex-col rounded-xl border-2 p-8 group-hover:bg-gradient-to-br  hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <div class="flex gap-3 items-center">
+                            <i class="ri-code-s-slash-fill bg-blue-200 p-3 px-4 rounded-full text-2xl"></i>
+                            <h2 class="whitespace-nowrap text-3xl font-semibold ">Native APIs</h2>
+                        </div>
+                        <p class="text-gray-600 mt-8"> What sets ToDesktop apart is its seamless integration with native
+                            APIs using our existing web
+                            codebase. By tapping into APIs like Tray and Notifications, we've crafted an exceptionally
+                            polished desktop user experience.</p>
+                        <div class="flex gap-14 mt-6">
+                            <div class="flex w-12">
+                                <img class="rounded-full"
+                                    src="https://imgs.search.brave.com/73Mx1ESfncickq_ths_aakNFeMJ4HSDpBJYl52H_DeQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtY3NlLmNhbnZh/LmNvbS9ibG9iLzIz/NDIwOTcvMTYwMHct/Qi1jUnlvaDdiOTgu/anBn">
+                                <img class="-ml-2 rounded-full border-amber-50 border"
+                                    src="https://imgs.search.brave.com/8-KpdCT-iUzMY97mdeaBzru78J-5W1Ttj0tdkOg6Tcg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vRUFGLUZB/dmZEMUUvMi8wLzE2/MDB3L2NhbnZhLW5l/b24tcmFpbmJvdy1n/cmFkaWVudC1mdW4t/Y3JlYXRpdmUtbGlu/a2VkaW4tcHJvZmls/ZS1waWN0dXJlLUlZ/Y2dQbkp0eDNRLmpw/Zw">
+                            </div>
+                            <div>
+                                <h3>Jonny karbon</h3>
+                                <h3 class="text-gray-500">Rise</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="group rounded-xl p-[1px] hover:bg-gradient-to-br hover:from-red-300 hover:via-purple-300 hover:to-yellow-300 transition-colors duration-300">
+                    <div
+                        class=" flex flex-col rounded-xl border-2 p-8 hover:bg-gradient-to-br  hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <div class="flex gap-3 items-center">
+                            <i class="ri-code-s-slash-fill bg-blue-200 p-3 px-4 rounded-full text-2xl"></i>
+                            <h2 class="whitespace-nowrap text-3xl font-semibold ">Native APIs</h2>
+                        </div>
+                        <p class="text-gray-600 mt-8"> What sets ToDesktop apart is its seamless integration with native
+                            APIs using our existing web
+                            codebase. By tapping into APIs like Tray and Notifications, we've crafted an exceptionally
+                            polished desktop user experience.</p>
+                        <div class="flex gap-14 mt-6">
+                            <div class="flex w-12">
+                                <img class="rounded-full"
+                                    src="https://imgs.search.brave.com/73Mx1ESfncickq_ths_aakNFeMJ4HSDpBJYl52H_DeQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtY3NlLmNhbnZh/LmNvbS9ibG9iLzIz/NDIwOTcvMTYwMHct/Qi1jUnlvaDdiOTgu/anBn">
+                                <img class="-ml-2 rounded-full border-amber-50 border"
+                                    src="https://imgs.search.brave.com/8-KpdCT-iUzMY97mdeaBzru78J-5W1Ttj0tdkOg6Tcg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vRUFGLUZB/dmZEMUUvMi8wLzE2/MDB3L2NhbnZhLW5l/b24tcmFpbmJvdy1n/cmFkaWVudC1mdW4t/Y3JlYXRpdmUtbGlu/a2VkaW4tcHJvZmls/ZS1waWN0dXJlLUlZ/Y2dQbkp0eDNRLmpw/Zw">
+                            </div>
+                            <div>
+                                <h3>Jonny karbon</h3>
+                                <h3 class="text-gray-500">Rise</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="group rounded-xl p-[1px] hover:bg-gradient-to-br hover:from-red-300 hover:via-purple-300 hover:to-yellow-300 transition-colors duration-300">
+                    <div
+                        class=" flex flex-col rounded-xl border-2 p-8 hover:bg-gradient-to-br  hover:bg-gradient-to-br hover:from-red-50 hover:via-purple-50 hover:to-yellow-50 transition-colors duration-300">
+                        <div class="flex gap-3 items-center">
+                            <i class="ri-code-s-slash-fill bg-blue-200 p-3 px-4 rounded-full text-2xl"></i>
+                            <h2 class="whitespace-nowrap text-3xl font-semibold ">Native APIs</h2>
+                        </div>
+                        <p class="text-gray-600 mt-8"> What sets ToDesktop apart is its seamless integration with native
+                            APIs using our existing web
+                            codebase. By tapping into APIs like Tray and Notifications, we've crafted an exceptionally
+                            polished desktop user experience.</p>
+                        <div class="flex gap-14 mt-6">
+                            <div class="flex w-12">
+                                <img class="rounded-full"
+                                    src="https://imgs.search.brave.com/73Mx1ESfncickq_ths_aakNFeMJ4HSDpBJYl52H_DeQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMtY3NlLmNhbnZh/LmNvbS9ibG9iLzIz/NDIwOTcvMTYwMHct/Qi1jUnlvaDdiOTgu/anBn">
+                                <img class="-ml-2 rounded-full border-amber-50 border"
+                                    src="https://imgs.search.brave.com/8-KpdCT-iUzMY97mdeaBzru78J-5W1Ttj0tdkOg6Tcg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vRUFGLUZB/dmZEMUUvMi8wLzE2/MDB3L2NhbnZhLW5l/b24tcmFpbmJvdy1n/cmFkaWVudC1mdW4t/Y3JlYXRpdmUtbGlu/a2VkaW4tcHJvZmls/ZS1waWN0dXJlLUlZ/Y2dQbkp0eDNRLmpw/Zw">
+                            </div>
+                            <div>
+                                <h3>Jonny karbon</h3>
+                                <h3 class="text-gray-500">Rise</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- black box -->
+            <div id="Customer-stories" class="max-w-8xl mt-5 mx-auto ">
+                <div class="rounded-2xl border-2 flex flex-col lg:flex-row items-end sm:items-start bg-black">
+                    <div id="lefr" class="flex flex-col gap-6 p-8">
+                        <h3 class="font-medium text-gray-400 mt-6">READY TO START BUILDING?</h3>
+                        <h2 class="text-white text-4xl sm:text-6xl">Create your desktop app for free*</h2>
+                        <h3 class="text-xl leading-relaxed text-gray-500 ">ClickUp used ToDesktop to get their desktop
+                            app in front of customers in days instead of months.</h3>
+                        <div class="flex justify-center ">
+                        </div>
+                        <button class="btn py-3 bg-blue-700 w-full flex justify-center text-white gap-3 rounded-md transition dru"><i
+                                class="ri-download-2-line "></i>Download ToDestop Builder
+
+                        </button>
+                        <p class="text-xs italic font-light text-gray-500 ">*You can create a desktop app and run it on
+                            your computer for free. You will only be charged if you want to create a distributable app
+                            for your customers.</p>
+
+                    </div>
+                    <div id="rihgt" class="sm:w-4/6 w-5/6 sm:mt-10 sm:ml-12">
+                        <img src="./assests/asset 46.png" class="">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- pricing 3 cards -->
+            <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36 ">
+                <h2 class="text-6xl">Choose a plan that fits your needs </h2>
+                <div class="flex flex-col lg:flex-row justify-between  gap-4 mt-5">
+
+                    <div
+                        class="flex bg-gray-50 flex-col rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
+                        <h2 class="text-4xl font-medium">Free</h2>
+                        <p class="font-light text-xl">For personal use or testing your app before deploying to
+                            customers.</p>
+                        <h2 class="">KEY FEATURES</h2>
+                        <div>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                        </div>
+                        <button class="text-blue-600 font-medium border py-3 rounded-xl hover:border-gray-500">Read
+                            Docs</button>
+                    </div>
+
+
+                    <div
+                        class="flex flex-col bg-gray-50 rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
+                        <h2 class="text-4xl font-medium">Essential</h2>
+                        <p class="font-light text-xl">For simple desktop apps.</p>
+                        <h2 class="font-bold text-2xl">$99<span class="text-lg font-light">/month</span></h2>
+                        <h2 class="">KEY FEATURES</h2>
+                        <div>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                        </div>
+                        <button class="text-blue-600 font-medium border py-3 rounded-xl hover:border-gray-500">Read
+                            Docs</button>
+                    </div>
+
+                    <div
+                        class="flex flex-col bg-gray-50 rounded-xl border-2 p-8 gap-6 sm:w-[35%] pricecard transition duration-300">
+                        <h2 class="text-4xl font-medium">Professional</h2>
+                        <p class="font-light text-xl">For sophisticated desktop apps.</p>
+                        <h2 class="font-bold text-2xl">$149<span class="text-lg font-light">/month</span></h2>
+                        <h2 class="">KEY FEATURES</h2>
+                        <div>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-check-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                            <h3 class="text-xl font-light"><i class="ri-close-line text-2xl mr-2 "></i>Free for
+                                personal
+                                use</h3>
+                        </div>
+                        <button class="bg-blue-600 font-medium border py-3 rounded-xl hover:bg-blue-700 text-white">Read
+                            Docs</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- FQS -->
+            <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36">
+                <h3 class="text-6xl mb-6">FQS</h3>
+                <div class="sm:grid-cols-2 grid items-start">
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq1">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq1">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq2">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq2">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq3">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq3">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq4">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq4">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq5">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Is ToDesktop For Me?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq5">
+                            That depends! If you would like to distribute your web app to your users as a downloadable
+                            desktop app then ToDesktop is for you.
+                        </p>
+                    </div>
+
+                    <div class="faq-item flex flex-col rounded-xl border p-5 m-3 bg-gray-50 gap-6 cursor-pointer"
+                        aria-controls="faq6">
+                        <div class="justify-between items-center flex">
+                            <h2 class="sm:text-2xl text-xl">Another Question?</h2>
+                            <i class="ri-arrow-down-s-line text-2xl transform transition-transform duration-300"></i>
+                        </div>
+                        <p class="hidden" id="faq6">
+                            Answer for second question goes here. Lorem ipsum dolor sit amet, veritatis itaque odit quos
+                            nam quibusdam eligendi pariatur libero? Perferendis exercitationem corrupti a.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="max-w-8xl mt-28 mx-auto lg:px-8 lg:mt-36">
+                <div class="flex flex-col sm:flex-row rounded-lg p-5 bg-gray-50 py-16 sm:justify-between sm:px-10">
+                    <div class="justify-center flex ">
+                        <a href="#" id="brand" class="flex gap-3 items-center">
+                            <img src="./assests/finder.png" class="max-h-12 min-h-6">
+                            <span class="font-medium text-2xl">Todesktop</span>
+                        </a>
+                    </div>
+                    <div class="items-center flex sm:mt-3 gap-5 mt-10 flex-col sm:flex-row">
+                        <div class="flex gap-6 text-2xl">
+                            
+                            <a href="https://github.com/oye-rahul"><i class="ri-github-fill"></i></a>
+                            <a href="https://www.instagram.com/oye.rahul_malvi/"><i class="ri-instagram-line"></i></a>
+                            <a href="https://www.threads.com/"><i class="ri-threads-line"></i></a>
+                            
+                            
+                        </div>
+                        <a href="#"><h2 class="font-light mt-5 sm:mt-0">Documentation</h2></a>
+                    </div>
+                </div>
+                <div class="flex items-center flex-col mt-20 mb-20">
+                    <div class="flex items-center gap-5">
+                        <img class="w-10 rounded-lg" src="https://imgs.search.brave.com/1BALw-g_WZEdYKVhO809ut9go6OhtejhMnAlT-2jGKU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbWFya2V0aW5n/Ljk5c3RhdGljLmNv/bS9pbWFnZXMvcHJv/ZHVjdC1sYW5kaW5n/L3doeTk5ZC9XaHk5/OWRfbG9nby1kZXNp/Z24ucG5nP2F1dG89/Zm9ybWF0JmZpdD1t/YXgmdz0zODQwJnE9/NzU" alt="">
+                        <h2>The  Hype  Lab  Company  PVT. LTD.</h2>
+                    </div>
+                    <h2 class="text-gray-500 mt-10 flex">© 2024 ToDesktop, Inc. All rights reserved.</h2>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+<!-- git config --global alias.pushf '!f() { git add . && git commit -m "$1" && git push origin main; }; f' ~~~~ to run git pushf "commit message" -->
