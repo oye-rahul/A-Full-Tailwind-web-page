@@ -1,297 +1,1161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leonix | Expert Consultation</title>
-    <link rel="stylesheet" href="index.css">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Leonix | Client Workspace</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+    <!-- Remix Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind CSS with Forms and Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Prism Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#004ac6",
+                            "primary-container": "#2563eb",
+                            "on-primary": "#ffffff",
+                            "on-surface": "#1b1b1b",
+                            "on-surface-variant": "#434655",
+                            "background": "#f8fafc",
+                            "surface": "#f9f9f9",
+                            "outline-variant": "#e2e8f0"
+                        },
+                        borderRadius: {
+                            "3xl": "24px",
+                            "2xl": "16px"
+                        },
+                        fontFamily: {
+                            sans: ["Inter", "sans-serif"],
+                            mono: ["Fira Code", "monospace"]
+                        }
+                    },
+                },
+            }
+        } catch (_e) { }
+    </script>
+    
     <style>
-        .chat-glass {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
         }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.12);
+            border-radius: 10px;
+        }
+
+        /* Glassmorphism elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .dark .glass-panel {
+            background: rgba(15, 22, 38, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .float-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+        }
+        .dark .float-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+        }
+
         .service-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.06);
         }
-        .chat-bubble-received {
-            background: #f3f4f6;
-            border-radius: 20px 20px 20px 5px;
+        .dark .service-card:hover {
+            background: rgba(30, 41, 59, 0.6);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.3);
         }
-        .chat-bubble-sent {
+
+        /* Chat bubbles (Compact, snug, perfectly padded) */
+        .chat-bubble-client {
+            background: #004ac6;
+            color: #ffffff;
+            border-radius: 18px 18px 4px 18px;
+            box-shadow: 0 2px 8px -1px rgba(0, 74, 198, 0.2);
+        }
+        .dark .chat-bubble-client {
             background: #2563eb;
-            color: white;
-            border-radius: 20px 20px 5px 20px;
+            box-shadow: 0 2px 8px -1px rgba(37, 99, 235, 0.25);
         }
-        @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.05); opacity: 0.8; }
+        
+        .chat-bubble-company {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            color: #1e293b;
+            border-radius: 18px 18px 18px 4px;
+            box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.02);
         }
-        .bg-glow {
-            animation: pulse-soft 10s infinite;
+        .dark .chat-bubble-company {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #f1f5f9;
+        }
+        
+        /* Typing dots */
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            background-color: currentColor;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing-bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing-bounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Syntax overrides */
+        code[class*="language-"], pre[class*="language-"] {
+            font-family: "Fira Code", monospace;
+            font-size: 0.82rem;
+            text-shadow: none;
+            background: transparent !important;
+        }
+        .code-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
-<body class="bg-[#f8f9fa] min-h-screen overflow-hidden">
-    
-    <!-- Background Decor -->
-    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100 rounded-full blur-[120px] bg-glow z-0"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-100 rounded-full blur-[120px] bg-glow z-0"></div>
 
-    <div class="relative z-10 flex h-screen w-full">
-        
-        <!-- Sidebar Navigation -->
-        <aside class="w-24 bg-white border-r border-gray-100 flex flex-col items-center py-8 gap-10">
-            <a href="index.html" class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 hover:scale-110 transition-transform">
-                <i class="ri-home-fill text-white text-2xl"></i>
-            </a>
-            <div class="flex flex-col gap-6">
-                <button class="w-12 h-12 rounded-xl text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all">
-                    <i class="ri-dashboard-line text-2xl"></i>
-                </button>
-                <button class="w-12 h-12 rounded-xl text-blue-600 bg-blue-50 transition-all">
-                    <i class="ri-chat-3-fill text-2xl"></i>
-                </button>
-                <button class="w-12 h-12 rounded-xl text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all">
-                    <i class="ri-settings-4-line text-2xl"></i>
-                </button>
-            </div>
-            <div class="mt-auto">
-                <img src="https://i.pravatar.cc/150?u=leonix-agent" class="w-10 h-10 rounded-full ring-2 ring-blue-100">
-            </div>
-        </aside>
+<body class="bg-slate-100/70 dark:bg-[#0b0f19] text-on-surface dark:text-slate-200 h-screen overflow-hidden p-3 md:p-4 flex gap-4 transition-colors duration-300">
 
-        <!-- Main Workspace -->
-        <main class="flex-1 flex flex-col overflow-hidden">
-            
-            <!-- Workspace Header -->
-            <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-10">
-                <div class="flex items-center gap-4">
-                    <h1 class="text-xl font-black text-gray-900 tracking-tighter">System Console</h1>
-                    <span class="px-3 py-1 bg-green-100 text-green-600 text-[10px] font-bold uppercase rounded-full tracking-widest">Active Connection</span>
+    <!-- Compact Floating Sidebar (Width 256px) -->
+    <aside class="w-64 h-full glass-panel rounded-3xl hidden md:flex flex-col py-6 px-4 shrink-0 float-card z-20">
+        <div class="flex flex-col gap-6 h-full">
+            <!-- Brand Logotype -->
+            <div class="flex items-center gap-3 px-2">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-md shadow-primary/20 shrink-0">
+                    <span class="material-symbols-outlined text-on-primary text-xl">corporate_fare</span>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div class="text-right">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none">Status</p>
-                        <p class="text-sm font-bold text-gray-900">Encrypted (AES-256)</p>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight text-primary leading-none">Leonix</h1>
+                    <p class="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">Creative Suite</p>
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <button onclick="confirmClearHistory()" class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:shadow-md hover:shadow-primary/20 transition-all active:scale-95">
+                <span class="material-symbols-outlined text-base">add</span>
+                Reset Thread Log
+            </button>
+
+            <!-- Agent Swap/Selection Category Items -->
+            <nav id="categories-nav" class="flex-1 space-y-1.5">
+                <p class="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Categories</p>
+                
+                <!-- Design -->
+                <button onclick="switchAgent('photo')" id="agent-btn-photo" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl font-semibold text-sm transition-all group text-left">
+                    <span class="material-symbols-outlined text-lg group-hover:text-primary transition-colors">palette</span>
+                    <span class="group-hover:text-slate-900 dark:group-hover:text-white">Design</span>
+                </button>
+
+                <!-- Editing -->
+                <button onclick="switchAgent('editing')" id="agent-btn-editing" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl font-semibold text-sm transition-all group text-left">
+                    <span class="material-symbols-outlined text-lg group-hover:text-primary transition-colors">movie_edit</span>
+                    <span class="group-hover:text-slate-900 dark:group-hover:text-white">Editing</span>
+                </button>
+                
+                <!-- Marketing -->
+                <button onclick="switchAgent('marketing')" id="agent-btn-marketing" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl font-semibold text-sm transition-all group text-left">
+                    <span class="material-symbols-outlined text-lg group-hover:text-primary transition-colors">campaign</span>
+                    <span class="group-hover:text-slate-900 dark:group-hover:text-white">Marketing</span>
+                </button>
+                
+                <!-- Tech Dev -->
+                <button onclick="switchAgent('web')" id="agent-btn-web" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl font-semibold text-sm transition-all group text-left">
+                    <span class="material-symbols-outlined text-lg group-hover:text-primary transition-colors">terminal</span>
+                    <span class="group-hover:text-slate-900 dark:group-hover:text-white">Tech Dev</span>
+                </button>
+            </nav>
+
+            <!-- Bottom Utilities -->
+            <div class="pt-4 border-t border-slate-200/60 dark:border-slate-800 space-y-1">
+                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl transition-all font-medium text-xs" href="profile.html">
+                    <span class="material-symbols-outlined text-lg">settings</span>
+                    <span>Settings</span>
+                </a>
+                <!-- Theme Toggler -->
+                <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800/50 rounded-xl transition-all text-left font-medium text-xs">
+                    <span id="theme-icon" class="material-symbols-outlined text-lg">dark_mode</span>
+                    <span id="theme-label">Dark Mode</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area: Floating Card -->
+    <main class="flex-1 flex flex-col min-w-0 glass-panel rounded-3xl overflow-hidden float-card z-10 relative">
+        
+        <!-- SELECTION SCREEN -->
+        <div id="selection-screen" class="flex-1 p-6 md:p-10 flex flex-col items-center justify-center overflow-y-auto">
+            <div class="max-w-3xl w-full">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">Client Workspace</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Select a service ticket thread to communicate with the Nexus team.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Design Card -->
+                    <div onclick="openChat('photo')" class="service-card bg-white/50 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800 p-5 rounded-2xl cursor-pointer group">
+                        <div class="w-10 h-10 bg-pink-600 rounded-xl flex items-center justify-center mb-3 shadow-md shadow-pink-500/20 group-hover:scale-105 transition-all">
+                            <span class="material-symbols-outlined text-white text-lg">palette</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Design Division</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-3">Wireframe strategies, vector branding, and UX audits.</p>
+                        <div class="flex items-center text-pink-600 dark:text-pink-400 font-bold gap-1 text-xs">
+                            Enter Brief Chat <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
                     </div>
+
+                    <!-- Editing Card -->
+                    <div onclick="openChat('editing')" class="service-card bg-white/50 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800 p-5 rounded-2xl cursor-pointer group">
+                        <div class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center mb-3 shadow-md shadow-purple-500/20 group-hover:scale-105 transition-all">
+                            <span class="material-symbols-outlined text-white text-lg">movie_edit</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Editing & VFX</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-3">LUT color grading filters, overlay drafts, and asset reviews.</p>
+                        <div class="flex items-center text-purple-600 dark:text-purple-400 font-bold gap-1 text-xs">
+                            Enter Editing Room <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Card -->
+                    <div onclick="openChat('marketing')" class="service-card bg-white/50 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800 p-5 rounded-2xl cursor-pointer group">
+                        <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center mb-3 shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-all">
+                            <span class="material-symbols-outlined text-white text-lg">campaign</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Ad Campaigns</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-3">Ad copywriting copy, conversion structures, and headlines.</p>
+                        <div class="flex items-center text-emerald-600 dark:text-emerald-400 font-bold gap-1 text-xs">
+                            Enter Campaign Desk <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Tech Dev Card -->
+                    <div onclick="openChat('web')" class="service-card bg-white/50 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800 p-5 rounded-2xl cursor-pointer group">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center mb-3 shadow-md shadow-primary/20 group-hover:scale-105 transition-all">
+                            <span class="material-symbols-outlined text-on-primary text-lg">terminal</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Tech Development</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-3">Audits of Docker settings, database models, and commits.</p>
+                        <div class="flex items-center text-primary dark:text-blue-400 font-bold gap-1 text-xs">
+                            Enter Tech Dev Chat <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT WORKSPACE (Hidden by default) -->
+        <div id="chat-workspace" class="hidden flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Compact Top Header (Height 60px) -->
+            <header class="flex justify-between items-center w-full h-15 px-6 border-b border-slate-200/60 dark:border-slate-800 bg-white/40 dark:bg-slate-900/40 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button onclick="backToSelection()" class="w-8 h-8 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 rounded-full transition-all border border-slate-200/60 dark:border-slate-700 shadow-xs" title="Back to selection">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                    </button>
+                    <div class="flex items-center gap-2.5">
+                        <span id="current-agent-symbol" class="material-symbols-outlined text-primary text-xl">palette</span>
+                        <h2 id="current-agent-name" class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Design</h2>
+                    </div>
+                    <div class="h-4 w-[1px] bg-slate-300 dark:bg-slate-700 hidden sm:block"></div>
+                    <!-- Ticket Badge -->
+                    <div class="bg-primary/10 dark:bg-blue-500/10 px-3 py-1 rounded-full border border-primary/15 hidden sm:flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <span id="ticket-badge" class="text-[11px] font-bold text-primary dark:text-blue-400">Ticket #824</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <button onclick="triggerExportDropdown(event)" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-white/60 dark:hover:bg-slate-800">
+                            <span>Export Log</span>
+                            <span class="material-symbols-outlined text-sm">expand_more</span>
+                        </button>
+                        <!-- Export Dropdown (Hidden cleanly) -->
+                        <div id="export-dropdown" class="absolute right-0 top-full mt-1.5 w-36 bg-white dark:bg-[#161c2e] border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl py-1 hidden z-50">
+                            <button onclick="exportChat('md')" class="w-full px-3.5 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-left text-xs font-semibold flex items-center gap-2 text-slate-700 dark:text-slate-300 transition-colors">
+                                <span class="material-symbols-outlined text-sm text-blue-500">article</span> Export MD
+                            </button>
+                            <button onclick="exportChat('json')" class="w-full px-3.5 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-left text-xs font-semibold flex items-center gap-2 text-slate-700 dark:text-slate-300 transition-colors">
+                                <span class="material-symbols-outlined text-sm text-purple-500">terminal</span> Export JSON
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="confirmClearHistory()" class="w-8 h-8 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 rounded-full transition-all" title="Clear thread log">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                    </button>
                 </div>
             </header>
 
-            <!-- SELECTION SCREEN (Visible by default) -->
-            <div id="selection-screen" class="flex-1 p-10 flex flex-col items-center justify-center">
-                <div class="max-w-4xl w-full">
-                    <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">What's on your mind?</h2>
-                        <p class="text-gray-500 font-medium">Choose a specialized agent to begin your digital transformation.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Option 1: Web Page -->
-                        <div onclick="openChat('web')" class="service-card chat-glass p-8 rounded-[40px] cursor-pointer group">
-                            <div class="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-blue-200 group-hover:scale-110 transition-transform">
-                                <i class="ri-code-s-slash-line text-white text-3xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-gray-900 mb-4">Web Architecture</h3>
-                            <p class="text-gray-500 leading-relaxed mb-8">From UI/UX strategy to high-performance development and deployment.</p>
-                            <div class="flex items-center text-blue-600 font-bold gap-2">
-                                Start Consultation <i class="ri-arrow-right-line group-hover:translate-x-2 transition-transform"></i>
-                            </div>
-                        </div>
-
-                        <!-- Option 2: Photo Editing -->
-                        <div onclick="openChat('photo')" class="service-card chat-glass p-8 rounded-[40px] cursor-pointer group">
-                            <div class="w-16 h-16 bg-pink-600 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-pink-200 group-hover:scale-110 transition-transform">
-                                <i class="ri-brush-line text-white text-3xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-gray-900 mb-4">Visual Engineering</h3>
-                            <p class="text-gray-500 leading-relaxed mb-8">Professional retouching, VFX, and brand-aligned visual design.</p>
-                            <div class="flex items-center text-pink-600 font-bold gap-2">
-                                Open Creative Suite <i class="ri-arrow-right-line group-hover:translate-x-2 transition-transform"></i>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Centered Constrained Chat Feed (Max-width 4xl to eliminate wide empty spaces) -->
+            <div class="flex-1 flex flex-col min-h-0 w-full">
+                <div id="chat-scroller" class="flex-1 overflow-y-auto px-4 md:px-8 py-5 space-y-4 max-w-4xl mx-auto w-full scrollbar-hide">
+                    <!-- Dynamically populated thread logs -->
                 </div>
-            </div>
 
-            <!-- CHAT INTERFACE (Hidden by default) -->
-            <div id="chat-interface" class="hidden flex-1 overflow-hidden flex flex-col">
-                <!-- Chat Header -->
-                <div class="px-10 py-4 bg-white border-b border-gray-100 flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <button onclick="backToSelection()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors">
-                            <i class="ri-arrow-left-line text-xl text-gray-400"></i>
+                <!-- Attachment preview slot -->
+                <div id="attachment-preview-container" class="hidden max-w-4xl mx-auto w-full px-4 md:px-8 mb-2">
+                    <div class="p-2.5 bg-white/90 dark:bg-slate-900/80 border border-primary/20 rounded-xl flex items-center justify-between shadow-xs">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <div id="attachment-preview-thumbnail" class="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700">
+                                <!-- Dynamic thumbnail -->
+                            </div>
+                            <div class="overflow-hidden">
+                                <p id="attachment-preview-name" class="text-xs font-bold truncate text-slate-800 dark:text-slate-200"></p>
+                                <p id="attachment-preview-size" class="text-[10px] text-slate-400 font-medium"></p>
+                            </div>
+                        </div>
+                        <button onclick="clearAttachment()" class="w-6 h-6 rounded-full bg-slate-200/60 dark:bg-slate-800 hover:bg-red-500 hover:text-white text-slate-500 flex items-center justify-center transition-all">
+                            <span class="material-symbols-outlined text-sm">close</span>
                         </button>
-                        <div id="current-agent-icon" class="w-10 h-10 rounded-full flex items-center justify-center text-white"></div>
-                        <div>
-                            <h4 id="current-agent-name" class="font-bold text-gray-900 text-sm"></h4>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                <span class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Online</span>
+                    </div>
+                </div>
+
+                <!-- Compact Chat Input Footer (Max-width 4xl) -->
+                <footer class="p-4 md:px-8 max-w-4xl mx-auto w-full shrink-0">
+                    <!-- Quick-action prompt chips -->
+                    <div id="quick-chips" class="flex flex-wrap gap-1.5 mb-2 overflow-x-auto scrollbar-hide shrink-0">
+                        <!-- Loaded dynamically -->
+                    </div>
+                    
+                    <div class="glass-panel p-1.5 rounded-2xl border-primary/20 focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white/70 dark:bg-[#161c2e]/70 shadow-xs">
+                        <textarea id="chat-input" class="w-full bg-transparent border-none focus:ring-0 resize-none px-3.5 py-2.5 text-xs md:text-sm font-medium placeholder:text-slate-400 dark:placeholder-slate-500 dark:text-white min-h-[44px] max-h-32 scrollbar-hide" placeholder="Send message to Nexus team..." rows="1"></textarea>
+                        <div class="flex items-center justify-between px-1.5 pb-1">
+                            <div class="flex items-center gap-0.5">
+                                <!-- Attach File -->
+                                <button onclick="triggerFileSelect()" class="w-8 h-8 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all" title="Attach file">
+                                    <span class="material-symbols-outlined text-lg">attach_file</span>
+                                </button>
+                                <input type="file" id="attachment-file" class="hidden" onchange="handleFileSelect(event)">
+                                
+                                <!-- Voice mic -->
+                                <button id="mic-btn" onclick="toggleSpeechRecognition()" class="w-8 h-8 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all" title="Voice dictation">
+                                    <span class="material-symbols-outlined text-lg">mic</span>
+                                </button>
                             </div>
+                            <button onclick="sendMessage()" class="bg-primary text-on-primary px-5 py-2 rounded-xl hover:shadow-md hover:shadow-primary/20 transition-all flex items-center gap-1.5 text-xs font-bold active:scale-95">
+                                <span>Send</span>
+                                <span class="material-symbols-outlined text-sm">send</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <button class="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center text-gray-400"><i class="ri-video-chat-line text-xl"></i></button>
-                        <button class="w-10 h-10 rounded-full hover:bg-gray-50 flex items-center justify-center text-gray-400"><i class="ri-more-2-fill text-xl"></i></button>
-                    </div>
-                </div>
-
-                <!-- Chat Messages -->
-                <div id="chat-scroller" class="flex-1 overflow-y-auto p-10 space-y-6">
-                    <!-- Messages will be injected here -->
-                </div>
-
-                <!-- Chat Input -->
-                <div class="p-6 bg-white border-t border-gray-100">
-                    <div class="max-w-4xl mx-auto relative">
-                        <input id="chat-input" type="text" placeholder="Type your request here..." class="w-full bg-gray-50 border-none rounded-2xl py-5 pl-8 pr-32 font-medium focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
-                        <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                            <button class="p-3 text-gray-400 hover:text-blue-600 transition-colors"><i class="ri-attachment-2"></i></button>
-                            <button onclick="sendMessage()" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all">Send</button>
-                        </div>
-                    </div>
-                </div>
+                </footer>
             </div>
+        </div>
+    </main>
 
-        </main>
+    <!-- Mobile Navigation -->
+    <nav class="md:hidden fixed bottom-4 left-4 right-4 z-50 flex justify-around items-center h-16 glass-panel rounded-full shadow-xl border-white/60">
+        <button onclick="mobileSwitch('photo')" class="flex flex-col items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-xl">palette</span>
+            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Visual</span>
+        </button>
+        <button onclick="mobileSwitch('editing')" class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-xl">movie_edit</span>
+            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Edit</span>
+        </button>
+        <button onclick="mobileSwitch('marketing')" class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-xl">campaign</span>
+            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Promo</span>
+        </button>
+        <button onclick="mobileSwitch('web')" class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-xl">terminal</span>
+            <span class="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Dev</span>
+        </button>
+    </nav>
+
+    <!-- Image Zoom Lightbox Modal -->
+    <div id="lightbox-modal" onclick="closeLightbox()" class="hidden fixed inset-0 bg-slate-900/90 backdrop-blur z-[100] flex items-center justify-center p-4 cursor-zoom-out">
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-lg transition-all">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <img id="lightbox-image" src="" class="max-w-full max-h-[85vh] rounded-xl object-contain shadow-2xl transition-transform duration-300 scale-95">
     </div>
 
     <script>
         const selectionScreen = document.getElementById('selection-screen');
-        const chatInterface = document.getElementById('chat-interface');
+        const chatWorkspace = document.getElementById('chat-workspace');
         const scroller = document.getElementById('chat-scroller');
         const input = document.getElementById('chat-input');
         
-        // --- AUTH & DATA LOGIC ---
-        const currentUser = JSON.parse(localStorage.getItem('leonix_current_user'));
+        // --- USER AUTHENTICATION ---
+        let currentUser = JSON.parse(localStorage.getItem('leonix_current_user'));
         if (!currentUser) {
-            window.location.href = 'login.html';
+            currentUser = { id: "usr_alex", name: "Alex Rivera", identity: "alex@rivera.ai", age: "28" };
+            localStorage.setItem('leonix_current_user', JSON.stringify(currentUser));
         }
 
         let currentMode = '';
+        let selectedAttachment = null;
+        let speechRecognitionInstance = null;
+        let isSpeechListening = false;
+        let textToSpeechUtterance = null;
 
+        // --- TICKETS CONFIG ---
         const agents = {
-            web: {
-                id: "agent_web",
-                name: "Web Architect Agent",
-                icon: "ri-code-s-slash-line",
-                color: "bg-blue-600",
-                intro: "Welcome to the Web Console. I'm ready to help you blueprint and build your next-gen digital experience. What type of website are we building today?"
-            },
             photo: {
                 id: "agent_photo",
-                name: "Creative Engineering Agent",
-                icon: "ri-brush-line",
+                name: "Design Suite",
+                symbol: "palette",
+                ticket: "Ticket #DS-824",
                 color: "bg-pink-600",
-                intro: "Visual Suite initialized. I'm here to handle your professional retouching and VFX needs. Upload your assets or describe the project you're working on!"
+                representative: "Creative Team",
+                repAvatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+                intro: "Welcome to the Design thread. Marcus and Sarah Jenkins from the Creative Team will be coordinating your visual assets.",
+                chips: ["Premium logo brief", "CSS grid wireframe mockup", "SVG vector outline", "Brand styling guide"],
+                defaults: [
+                    { type: 'received', name: 'Creative Team', text: 'Welcome to the Design thread. Marcus and Sarah Jenkins from the Creative Team will be coordinating your visual assets.', timestamp: Date.now() - 3600000 },
+                    { type: 'sent', name: 'Alex Rivera', text: 'Hi, I\'ve uploaded the new design drafts for the landing page. We\'re looking for something that feels more **"premium"** but stays accessible.', timestamp: Date.now() - 3000000 },
+                    { type: 'received', name: 'Creative Team', text: 'Thanks! We\'ll review these by end of day. I\'ve already flagged the art director to take a look at the layout changes you suggested in the brief.', timestamp: Date.now() - 2500000 },
+                    { type: 'sent', name: 'Alex Rivera', text: 'Here is the updated branding guide for reference.', attachment: { name: 'Brand_Guidelines_V2.pdf', size: 4404019, type: 'application/pdf' }, timestamp: Date.now() - 1200000 }
+                ]
+            },
+            editing: {
+                id: "agent_editing",
+                name: "Editing & VFX",
+                symbol: "movie_edit",
+                ticket: "Ticket #ED-402",
+                color: "bg-purple-600",
+                representative: "Marcus (Visual Editor)",
+                repAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                intro: "Visual Editor initialized. I am prepared to process image filter matrices, coordinate Lightroom cinematic grading formulas, or build custom visual overlays.",
+                chips: ["LUT Color grading formula", "Image filter overlay CSS", "Video asset specs sheet", "VFX Brief outline"],
+                defaults: [
+                    { type: 'received', name: 'Marcus (Visual Editor)', text: 'VFX Suite active. Let me know if the raw footage assets or film layers require processing.', timestamp: Date.now() - 3600000 },
+                    { type: 'sent', name: 'Alex Rivera', text: 'Here is the raw footage and the overlay assets for the teaser edit. Let me know if the resolution is okay.', timestamp: Date.now() - 3000000 },
+                    { type: 'received', name: 'Marcus (Visual Editor)', text: 'Got the assets! We\'re starting on color grading now. We\'ll use the cinematic filter we established last week.', timestamp: Date.now() - 2000000 }
+                ]
+            },
+            marketing: {
+                id: "agent_marketing",
+                name: "Marketing Campaign",
+                symbol: "campaign",
+                ticket: "Ticket #MK-112",
+                color: "bg-emerald-600",
+                representative: "David (Marketing)",
+                repAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+                intro: "Ad Campaigns Portal connected. Let's write engaging tagline copies, design landing page conversion structures, or draft organic social media traffic briefs.",
+                chips: ["Taglines for tech product", "Landing page copy schema", "Social post framework", "Ads traffic ideas"],
+                defaults: [
+                    { type: 'received', name: 'David (Marketing)', text: 'Marketing thread online. Let\'s coordinate on the copy briefs and advertising spend.', timestamp: Date.now() - 3600000 },
+                    { type: 'sent', name: 'Alex Rivera', text: 'I\'ve drafted the ad copy options. Let\'s see if we should focus on social media first or launch search ads.', timestamp: Date.now() - 3000000 },
+                    { type: 'received', name: 'David (Marketing)', text: 'Excellent. Let\'s run a small test on social media. We\'ll outline the traffic metrics by tomorrow.', timestamp: Date.now() - 2000000 }
+                ]
+            },
+            web: {
+                id: "agent_web",
+                name: "Tech Development",
+                symbol: "terminal",
+                ticket: "Ticket #TD-095",
+                color: "bg-primary",
+                representative: "Tech Lead",
+                repAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+                intro: "Developer Shell active. I'm ready to code modular backend scripts, write Nginx SSL reverse-proxy configs, structure Docker Compose stacks, or optimize Postgres SQL plans.",
+                chips: ["Tailwind Navbar card", "GSAP Scroll trigger helper", "React functional component", "Build speed benchmark"],
+                defaults: [
+                    { type: 'received', name: 'Tech Lead', text: 'Development node active. I am auditing the repository configurations.', timestamp: Date.now() - 3600000 },
+                    { type: 'sent', name: 'Alex Rivera', text: 'I pushed the initial Docker settings to the repository. Please review the environment ports.', timestamp: Date.now() - 3000000 },
+                    { type: 'received', name: 'Tech Lead', text: 'Understood. The ports have been verified on our end. Let\'s build the staging branch next.', timestamp: Date.now() - 2000000 }
+                ]
             }
         };
 
-        function getChatKey() {
-            return `leonix_chats_${currentUser.id}_${currentMode}`;
+        // --- THEME MANAGING ---
+        function initTheme() {
+            const savedTheme = localStorage.getItem('leonix_theme') || 'light';
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeLabel = document.getElementById('theme-label');
+            const body = document.body;
+            
+            if (savedTheme === 'dark') {
+                html.className = 'dark';
+                body.className = 'bg-background dark:bg-[#0b0f19] text-on-surface dark:text-slate-200 h-screen overflow-hidden p-3 md:p-4 flex gap-4 transition-colors duration-300';
+                if (themeIcon) themeIcon.innerText = 'light_mode';
+                if (themeLabel) themeLabel.innerText = 'Light Mode';
+            } else {
+                html.className = 'light';
+                body.className = 'bg-slate-100/70 dark:bg-[#0b0f19] text-on-surface dark:text-slate-200 h-screen overflow-hidden p-3 md:p-4 flex gap-4 transition-colors duration-300';
+                if (themeIcon) themeIcon.innerText = 'dark_mode';
+                if (themeLabel) themeLabel.innerText = 'Dark Mode';
+            }
+        }
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+            
+            if (isDark) {
+                localStorage.setItem('leonix_theme', 'light');
+            } else {
+                localStorage.setItem('leonix_theme', 'dark');
+            }
+            initTheme();
+        }
+        initTheme();
+
+        // --- EXPORT DROPDOWN ---
+        function triggerExportDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('export-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+        
+        document.addEventListener('click', () => {
+            const dropdown = document.getElementById('export-dropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        });
+
+        // --- SPEECH UTILITIES ---
+        function speakMessage(btn, textId) {
+            const textElement = document.getElementById(textId);
+            if (!textElement) return;
+            
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                if (textToSpeechUtterance && textToSpeechUtterance.textId === textId) {
+                    textToSpeechUtterance = null;
+                    return;
+                }
+            }
+            
+            const rawText = textElement.innerText || textElement.textContent;
+            
+            const utterance = new SpeechSynthesisUtterance(rawText);
+            utterance.textId = textId;
+            textToSpeechUtterance = utterance;
+            window.speechSynthesis.speak(utterance);
         }
 
-        function loadChatHistory() {
-            const history = JSON.parse(localStorage.getItem(getChatKey()) || '[]');
-            scroller.innerHTML = '';
-            if (history.length === 0) {
-                addMessage('received', agents[currentMode].intro, false);
+        function toggleSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Speech recognition is not supported in this browser.");
+                return;
+            }
+            
+            if (!speechRecognitionInstance) {
+                speechRecognitionInstance = new SpeechRecognition();
+                speechRecognitionInstance.continuous = false;
+                speechRecognitionInstance.interimResults = false;
+                speechRecognitionInstance.lang = 'en-US';
+                
+                speechRecognitionInstance.onstart = () => {
+                    isSpeechListening = true;
+                    const micBtn = document.getElementById('mic-btn');
+                    micBtn.classList.add('text-red-500', 'animate-pulse');
+                    micBtn.querySelector('span').innerText = 'graphic_eq';
+                };
+                
+                speechRecognitionInstance.onresult = (e) => {
+                    const transcript = e.results[0][0].transcript;
+                    if (input && transcript) {
+                        input.value = (input.value + " " + transcript).trim();
+                    }
+                };
+                
+                speechRecognitionInstance.onend = () => {
+                    isSpeechListening = false;
+                    const micBtn = document.getElementById('mic-btn');
+                    micBtn.classList.remove('text-red-500', 'animate-pulse');
+                    micBtn.querySelector('span').innerText = 'mic';
+                };
+                
+                speechRecognitionInstance.onerror = (err) => {
+                    console.error("Speech Recognition Error", err);
+                    speechRecognitionInstance.stop();
+                };
+            }
+            
+            if (isSpeechListening) {
+                speechRecognitionInstance.stop();
             } else {
-                history.forEach(msg => addMessage(msg.type, msg.text, false));
+                speechRecognitionInstance.start();
             }
         }
 
-        function saveMessage(type, text) {
+        // --- STORAGE ---
+        function getChatKey() {
+            return `leonix_client_chats_${currentUser.id}_${currentMode}`;
+        }
+
+        function loadChatHistory() {
+            const key = getChatKey();
+            let history = JSON.parse(localStorage.getItem(key));
+            
+            if (!history || history.length === 0) {
+                history = agents[currentMode].defaults || [{ type: 'received', name: agents[currentMode].representative, text: agents[currentMode].intro, timestamp: Date.now() }];
+                localStorage.setItem(key, JSON.stringify(history));
+            }
+            
+            scroller.innerHTML = '';
+
+            const dateHeader = document.createElement('div');
+            dateHeader.className = "flex justify-center mb-3 shrink-0";
+            dateHeader.innerHTML = `<span class="text-[9px] font-bold text-slate-400 dark:text-slate-500 px-3 py-1 bg-white/50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/30 rounded-full uppercase tracking-widest shadow-2xs">Today</span>`;
+            scroller.appendChild(dateHeader);
+
+            history.forEach(msg => addMessage(msg.type, msg.text, false, msg.attachment, msg.timestamp, msg.name));
+        }
+
+        function saveMessage(type, text, attachment = null, name = null) {
             const key = getChatKey();
             const history = JSON.parse(localStorage.getItem(key) || '[]');
-            history.push({ type, text, timestamp: new Date().getTime() });
+            history.push({ type, text, attachment, name: name || (type === 'sent' ? currentUser.name : agents[currentMode].representative), timestamp: new Date().getTime() });
             localStorage.setItem(key, JSON.stringify(history));
         }
 
+        // --- ATTACHMENT ---
+        function triggerFileSelect() {
+            document.getElementById('attachment-file').click();
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const previewContainer = document.getElementById('attachment-preview-container');
+            const previewThumbnail = document.getElementById('attachment-preview-thumbnail');
+            const previewName = document.getElementById('attachment-preview-name');
+            const previewSize = document.getElementById('attachment-preview-size');
+            
+            selectedAttachment = {
+                name: file.name,
+                size: file.size,
+                type: file.type
+            };
+            
+            previewName.innerText = file.name;
+            previewSize.innerText = `${(file.size / 1024 / 1024).toFixed(1)} MB`;
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    selectedAttachment.dataUrl = event.target.result;
+                    previewThumbnail.innerHTML = `<img src="${event.target.result}" class="w-full h-full object-cover">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const isPdf = file.name.endsWith('.pdf');
+                previewThumbnail.innerHTML = `<span class="material-symbols-outlined text-xl text-${isPdf ? 'red' : 'blue'}-500">${isPdf ? 'picture_as_pdf' : 'article'}</span>`;
+            }
+            
+            previewContainer.classList.remove('hidden');
+            gsap.from(previewContainer, { y: 10, opacity: 0, duration: 0.2 });
+        }
+
+        function clearAttachment() {
+            selectedAttachment = null;
+            document.getElementById('attachment-file').value = '';
+            document.getElementById('attachment-preview-container').classList.add('hidden');
+        }
+
+        // --- TRANSITIONS ---
         function openChat(mode) {
             currentMode = mode;
             const agent = agents[mode];
             
-            // Update UI
+            document.querySelectorAll('#categories-nav button').forEach(btn => {
+                btn.classList.remove('bg-primary/10', 'text-primary', 'dark:bg-blue-500/10', 'dark:text-blue-400');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+            const activeSidebarBtn = document.getElementById(`agent-btn-${mode}`);
+            if (activeSidebarBtn) {
+                activeSidebarBtn.classList.add('bg-primary/10', 'text-primary', 'dark:bg-blue-500/10', 'dark:text-blue-400');
+                activeSidebarBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+            }
+            
             document.getElementById('current-agent-name').innerText = agent.name;
-            const iconWrap = document.getElementById('current-agent-icon');
-            iconWrap.className = `w-10 h-10 rounded-full flex items-center justify-center text-white ${agent.color}`;
-            iconWrap.innerHTML = `<i class="${agent.icon} text-lg"></i>`;
+            document.getElementById('current-agent-symbol').innerText = agent.symbol;
+            document.getElementById('ticket-badge').innerText = agent.ticket;
 
-            // Transition
+            const chipsBox = document.getElementById('quick-chips');
+            chipsBox.innerHTML = '';
+            agent.chips.forEach(chip => {
+                const chipBtn = document.createElement('button');
+                chipBtn.className = "px-3 py-1 bg-white/60 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 text-[11px] font-semibold rounded-full border border-slate-200/70 dark:border-slate-700/50 transition-all cursor-pointer shrink-0 text-slate-600 dark:text-slate-300 shadow-2xs";
+                chipBtn.innerText = chip;
+                chipBtn.onclick = () => {
+                    input.value = chip;
+                    input.focus();
+                };
+                chipsBox.appendChild(chipBtn);
+            });
+
             gsap.to(selectionScreen, {
                 opacity: 0,
-                y: -20,
-                duration: 0.4,
+                y: -10,
+                duration: 0.25,
                 onComplete: () => {
                     selectionScreen.style.display = 'none';
-                    chatInterface.style.display = 'flex';
-                    gsap.fromTo(chatInterface, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
-                    
+                    chatWorkspace.style.display = 'flex';
+                    gsap.fromTo(chatWorkspace, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.25 });
                     loadChatHistory();
                 }
             });
         }
 
-        function backToSelection() {
-            gsap.to(chatInterface, {
+        function switchAgent(mode) {
+            if (currentMode === mode) return;
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            
+            gsap.to(scroller, {
                 opacity: 0,
-                y: 20,
-                duration: 0.4,
+                duration: 0.15,
                 onComplete: () => {
-                    chatInterface.style.display = 'none';
+                    openChat(mode);
+                    gsap.to(scroller, { opacity: 1, duration: 0.15 });
+                }
+            });
+        }
+        
+        function mobileSwitch(mode) {
+            if (chatWorkspace.classList.contains('hidden')) {
+                openChat(mode);
+            } else {
+                switchAgent(mode);
+            }
+        }
+
+        function backToSelection() {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            
+            gsap.to(chatWorkspace, {
+                opacity: 0,
+                y: 10,
+                duration: 0.25,
+                onComplete: () => {
+                    chatWorkspace.style.display = 'none';
                     selectionScreen.style.display = 'flex';
-                    gsap.fromTo(selectionScreen, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4 });
+                    gsap.fromTo(selectionScreen, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.25 });
+                    
+                    document.querySelectorAll('#categories-nav button').forEach(btn => {
+                        btn.classList.remove('bg-primary/10', 'text-primary', 'dark:bg-blue-500/10', 'dark:text-blue-400');
+                        btn.classList.add('text-slate-600', 'dark:text-slate-300');
+                    });
                 }
             });
         }
 
-        function addMessage(type, text, save = true) {
-            const bubble = document.createElement('div');
-            bubble.className = `flex ${type === 'sent' ? 'justify-end' : 'justify-start'}`;
+        // --- MARKDOWN & HIGHLIGHT ---
+        function formatMarkdownAndHighlight(text) {
+            if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
+                const renderer = new marked.Renderer();
+                renderer.code = function(code, lang) {
+                    const uniqueId = 'code_' + Math.random().toString(36).substr(2, 9);
+                    const safeLang = lang || 'javascript';
+                    
+                    let highlighted = code;
+                    if (typeof Prism !== 'undefined' && Prism.languages[safeLang]) {
+                        highlighted = Prism.highlight(code, Prism.languages[safeLang], safeLang);
+                    } else {
+                        highlighted = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    }
+                    
+                    return `
+                        <div class="my-2 rounded-xl overflow-hidden border border-slate-200/50 dark:border-slate-800 shadow-xs bg-[#111625]">
+                            <div class="code-header px-3 py-1.5 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold tracking-wider">
+                                <span>${safeLang.toUpperCase()}</span>
+                                <button onclick="copyCode(this, '${uniqueId}')" class="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
+                                    <span class="material-symbols-outlined text-xs">content_copy</span> Copy
+                                </button>
+                            </div>
+                            <pre class="p-3 overflow-x-auto"><code id="${uniqueId}" class="language-${safeLang}">${highlighted}</code></pre>
+                        </div>
+                    `;
+                };
+                marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
+                return marked.parse(text);
+            }
             
-            bubble.innerHTML = `
-                <div class="max-w-[70%] p-5 text-sm font-medium ${type === 'sent' ? 'chat-bubble-sent' : 'chat-bubble-received text-gray-700 shadow-sm'}">
-                    ${text}
+            let html = text
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`(.*?)`/g, '<code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono text-xs text-pink-600 dark:text-pink-400">$1</code>');
+            return html;
+        }
+
+        function copyCode(btn, elementId) {
+            const codeText = document.getElementById(elementId).innerText || document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined text-xs text-green-500">check</span> Copied!`;
+                setTimeout(() => {
+                    btn.innerHTML = `<span class="material-symbols-outlined text-xs">content_copy</span> Copy`;
+                }, 2000);
+            }).catch(err => {
+                console.error("Clipboard failure", err);
+            });
+        }
+
+        // --- LIGHTBOX ---
+        function zoomImage(src) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-image');
+            img.src = src;
+            modal.classList.remove('hidden');
+            gsap.fromTo(img, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(1.7)" });
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-image');
+            gsap.to(img, {
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.15,
+                onComplete: () => modal.classList.add('hidden')
+            });
+        }
+
+        // --- MESSAGE RENDERING (Snug compact bubbles, max-w-xl) ---
+        function addMessage(type, text, save = true, attachment = null, timestamp = null, senderName = null) {
+            const timeStr = new Date(timestamp || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const bubbleId = 'bubble_' + Math.random().toString(36).substr(2, 9);
+            const textId = 'text_' + Math.random().toString(36).substr(2, 9);
+            
+            const messageRow = document.createElement('div');
+            messageRow.id = bubbleId;
+            
+            const isClient = type === 'sent';
+            
+            // Constrain bubble max width snug to content
+            messageRow.className = `flex gap-2.5 max-w-[85%] md:max-w-[75%] ${isClient ? 'flex-row-reverse ml-auto' : 'mr-auto'} items-start shrink-0`;
+            
+            let attachmentHtml = '';
+            if (attachment) {
+                if (attachment.dataUrl) {
+                    attachmentHtml = `
+                        <div class="mt-2 rounded-xl overflow-hidden cursor-pointer border border-slate-200/60 dark:border-slate-800 shadow-2xs transition-transform hover:scale-[1.01]" onclick="zoomImage('${attachment.dataUrl}')">
+                            <img src="${attachment.dataUrl}" class="w-full h-auto max-h-40 object-cover">
+                        </div>
+                    `;
+                } else {
+                    const isPdf = attachment.name.endsWith('.pdf');
+                    attachmentHtml = `
+                        <div class="mt-2 flex items-center gap-2.5 p-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 rounded-xl hover:border-primary/40 transition-all cursor-pointer shadow-2xs w-full max-w-[240px]">
+                            <div class="w-8 h-8 bg-${isPdf ? 'red' : 'blue'}-50 dark:bg-${isPdf ? 'red' : 'blue'}-500/10 rounded-lg flex items-center justify-center text-${isPdf ? 'red' : 'blue'}-500 shrink-0">
+                                <span class="material-symbols-outlined text-lg">${isPdf ? 'picture_as_pdf' : 'article'}</span>
+                            </div>
+                            <div class="flex-1 overflow-hidden min-w-[90px]">
+                                <p class="text-xs font-bold text-slate-800 dark:text-white truncate">${attachment.name}</p>
+                                <p class="text-[9px] font-semibold text-slate-400 mt-0.5">${(attachment.size / 1024 / 1024).toFixed(1)} MB • Document</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-sm">download</span>
+                        </div>
+                    `;
+                }
+            }
+
+            const activeName = senderName || (isClient ? currentUser.name : agents[currentMode].representative);
+            const avatarUrl = isClient 
+                ? `https://i.pravatar.cc/100?u=${currentUser.id}` 
+                : agents[currentMode].repAvatar;
+
+            const avatarHtml = `
+                <div class="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-white dark:border-slate-800 shadow-2xs mt-0.5">
+                    <img src="${avatarUrl}" class="w-full h-full object-cover" alt="${activeName}">
+                </div>
+            `;
+
+            messageRow.innerHTML = `
+                ${avatarHtml}
+                <div class="flex flex-col ${isClient ? 'items-end' : 'items-start'}">
+                    <div class="flex items-center gap-1.5 mb-1">
+                        <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300">${isClient ? 'You' : activeName}</span>
+                        <span class="text-[9px] text-slate-400 font-medium">${timeStr}</span>
+                        ${!isClient ? `<button onclick="speakMessage(this, '${textId}')" class="text-slate-400 hover:text-primary flex items-center" title="Speak message"><span class="material-symbols-outlined text-xs">volume_up</span></button>` : ''}
+                    </div>
+                    <div id="${textId}" class="px-4 py-2.5 text-[13.5px] leading-relaxed ${isClient ? 'chat-bubble-client' : 'chat-bubble-company'}">
+                        ${formatMarkdownAndHighlight(text)}
+                        ${attachmentHtml}
+                    </div>
+                    ${isClient ? `
+                        <div class="flex items-center gap-0.5 mt-0.5">
+                            <span class="material-symbols-outlined text-[12px] text-primary dark:text-blue-400" style="font-variation-settings: 'FILL' 1;">done_all</span>
+                            <span class="text-[8.5px] text-slate-400 font-medium italic">Sent</span>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            scroller.appendChild(messageRow);
+            scroller.scrollTop = scroller.scrollHeight;
+            
+            if (save) saveMessage(type, text, attachment, activeName);
+            
+            gsap.from(messageRow, { opacity: 0, y: 8, duration: 0.25, ease: "power2.out" });
+            
+            if (typeof Prism !== 'undefined') Prism.highlightAll();
+            
+            return { bubbleId, textId };
+        }
+
+        // --- TYPING INDICATOR ---
+        function renderTypingIndicator(representativeName) {
+            const bubbleId = 'think_' + Math.random().toString(36).substr(2, 9);
+            const avatarUrl = agents[currentMode].repAvatar;
+            
+            const thinkRow = document.createElement('div');
+            thinkRow.id = bubbleId;
+            thinkRow.className = "flex gap-2.5 mr-auto items-center shrink-0";
+            
+            thinkRow.innerHTML = `
+                <div class="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-white dark:border-slate-800 shadow-2xs">
+                    <img src="${avatarUrl}" class="w-full h-full object-cover" alt="${representativeName}">
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5 mb-0.5">
+                        <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300">${representativeName}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-1 bg-white/60 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-200/60 dark:border-slate-700/40">
+                            <div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot"></div>
+                            <div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot" style="animation-delay: 0.2s"></div>
+                            <div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot" style="animation-delay: 0.4s"></div>
+                        </div>
+                        <span class="text-[9px] text-slate-400 font-semibold italic">Typing...</span>
+                    </div>
                 </div>
             `;
             
-            scroller.appendChild(bubble);
+            scroller.appendChild(thinkRow);
             scroller.scrollTop = scroller.scrollHeight;
+            gsap.from(thinkRow, { opacity: 0, y: 6, duration: 0.2 });
             
-            if (save) saveMessage(type, text);
-            gsap.from(bubble, { opacity: 0, y: 10, duration: 0.3 });
+            return bubbleId;
         }
 
+        // --- SEND MESSAGE ---
         function sendMessage() {
             const text = input.value.trim();
-            if(!text) return;
+            if(!text && !selectedAttachment) return;
             
-            addMessage('sent', text);
+            addMessage('sent', text || `Uploaded file: ${selectedAttachment.name}`, true, selectedAttachment);
+            
+            const textCache = text;
+            const attachmentCache = selectedAttachment;
+            
             input.value = '';
+            clearAttachment();
 
-            // Simulated Agent Response
             setTimeout(() => {
-                const response = currentMode === 'web' 
-                    ? "Understood. I've initiated the blueprinting sequence for your " + text + ". Should we focus on a Minimalist or High-Tech aesthetic first?"
-                    : "Excellent. I've logged the creative brief for your creative project. Looking forward to refining the visual details!";
-                addMessage('received', response);
-            }, 1000);
+                const rep = agents[currentMode].representative;
+                const thinkId = renderTypingIndicator(rep);
+                
+                setTimeout(() => {
+                    const thinkBubble = document.getElementById(thinkId);
+                    if(thinkBubble) thinkBubble.remove();
+                    
+                    let response = '';
+                    const hasCodeQuery = /\b(code|landing|portfolio|navbar|docker|deploy|sql|jwt|auth|security|color|grade|vfx|photo|css|alignment|spacing)\b/i.test(textCache);
+                    
+                    if (currentMode === 'web') {
+                        if (hasCodeQuery) {
+                            response = `Certainly! I've engineered the visual component aligned with your layout specifications. Here is the modular layout code:\n\n` +
+                                       "```html\n" +
+                                       "<!-- Responsive layout cards grid component -->\n" +
+                                       "<div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-8\">\n" +
+                                       "    <div class=\"bg-white/60 backdrop-blur border border-white p-6 rounded-3xl shadow-sm\">\n" +
+                                       "        <h3 class=\"text-lg font-bold mb-2\">Project Brief</h3>\n" +
+                                       "        <p class=\"text-sm text-slate-500\">Description details...</p>\n" +
+                                       "    </div>\n" +
+                                       "</div>\n" +
+                                       "```\n\n" +
+                                       `We will check the database bindings next. Does this grid styling look good to you?`;
+                        } else {
+                            response = `Thanks for the details! The development team is checking your request. We've verified your Docker scripts on our dev servers and will merge the staging branch shortly. Let us know if you want us to set up additional database models.`;
+                        }
+                    } else if (currentMode === 'photo') {
+                        if (hasCodeQuery) {
+                            response = `Design brief noted. Below is the responsive grid structure matching the premium visual guidelines you requested:\n\n` +
+                                       "```css\n" +
+                                       "/* Spacing and visual alignment styles */\n" +
+                                       ".premium-grid-container {\n" +
+                                       "    display: grid;\n" +
+                                       "    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n" +
+                                       "    gap: 24px;\n" +
+                                       "    padding: 32px;\n" +
+                                       "    background: rgba(255, 255, 255, 0.4);\n" +
+                                       "    backdrop-filter: blur(20px);\n" +
+                                       "}\n" +
+                                       "```\n\n" +
+                                       `Let's coordinate on structural grids. Upload any preview files so we can verify the spacing alignments contextually.`;
+                        } else {
+                            response = `Hi Alex, we've reviewed your design layout proposals. Sarah Jenkins has checked the wireframes and we are currently working on upscaling the vector assets. We'll send the updated mockups by end of day.`;
+                        }
+                    } else if (currentMode === 'editing') {
+                        if (hasCodeQuery) {
+                            response = `Edit parameters updated on our timeline. Below is the cinematic LUT and filter styling matching your teaser details:\n\n` +
+                                       "```css\n" +
+                                       "/* Professional photo filter formula */\n" +
+                                       ".teaser-cinematic-filter {\n" +
+                                       "    filter: contrast(1.06) saturate(1.08) brightness(0.97);\n" +
+                                       "    background: linear-gradient(135deg, rgba(236,72,153,0.02) 0%, rgba(37,99,235,0.04) 100%);\n" +
+                                       "}\n" +
+                                       "```\n\n" +
+                                       `We will check the raw video files next. Send over the remaining clips and we'll apply the overlays.`;
+                        } else {
+                            response = `Got it! Marcus has imported the raw footage files. We are currently applying the cinematic filter overlays and LUT profiles. We expect to share the initial visual teaser drafts in a few hours.`;
+                        }
+                    } else { // marketing
+                        if (hasCodeQuery) {
+                            response = `Ad Strategy copy complete. For your tech product landing page campaign, we suggest this conversion header layout:\n\n` +
+                                       "```markdown\n" +
+                                       "# Nexus Redefined: Scale Your Workflows in 2 Weeks\n" +
+                                       "### Experience transparent, secure, and accelerated full-stack development.\n" +
+                                       "```\n\n" +
+                                       `Let us know if you want us to set up matching social media ad frameworks!`;
+                        } else {
+                            response = `Excellent copy direction. David is reviewing the ad traffic guidelines you shared. We will allocate the search budgets and publish the social media taglines as suggested. We'll share the traffic reports tomorrow.`;
+                        }
+                    }
+                    
+                    if (attachmentCache) {
+                        response = `**Attachment Received:** We have received file \`${attachmentCache.name}\` (${(attachmentCache.size / 1024 / 1024).toFixed(1)} MB) and added it to Ticket files.\n\n` + response;
+                    }
+
+                    const tempBubble = addMessage('received', '', false);
+                    const bubbleElement = document.getElementById(tempBubble.textId);
+                    
+                    const words = response.split(' ');
+                    let currentWordIndex = 0;
+                    let typedText = '';
+                    
+                    function typeNextWord() {
+                        if (currentWordIndex < words.length) {
+                            typedText += (currentWordIndex === 0 ? '' : ' ') + words[currentWordIndex];
+                            bubbleElement.innerHTML = formatMarkdownAndHighlight(typedText);
+                            scroller.scrollTop = scroller.scrollHeight;
+                            
+                            if (typeof Prism !== 'undefined') Prism.highlightAll();
+                            
+                            currentWordIndex++;
+                            setTimeout(typeNextWord, Math.random() * (30 - 10) + 10);
+                        } else {
+                            saveMessage('received', response);
+                        }
+                    }
+                    typeNextWord();
+
+                }, 1200);
+            }, 600);
         }
 
-        input.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') sendMessage();
+        input.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
 
-        // Auto-launch via URL params
+        function confirmClearHistory() {
+            if (confirm("Delete all logged messages for the active project thread? This cannot be undone.")) {
+                localStorage.removeItem(getChatKey());
+                loadChatHistory();
+            }
+        }
+
+        function exportChat(format) {
+            const key = getChatKey();
+            const history = JSON.parse(localStorage.getItem(key) || '[]');
+            if (history.length === 0) {
+                alert("No chat logs found in the active thread to export.");
+                return;
+            }
+            
+            let dataStr = '';
+            let filename = `nexus_${currentMode}_thread_${new Date().toISOString().slice(0,10)}`;
+            let mimeType = '';
+            
+            if (format === 'md') {
+                mimeType = 'text/markdown';
+                filename += '.md';
+                dataStr = `# Nexus Project Chat Logs\n`;
+                dataStr += `* **Project Division:** ${agents[currentMode].name}\n`;
+                dataStr += `* **Client:** ${currentUser.name} (${currentUser.identity})\n`;
+                dataStr += `* **Date Extracted:** ${new Date().toLocaleString()}\n\n`;
+                dataStr += `--- \n\n`;
+                
+                history.forEach(m => {
+                    const time = new Date(m.timestamp).toLocaleString();
+                    dataStr += `### [${time}] ${m.name}:\n${m.text}\n\n`;
+                    if (m.attachment) {
+                        dataStr += `*Attachment attached: ${m.attachment.name} (${(m.attachment.size/1024/1024).toFixed(1)} MB)*\n\n`;
+                    }
+                });
+            } else {
+                mimeType = 'application/json';
+                filename += '.json';
+                dataStr = JSON.stringify({
+                    agent: agents[currentMode],
+                    client: currentUser,
+                    logs: history
+                }, null, 2);
+            }
+            
+            const blob = new Blob([dataStr], { type: mimeType });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const serviceParam = urlParams.get('service');
         const planParam = urlParams.get('plan');
@@ -299,10 +1163,10 @@
         if (serviceParam && agents[serviceParam]) {
             openChat(serviceParam);
         } else if (planParam) {
-            openChat('web');
+            openChat('photo');
             setTimeout(() => {
-                addMessage('received', `I see you are interested in the **${decodeURIComponent(planParam)}**. Let's customize this package for your goals!`, true);
-            }, 500);
+                addMessage('received', `Hi Alex, we see you are interested in the **${decodeURIComponent(planParam)}** plan. We are setting up your project brief!`, true);
+            }, 600);
         }
     </script>
 </body>
